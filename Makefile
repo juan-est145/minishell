@@ -1,9 +1,10 @@
 LIBFT_PATH = libft
 SRC_PATH = src
 
-NAME = fdf
+NAME = minishell
 
 SCRS = $(SRC_PATH)/main.c\
+$(SRC_PATH)/ft_isspace.c\
 
 OBJS = $(SCRS:.c=.o)
 
@@ -12,6 +13,7 @@ HEADER = $(SRC_PATH)/minishell.h
 COMPILER = $(CC)
 
 CFLAGS = -Wall -Werror -Wextra
+LIB_FLAGS = -Llibft -lft
 EXEC-NAME-FLAG = -o
 
 RM = rm -rf
@@ -28,7 +30,7 @@ make-library-debug:
 	$(MAKE) -C $(LIBFT_PATH) debug
 
 $(NAME): $(OBJS) $(HEADER)
-	$(COMPILER) $(CFLAGS) $(OBJS) $(EXEC-NAME-FLAG) $(NAME)
+	$(COMPILER) $(CFLAGS) $(OBJS) $(LIB_FLAGS) $(EXEC-NAME-FLAG) $(NAME)
 
 clean:
 	$(MAKE) clean -C $(LIBFT_PATH)

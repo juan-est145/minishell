@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/19 12:12:10 by juan-est145      ###   ########.fr       */
+/*   Created: 2024/04/19 12:01:38 by juan-est145       #+#    #+#             */
+/*   Updated: 2024/04/19 12:21:47 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../libft/libft.h"
+#include "minishell.h"
 
-typedef struct s_token_list
+bool	ft_isspace(unsigned char c)
 {
-	char			*token;
-	struct s_token	*prev;
-	struct s_token	*next;
-}					t_token_list;
-
-bool				ft_isspace(unsigned char c);
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+		|| c == ' ')
+		return (true);
+	return (false);
+}
