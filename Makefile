@@ -6,6 +6,7 @@ NAME = minishell
 SCRS = $(SRC_PATH)/main.c\
 $(SRC_PATH)/ft_isspace.c\
 $(SRC_PATH)/tokenizer.c\
+$(SRC_PATH)/tokenizer_utils.c\
 
 OBJS = $(SCRS:.c=.o)
 

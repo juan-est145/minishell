@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:12:37 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/22 17:08:53 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/22 19:07:51 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*save_token(t_token_list **token_list, char *full_cmd,
 {
 	t_token_list	*new_node;
 
-	new_node = malloc(sizeof(token_list));
+	new_node = malloc(sizeof(t_token_list));
 	if (new_node == NULL)
 		return (NULL);
 	new_node->prev = NULL;
@@ -74,6 +74,7 @@ static char	*save_token(t_token_list **token_list, char *full_cmd,
 	new_node->token = ft_substr(full_cmd, *start_index, (*i) - (*start_index));
 	if (new_node->token == NULL)
 		return (NULL);
+	add_token_identifiers(new_node);
 	*start_index = (*i) + 1;
 	token_node_add_last(token_list, new_node);
 	return (new_node->token);

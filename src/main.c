@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:34:35 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/22 16:56:05 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/22 19:05:04 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 int	main(void)
 {
-	char	*string;
+	t_token_list	*head;
+	char			*string;
 
-	string = "echo  \"Ho     ' l'a\"";
-	tokenize_cmd(string);
+	string = "echo \"Hola caracola\" | grep Hola | wc -l";
+	head = tokenize_cmd(string);
+	clean_tokens(&head);
 	return (0);
 }
