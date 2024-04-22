@@ -6,11 +6,13 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/22 17:53:25 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/22 19:42:59 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef MINISHELL_H
+# define MINISHELL_H
+# include <stdio.h>
 
 /*	PIPE == '|',
 	EXPRESSION == Either a command or it's arguments and flags,
@@ -42,7 +44,26 @@ typedef struct s_token_list
 	struct s_token_list	*next;
 }						t_token_list;
 
+typedef enum e_parse_identifier
+{
+	PARSE_PIPE,
+	PARSE_AND,
+	PARSE_OR,
+	PARSE_CMD
+}						t_parse_identifier;
+
+typedef struct s_AST
+{
+	t_parse_identifier	parse_identifier;
+	char				*redirections;
+	char				*args;
+	struct s_AST		*left;
+	struct s_AST		*right;
+}						t_AST;
+
 bool					ft_isspace(unsigned char c);
 t_token_list			*tokenize_cmd(char *full_cmd);
 void					clean_tokens(t_token_list **head);
 void					add_token_identifiers(t_token_list *node);
+t_AST					*create_ast(t_token_list **head);
+#endif
