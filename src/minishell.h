@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/19 12:12:10 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/22 17:00:30 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 typedef struct s_token_list
 {
-	char			*token;
-	struct s_token	*prev;
-	struct s_token	*next;
-}					t_token_list;
+	char				*token;
+	struct s_token_list	*prev;
+	struct s_token_list	*next;
+}						t_token_list;
 
-bool				ft_isspace(unsigned char c);
+bool					ft_isspace(unsigned char c);
+t_token_list			*tokenize_cmd(char *full_cmd);
