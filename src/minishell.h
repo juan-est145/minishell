@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 13:25:57 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/23 14:01:08 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ t_AST					*create_ast(t_token_list **head);
 t_token_list			*get_next_token(t_token_list **head);
 bool					token_is_binary_operator(t_token_list **head);
 t_AST					*new_ast_node(void);
+int						current_precedence(t_token_list **head);
 #endif

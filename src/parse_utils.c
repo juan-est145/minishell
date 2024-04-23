@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:30:29 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 12:39:24 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/23 14:00:44 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,11 @@ t_AST	*new_ast_node(void)
 	if (new_node == NULL)
 		return (NULL);
 	return (new_node);
+}
+
+int	current_precedence(t_token_list **head)
+{
+	if ((*head)->token_identifer == OR || (*head)->token_identifer == AND)
+		return (0);
+	return (1);
 }
