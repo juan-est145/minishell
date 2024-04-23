@@ -8,6 +8,7 @@ $(SRC_PATH)/ft_isspace.c\
 $(SRC_PATH)/tokenizer.c\
 $(SRC_PATH)/tokenizer_utils.c\
 $(SRC_PATH)/parse.c\
+$(SRC_PATH)/parse_utils.c\
 
 OBJS = $(SCRS:.c=.o)
 

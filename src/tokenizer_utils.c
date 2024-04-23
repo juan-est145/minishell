@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:44:18 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/22 19:13:39 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/23 13:15:16 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,12 @@ void	add_token_identifiers(t_token_list *node)
 		node->token_identifer = OR;
 	else
 		node->token_identifer = EXPRESSION;
+}
+
+t_token_list	*get_next_token(t_token_list **head)
+{
+	if (*head == NULL)
+		return (NULL);
+	*head = (*head)->next;
+	return (*head);
 }
