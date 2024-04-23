@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 16:55:58 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/23 18:35:48 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ static char	*handle_cmd_args(t_token_list **head)
 	get_next_token(head);
 	while (*head != NULL && (*head)->token_identifer == EXPRESSION)
 	{
+		cmds_args = ft_strjoin(cmds_args, " ");
+		free(copy_to_free);
+		if (cmds_args == NULL)
+			return (NULL);
+		copy_to_free = cmds_args;
 		cmds_args = ft_strjoin(cmds_args, (*head)->token);
 		free(copy_to_free);
 		if (cmds_args == NULL)
