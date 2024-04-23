@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 14:08:06 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/23 16:10:12 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,23 @@ static t_AST	*precedence_climbing(int precedence, t_token_list **copy)
 	int					updated_prec;
 	t_token_identifier	current_parse;
 
-	(void)current_parse;
-	(void)right;
 	if ((*copy)->token == NULL)
 		return (NULL);
 	left = process_current_token(copy);
 	if (left == NULL)
 		return (NULL);
 	while ((*copy) != NULL && token_is_binary_operator(copy) == true
-		&& precedence >= current_precedence(copy))
+		&& current_precedence(copy) >= precedence)
 	{
 		current_parse = (*copy)->token_identifer;
 		get_next_token(copy);
 		updated_prec = current_precedence(copy) + 1;
 		right = precedence_climbing(updated_prec, copy);
+		if (right == NULL)
+			return (left);
+		left = join_left_right_nodes(left, right, current_parse);
+		if (left == NULL)
+			return (NULL);
 	}
 	return (left);
 }
@@ -63,9 +66,9 @@ static t_AST	*process_current_token(t_token_list **head)
 		return (NULL);
 	while (*head != NULL && token_is_binary_operator(head) == false)
 	{
-		if ((*head)->token_identifer == EXPRESSION)
+		if (*head != NULL && (*head)->token_identifer == EXPRESSION)
 			ast_node->args = handle_cmd_args(head);
-		if ((*head)->token_identifer != EXPRESSION)
+		if (*head != NULL && is_redir((*head)->token_identifer) == true)
 			ast_node->redirections = handle_redir(head);
 	}
 	return (ast_node);
@@ -93,8 +96,8 @@ static char	*handle_cmd_args(t_token_list **head)
 	return (cmds_args);
 }
 
-//TO DO: Check the data type for storing redirections, 
-//maybe need to change to **char or  a struct with more information
+// TO DO: Check the data type for storing redirections,
+// maybe need to change to **char or  a struct with more information
 
 static char	*handle_redir(t_token_list **head)
 {

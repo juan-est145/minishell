@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 11:34:35 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 15:33:21 by juan-est145      ###   ########.fr       */
+/*   Created: 2024/04/23 15:57:57 by juan-est145       #+#    #+#             */
+/*   Updated: 2024/04/23 16:00:19 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "minishell.h"
 
-int	main(void)
+bool	is_redir(t_token_identifier identifier)
 {
-	t_token_list	*head;
-	t_AST			*ast_head;
-	char			*string;
-
-	string = "echo \"Hola caracola\" | grep Hola | wc -l";
-	head = tokenize_cmd(string);
-	ast_head = create_ast(&head);
-	clean_tokens(&head);
-	clean_ast(ast_head);
-	return (0);
+	if (identifier == REDIR_INSERT || identifier == REDIR_APPEND
+		|| identifier == REDIR_INPUT || identifier == REDIR_TERMINAL_LINES)
+		return (true);
+	return (false);
 }

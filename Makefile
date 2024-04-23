@@ -9,6 +9,7 @@ $(SRC_PATH)/tokenizer.c\
 $(SRC_PATH)/tokenizer_utils.c\
 $(SRC_PATH)/parse.c\
 $(SRC_PATH)/parse_utils.c\
+$(SRC_PATH)/parse_utils2.c\
 
 OBJS = $(SCRS:.c=.o)
 
