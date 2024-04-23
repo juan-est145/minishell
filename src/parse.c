@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 16:10:12 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/23 16:55:58 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static char		*handle_redir(t_token_list **head);
 t_AST	*create_ast(t_token_list **head)
 {
 	t_AST			*ast_head;
-	t_token_list	**head_copy;
+	t_token_list	*head_copy;
 
-	head_copy = head;
-	ast_head = precedence_climbing(0, head_copy);
+	head_copy = *head;
+	ast_head = precedence_climbing(0, &head_copy);
 	return (ast_head);
 }
 
@@ -62,6 +62,8 @@ static t_AST	*process_current_token(t_token_list **head)
 
 	ast_node = new_ast_node();
 	ast_node->parse_identifier = PARSE_CMD;
+	ast_node->redirections = NULL;
+	ast_node->args = NULL;
 	if (ast_node == NULL)
 		return (NULL);
 	while (*head != NULL && token_is_binary_operator(head) == false)

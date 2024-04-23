@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:30:29 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 15:30:20 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/23 17:07:01 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ t_AST	*new_ast_node(void)
 	new_node = malloc(sizeof(t_AST));
 	if (new_node == NULL)
 		return (NULL);
+	new_node->args = NULL;
+	new_node->redirections = NULL;
+	new_node->left = NULL;
+	new_node->right = NULL;
 	return (new_node);
 }
 
@@ -52,6 +56,8 @@ t_AST	*join_left_right_nodes(t_AST *left, t_AST *right,
 		new_node->parse_identifier = PARSE_AND;
 	else
 		new_node->parse_identifier = PARSE_OR;
+	new_node->args = NULL;
+	new_node->redirections = NULL;
 	new_node->right = right;
 	new_node->left = left;
 	return (new_node);
