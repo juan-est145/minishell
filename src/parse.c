@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 13:34:22 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/23 13:43:52 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,5 @@ static char	*handle_cmd_args(t_token_list **head)
 		copy_to_free = cmds_args;
 		get_next_token(head);
 	}
-	return (free(copy_to_free), cmds_args);
+	return (cmds_args);
 }
