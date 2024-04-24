@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 12:01:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/19 12:21:47 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/24 16:52:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "minishell.h"
+#include "../../libft/libft.h"
+#include "../../include/minishell.h"
 
 bool	ft_isspace(unsigned char c)
 {

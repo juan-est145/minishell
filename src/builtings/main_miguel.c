@@ -6,16 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/04/24 15:35:35 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:55:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <unistd.h>
-#include <readline/history.h>
-#include <stdlib.h>
-#include "prueba.h"
+#include "../../libft/libft.h"
+#include "../../include/minishell.h"
 
 int main (int argc, char **argv, char **env)
 {

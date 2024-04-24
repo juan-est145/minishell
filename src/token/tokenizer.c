@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:12:37 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/22 19:07:51 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/24 16:53:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "minishell.h"
+#include "../../libft/libft.h"
+#include "../../include/minishell.h"
 
 static t_token_list	*find_tokens(char *full_cmd, t_token_list **token_list);
 static char			*save_token(t_token_list **token_list, char *full_cmd,

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:57:57 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/24 16:16:14 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/24 16:53:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "minishell.h"
+#include "../../libft/libft.h"
+#include "../../include/minishell.h"
 
 static void		clean_node_list(t_redirections **head);
 

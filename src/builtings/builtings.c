@@ -6,11 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/24 15:54:45 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:55:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prueba.h"
+#include "../../libft/libft.h"
+#include "../../include/minishell.h"
 
 //IMITA EL COMANDO PWD
 void ft_getpwd(char *text, t_lst_env *lst_env)

@@ -6,11 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:48 by user42            #+#    #+#             */
-/*   Updated: 2024/04/24 15:16:18 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:54:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prueba.h"
+#include "../../libft/libft.h"
+#include "../../include/minishell.h"
 
 int	srch_path(char **env, char *search)
 {
