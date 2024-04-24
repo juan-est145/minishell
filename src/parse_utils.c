@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:30:29 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 17:07:01 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/24 16:02:00 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,10 @@ t_AST	*join_left_right_nodes(t_AST *left, t_AST *right,
 	return (new_node);
 }
 
-void	clean_ast(t_AST *node)
+bool	is_redir(t_token_identifier identifier)
 {
-	if (node == NULL)
-		return ;
-	if (node->args != NULL)
-		free(node->args);
-	if (node->redirections != NULL)
-		free(node->redirections);
-	clean_ast(node->left);
-	clean_ast(node->right);
-	free(node);
+	if (identifier == REDIR_INSERT || identifier == REDIR_APPEND
+		|| identifier == REDIR_INPUT || identifier == REDIR_TERMINAL_LINES)
+		return (true);
+	return (false);
 }

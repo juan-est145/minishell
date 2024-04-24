@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 16:00:38 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/24 16:00:09 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ typedef enum e_token_identifier
 	REDIR_TERMINAL_LINES,
 	AND,
 	OR
-}						t_token_identifier;
+}							t_token_identifier;
 
 typedef struct s_token_list
 {
-	char				*token;
-	t_token_identifier	token_identifer;
-	struct s_token_list	*prev;
-	struct s_token_list	*next;
-}						t_token_list;
+	char					*token;
+	t_token_identifier		token_identifer;
+	struct s_token_list		*prev;
+	struct s_token_list		*next;
+}							t_token_list;
 
 typedef enum e_parse_identifier
 {
@@ -50,28 +50,39 @@ typedef enum e_parse_identifier
 	PARSE_AND,
 	PARSE_OR,
 	PARSE_CMD
-}						t_parse_identifier;
+}							t_parse_identifier;
+
+typedef struct s_redirections
+{
+	t_token_identifier		redirection_type;
+	char					*file_location;
+	struct s_redirections	*prev;
+	struct s_redirections	*next;
+}							t_redirections;
 
 typedef struct s_AST
 {
-	t_parse_identifier	parse_identifier;
-	char				*redirections;
-	char				*args;
-	struct s_AST		*left;
-	struct s_AST		*right;
-}						t_AST;
+	t_parse_identifier		parse_identifier;
+	t_redirections			*redirections;
+	char					*args;
+	struct s_AST			*left;
+	struct s_AST			*right;
+}							t_AST;
 
-bool					ft_isspace(unsigned char c);
-t_token_list			*tokenize_cmd(char *full_cmd);
-void					clean_tokens(t_token_list **head);
-void					add_token_identifiers(t_token_list *node);
-t_AST					*create_ast(t_token_list **head);
-t_token_list			*get_next_token(t_token_list **head);
-bool					token_is_binary_operator(t_token_list **head);
-t_AST					*new_ast_node(void);
-int						current_precedence(t_token_list **head);
-t_AST					*join_left_right_nodes(t_AST *left, t_AST *right,
-							t_token_identifier current_parse);
-void					clean_ast(t_AST *node);
-bool					is_redir(t_token_identifier identifier);
+bool						ft_isspace(unsigned char c);
+t_token_list				*tokenize_cmd(char *full_cmd);
+void						clean_tokens(t_token_list **head);
+void						add_token_identifiers(t_token_list *node);
+t_AST						*create_ast(t_token_list **head);
+t_token_list				*get_next_token(t_token_list **head);
+bool						token_is_binary_operator(t_token_list **head);
+t_AST						*new_ast_node(void);
+int							current_precedence(t_token_list **head);
+t_AST						*join_left_right_nodes(t_AST *left, t_AST *right,
+								t_token_identifier current_parse);
+void						clean_ast(t_AST *node);
+bool						is_redir(t_token_identifier identifier);
+t_redirections				*create_red_node(t_token_identifier red_type);
+void						append_red_node(t_redirections **head,
+								t_redirections *node);
 #endif

@@ -6,17 +6,18 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/23 18:35:48 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/24 16:19:56 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "minishell.h"
 
-static t_AST	*precedence_climbing(int precedence, t_token_list **copy);
-static t_AST	*process_current_token(t_token_list **head);
-static char		*handle_cmd_args(t_token_list **head);
-static char		*handle_redir(t_token_list **head);
+static t_AST			*precedence_climbing(int precedence,
+							t_token_list **copy);
+static t_AST			*process_current_token(t_token_list **head);
+static char				*handle_cmd_args(t_token_list **head);
+static t_redirections	*handle_redir(t_token_list **head);
 
 t_AST	*create_ast(t_token_list **head)
 {
@@ -103,11 +104,26 @@ static char	*handle_cmd_args(t_token_list **head)
 	return (cmds_args);
 }
 
-// TO DO: Check the data type for storing redirections,
-// maybe need to change to **char or  a struct with more information
-
-static char	*handle_redir(t_token_list **head)
+static t_redirections	*handle_redir(t_token_list **head)
 {
-	(void)head;
-	return (NULL);
+	t_redirections		*redir_head;
+	t_token_identifier	redir_type;
+	t_redirections		*redir_tmp;
+
+	redir_head = NULL;
+	while (*head != NULL && is_redir((*head)->token_identifer) == true)
+	{
+		redir_type = (*head)->token_identifer;
+		redir_tmp = create_red_node(redir_type);
+		if (redir_tmp == NULL)
+			return (NULL);
+		get_next_token(head);
+		redir_tmp->file_location = ft_substr((*head)->token, 0,
+				ft_strlen((*head)->token));
+		if (redir_tmp->file_location == NULL)
+			return (free(redir_tmp), NULL);
+		append_red_node(&redir_head, redir_tmp);
+		get_next_token(head);
+	}
+	return (redir_head);
 }
