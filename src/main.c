@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:34:35 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/24 16:46:35 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:58:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 #include "../include/minishell.h"
 
 int	main(void)
+{
+	return (0);
+}
+//"echo \"Hola caracola\" | grep Hola | wc -l"
+// "echo \"Hola caracola\" | grep Hola | wc -l > prueba.txt"
+
+/*int	main(void)
 {
 	t_token_list	*head;
 	t_AST			*ast_head;
@@ -25,6 +32,4 @@ int	main(void)
 	clean_tokens(&head);
 	clean_ast(ast_head);
 	return (0);
-}
-//"echo \"Hola caracola\" | grep Hola | wc -l"
-// "echo \"Hola caracola\" | grep Hola | wc -l > prueba.txt"
+}*/
