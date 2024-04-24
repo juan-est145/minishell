@@ -1,15 +1,23 @@
 LIBFT_PATH = libft
+
 SRC_PATH = src
+BUILTINGS_PATH = $(SRC_PATH)/builtings
+PARSE_PATH = $(SRC_PATH)/parse
+TOKEN_PATH = $(SRC_PATH)/token
 
 NAME = minishell
 
 SCRS = $(SRC_PATH)/main.c\
-$(SRC_PATH)/ft_isspace.c\
-$(SRC_PATH)/tokenizer.c\
-$(SRC_PATH)/tokenizer_utils.c\
-$(SRC_PATH)/parse.c\
-$(SRC_PATH)/parse_utils.c\
-$(SRC_PATH)/parse_utils2.c\
+$(TOKEN_PATH)/ft_isspace.c\
+$(TOKEN_PATH)/tokenizer.c\
+$(TOKEN_PATH)/tokenizer_utils.c\
+$(PARSE_PATH)/parse.c\
+$(PARSE_PATH)/parse_utils.c\
+$(PARSE_PATH)/parse_utils2.c\
+$(BUILTINGS_PATH)/main_miguel.c\
+$(BUILTINGS_PATH)/archive_env.c\
+$(BUILTINGS_PATH)/archive_utils.c\
+$(BUILTINGS_PATH)/builtings.c\
 
 OBJS = $(SCRS:.c=.o)
 
@@ -19,7 +27,7 @@ COMPILER = $(CC)
 
 CFLAGS = -Wall -Werror -Wextra
 LIB_FLAGS = -Llibft -lft
-EXEC-NAME-FLAG = -o
+EXEC-NAME-FLAG = -lreadline -lhistory -o
 
 RM = rm -rf
 
