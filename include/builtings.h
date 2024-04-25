@@ -6,14 +6,14 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/04/25 12:22:04 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/25 16:43:44 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINGS_H
 # define BUILTINGS_H
 
-# include "minishell.h"
+# include <stdbool.h>
 
 // LISTA ENLAZADA DE VARIABLES DE ENTORNO
 typedef struct s_lst_env

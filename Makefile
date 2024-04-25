@@ -1,6 +1,7 @@
 LIBFT_PATH = libft
 
 SRC_PATH = src
+INCLUDE_PATH = include
 BUILTINGS_PATH = $(SRC_PATH)/builtings
 PARSE_PATH = $(SRC_PATH)/parse
 TOKEN_PATH = $(SRC_PATH)/token
@@ -21,7 +22,10 @@ $(BUILTINGS_PATH)/builtings.c\
 
 OBJS = $(SCRS:.c=.o)
 
-HEADER = $(SRC_PATH)/minishell.h
+HEADER = $(INCLUDE_PATH)/minishell.h\
+$(INCLUDE_PATH)/builtings.h\
+$(INCLUDE_PATH)/parse.h\
+$(INCLUDE_PATH)/token.h\
 
 COMPILER = $(CC)
 

@@ -6,14 +6,15 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:37:27 by user42            #+#    #+#             */
-/*   Updated: 2024/04/25 12:24:19 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/25 16:43:28 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
 
-# include "minishell.h"
+# include <stdbool.h>
+
 /*	PIPE == '|',
 	EXPRESSION == Either a command or it's arguments and flags,
 	RED_INSERT == >,

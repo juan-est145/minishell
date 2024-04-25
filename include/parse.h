@@ -6,14 +6,14 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:40:26 by user42            #+#    #+#             */
-/*   Updated: 2024/04/25 12:24:33 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/25 16:43:33 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "minishell.h"
+# include <stdbool.h>
 
 typedef enum e_parse_identifier
 {
