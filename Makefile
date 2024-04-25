@@ -15,7 +15,6 @@ $(TOKEN_PATH)/tokenizer_utils.c\
 $(PARSE_PATH)/parse.c\
 $(PARSE_PATH)/parse_utils.c\
 $(PARSE_PATH)/parse_utils2.c\
-$(BUILTINGS_PATH)/main_miguel.c\
 $(BUILTINGS_PATH)/archive_env.c\
 $(BUILTINGS_PATH)/archive_utils.c\
 $(BUILTINGS_PATH)/archive_utils1.c\
