@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/04/25 16:43:44 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/25 17:18:37 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILTINGS_H
 
 # include <stdbool.h>
+# include <stddef.h>
 
 // LISTA ENLAZADA DE VARIABLES DE ENTORNO
 typedef struct s_lst_env
@@ -27,12 +28,13 @@ int						srch_path(char **env, char *search);
 char					*ft_getenv(char **env, char *search);
 void					init_lst_env(char **env, t_lst_env *lst);
 char					*ft_fusion_string(char *s1, char *s2);
-// ARCHIVE UTILS 1
+// ARCHIVE UTILS
 void					free_matrix(char **matrix);
 void					free_lst_env(t_lst_env *lst);
 int						ft_contain(char *text, char search);
 void					liberar_memoria(char **matr);
 void					rellenar(char *palabra, char const *frase, char c);
+void					ft_lstadd_back_ms(t_lst_env **lst, t_lst_env *new);
 
 void					aux(char **matr, char const *s, char c);
 int						ntimes(char const *s, char c);

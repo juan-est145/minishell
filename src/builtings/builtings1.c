@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/25 15:36:49 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:27:52 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	ft_getpwd(char *text, t_lst_env *lst_env)
 	int			len;
 
 	temp = lst_env;
+	len = 0;
+	split = NULL;
 	len = ft_getpwd_normi(temp, len, split);
 	free_matrix(split);
 	split = ft_split(text, ' ');
@@ -56,6 +58,7 @@ bool	ft_echo_normi(char **cmd, int i, int j, bool open)
 {
 	char	chr;
 
+	chr = '\0';
 	if ((cmd[i][j] == '\"' || cmd[i][j] == '\'') && open == false)
 	{
 		open = true;
@@ -79,7 +82,6 @@ void	ft_echo(char **cmd)
 {
 	int		i;
 	int		j;
-	char	chr;
 	bool	open;
 
 	i = 1;

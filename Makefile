@@ -18,7 +18,10 @@ $(PARSE_PATH)/parse_utils2.c\
 $(BUILTINGS_PATH)/main_miguel.c\
 $(BUILTINGS_PATH)/archive_env.c\
 $(BUILTINGS_PATH)/archive_utils.c\
+$(BUILTINGS_PATH)/archive_utils1.c\
+$(BUILTINGS_PATH)/archive_utils2.c\
 $(BUILTINGS_PATH)/builtings.c\
+$(BUILTINGS_PATH)/builtings1.c\
 
 OBJS = $(SCRS:.c=.o)
 

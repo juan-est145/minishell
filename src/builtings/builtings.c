@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/25 15:35:49 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:24:40 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_env(t_lst_env *lst_env, char *text)
 	char	**split;
 
 	split = ft_split(text, ' ');
-	if (split[1 != NULL])
+	if (split[1] == NULL)
 	{
 		while (lst_env != NULL)
 		{
@@ -53,7 +53,7 @@ void	ft_export(char *new, t_lst_env *lst_env)
 			{
 				copia = ft_lstnew_ms(split[i]);
 				printf("%s\n", copia->text);
-				ft_lstadd_back(&lst_env, copia);
+				ft_lstadd_back_ms(&lst_env, copia);
 			}
 		}
 		i++;
@@ -105,7 +105,6 @@ static bool	ft_unset_normi2(char **split, char **name, bool flag,
 void	ft_unset(char *text, t_lst_env *lst_env)
 {
 	t_lst_env	*temp;
-	int			i;
 	bool		flag;
 	char		**name;
 	char		**split;
@@ -116,7 +115,6 @@ void	ft_unset(char *text, t_lst_env *lst_env)
 	while (temp->next != NULL)
 	{
 		name = ft_split(temp->next->text, '=');
-		i = 1;
 		flag = ft_unset_normi2(split, name, flag, temp);
 		free_matrix(name);
 		if (flag == true)

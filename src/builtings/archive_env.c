@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:48 by user42            #+#    #+#             */
-/*   Updated: 2024/04/25 13:55:10 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:10:31 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_lst_env(char **env, t_lst_env *lst)
 	while (env[i])
 	{
 		aux = ft_lstnew_ms(env[i]);
-		ft_lstadd_back(&lst, aux);
+		ft_lstadd_back_ms(&lst, aux);
 		i++;
 	}
 }
