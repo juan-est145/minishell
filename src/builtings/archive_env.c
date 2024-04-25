@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:48 by user42            #+#    #+#             */
-/*   Updated: 2024/04/24 16:54:59 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/25 08:19:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,25 @@ int	srch_path(char **env, char *search)
 	return (i);
 }
 
-char *ft_getenv(char **env, char *search)
+char	*ft_getenv(char **env, char *search)
 {
-    char *result;
-    int i = 0;
-
-    while(search[i] != '\0')
+    char	*result;
+    int		i;
+	
+	i = 0;
+    while (search[i] != '\0')
         i++;
     result = env[srch_path(env, search)] + i;
     return (result);
 }
 
 //INIZIALIZA LA LISTA DE VARIABLES GLOBALES
-void init_lst_env(char **env, t_lst_env *lst)
+void	init_lst_env(char **env, t_lst_env *lst)
 {
-	t_lst_env *aux;
-	int i = 0;
-
+	t_lst_env	*aux;
+	int			i;
+	
+	i = 0;
 	while (env[i])
 	{
 		aux = ft_lstnew_ms(env[i]);
@@ -49,12 +51,13 @@ void init_lst_env(char **env, t_lst_env *lst)
 		i++;
 	}
 }
-char *ft_fusion_string(char *s1, char *s2)
+
+char	*ft_fusion_string(char *s1, char *s2)
 {
-	char *result;
-	int	len_total;
-	int i;
-	int j;
+	char	*result;
+	int		len_total;
+	int		i;
+	int		j;
 
 	len_total = ft_strlen(s1) + ft_strlen(s2);
 	result = malloc(sizeof(char) * len_total);

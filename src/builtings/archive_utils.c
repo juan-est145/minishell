@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:15:43 by user42            #+#    #+#             */
-/*   Updated: 2024/04/24 16:55:03 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/25 09:18:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "../../include/minishell.h"
 
 //---------------UTILS----------------------//
-
 void free_matrix(char **matrix)
 {
 	int i;
@@ -28,33 +27,34 @@ void free_matrix(char **matrix)
 	free(matrix);
 }
 
-// To DO: Fix function
+// To DO: Fix function | HECHO
 void free_lst_env (t_lst_env *lst)
 {
 	t_lst_env *temp;
-	t_lst_env *aux;
 
-	temp = lst;
-	while (temp->next != NULL)
+	while (lst->next != NULL)
 	{
-		free(temp->next->text);
-		aux = temp;
-		temp = temp->next;
-		free(aux);
+		free(lst->next->text);
+		temp = lst;
+		lst = lst->next;
+		free(temp);
 	}
 }
+
 int ft_strlen(const char *s)
 {
-    int i = 0;
+	int	i;
 
-    while(s[i] != '\0')
-        i++;
-    return(i);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
 int ft_contain(char *text, char search)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (text[i])
 	{
 		if (text[i] == search)
@@ -63,8 +63,6 @@ int ft_contain(char *text, char search)
 	}
 	return (1);
 }
-
-
 
 void	ft_lstadd_back(t_lst_env **lst, t_lst_env *new)
 {
@@ -79,7 +77,6 @@ void	ft_lstadd_back(t_lst_env **lst, t_lst_env *new)
 			temp = temp->next;
 		temp->next = new;
 	}
-//	printf("%s\n", temp->next->text);
 }
 
 void	liberar_memoria(char **matr)

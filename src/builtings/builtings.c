@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/24 16:55:10 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/25 08:52:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "../../include/minishell.h"
 
 //IMITA EL COMANDO PWD
-void ft_getpwd(char *text, t_lst_env *lst_env)
+void	ft_getpwd(char *text, t_lst_env *lst_env)
 {
-    char *pwd;
-	char **split;
-	t_lst_env *temp;
-	int len;
+    char		*pwd;
+	char		**split;
+	t_lst_env 	*temp;
+	int 		len;
 
 	temp = lst_env;
 	while (temp->next != NULL)
@@ -49,24 +49,26 @@ void ft_getpwd(char *text, t_lst_env *lst_env)
 //IMITA LA FUNCION ECHO
 void ft_echo(char **cmd)
 {
-    int i = 1;
-    int j = 0;
+	int i;
+	int j;
 	char chr;
 	bool open ;
 
+	i = 1;
+	j = 0;
 	open = false;
-    if (ft_strncmp(cmd[1], "-n\0", 3) == 0)
-        i = 2;
-    while (cmd[i] != 0)
-    {
-        j = 0;
-        while (cmd[i][j] != '\0')
-        {
-            if ((cmd[i][j] == '\"' || cmd[i][j] == '\'') && open == false)
-            {
+	if (ft_strncmp(cmd[1], "-n\0", 3) == 0)
+		i = 2;
+	while (cmd[i] != 0)
+	{
+		j = 0;
+		while (cmd[i][j] != '\0')
+		{
+			if ((cmd[i][j] == '\"' || cmd[i][j] == '\'') && open == false)
+			{
 				open = true;
 				chr = cmd[i][j];
-			}   
+			}
 			else
 			{
 				if (cmd[i][j] == chr && open == true)
@@ -77,41 +79,52 @@ void ft_echo(char **cmd)
 				else
 					printf("%c", cmd[i][j]);
 			}
-            j++;
-        }
-        i++;
-        if (cmd[i] != 0)
-            printf(" ");
-    }
-    if (ft_strncmp(cmd[1], "-n\0", 3) != 0)
+			j++;
+		}
+		i++;
+		if (cmd[i] != 0)
+			printf(" ");
+	}
+	if (ft_strncmp(cmd[1], "-n\0", 3) != 0)
 		printf("\n");
 	free_matrix(cmd);
 }
+
 //IMITA EL COMANDO ENV
-void ft_env(t_lst_env *lst_env, char *text)
+void	ft_env(t_lst_env *lst_env, char *text)
 {
-	(void)text;
-	while (lst_env != NULL)
-    {
-		if (lst_env->next != NULL)
-        	printf("%s\n", lst_env->next->text);
-		lst_env = lst_env->next;
-    }
+	char	**split;
+
+	split = ft_split(text, ' ');
+	if (split[1 != NULL])
+	{
+		while (lst_env != NULL)
+		{
+			if (lst_env->next != NULL)
+				printf("%s\n", lst_env->next->text);
+			lst_env = lst_env->next;
+		}
+	}
+	else
+	{
+		printf("To many argument");
+	}
 }
+
 //IMITA EL COMANDO EXPORT
-void ft_export(char *new, t_lst_env *lst_env)
+void	ft_export(char *new, t_lst_env *lst_env)
 {	
-	t_lst_env *copia;
-	char **split = ft_split(new, ' ');
-	int i = 0;
+	t_lst_env	*copia;
+	char		**split;
+	int			i;
+
+	i = 0;
+	split = ft_split(new, ' ');
 	while (split[i])
 	{
-		if (ft_contain(split[i], '=') == 0 && ft_strlen(split[i]) > 2)
+		if (ft_contain(split[i], '=') == 0 && (ft_strlen(split[i]) > 2))
 		{
- 			if (ft_lst_contain_change(&lst_env, split[i]) == 0)
-			{
-				
-			}
+			if (ft_lst_contain_change(&lst_env, split[i]) == 0);
 			else
 			{
 				copia = ft_lstnew_ms(split[i]);
@@ -124,10 +137,11 @@ void ft_export(char *new, t_lst_env *lst_env)
 	}
 	free_matrix(split);
 }
+
 //IMITA EL COMANDO UNSET
-bool ft_unset_normi(t_lst_env *temp, bool flag)
+bool	ft_unset_normi(t_lst_env *temp, bool flag)
 {
-	t_lst_env *aux;
+	t_lst_env	*aux;
 
 	if (temp->next->next != NULL)
 	{
@@ -142,7 +156,6 @@ bool ft_unset_normi(t_lst_env *temp, bool flag)
 		free(aux);
 		flag = true;
 		return (flag);
-//		break;
 	}
 	return (flag);
 }
@@ -150,10 +163,10 @@ bool ft_unset_normi(t_lst_env *temp, bool flag)
 void ft_unset(char *text, t_lst_env *lst_env)
 {
 	t_lst_env	*temp;
-	int i;
-	bool flag;
-	char **name;
-	char **split;
+	int			i;
+	bool		flag;
+	char		**name;
+	char		**split;
 
 	temp = lst_env;
 	flag = false;
@@ -166,14 +179,6 @@ void ft_unset(char *text, t_lst_env *lst_env)
 		{
 			if (ft_strncmp(name[0], split[i], ft_strlen(name[0])) == 0)
 			{
-/* 				if (temp->next->next != NULL)
-					temp->next = temp->next->next;
-				else
-				{
-					temp->next = NULL;
-					flag = true;
-					break;
-				} */
 				flag = ft_unset_normi(temp, flag);
 				if (flag == true)
 					break;
@@ -191,9 +196,9 @@ void ft_unset(char *text, t_lst_env *lst_env)
 //IMITA EL COMANDO CD
 void ft_cd(char *text, t_lst_env *lst_env)
 {
-	char **split;
-	char pwd[1024];
-	char *aux;
+	char	**split;
+	char	pwd[1024];
+	char	*aux;
 	
 	split = ft_split(text, ' ');
 	if (split[2] != NULL)
