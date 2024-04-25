@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:40:26 by user42            #+#    #+#             */
-/*   Updated: 2024/04/24 16:51:01 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/25 12:24:33 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
-#define PARSE_H
+# define PARSE_H
 
-#include "minishell.h"
+# include "minishell.h"
 
 typedef enum e_parse_identifier
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:15:43 by user42            #+#    #+#             */
-/*   Updated: 2024/04/25 09:18:40 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/25 12:01:16 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,6 @@ void free_lst_env (t_lst_env *lst)
 	}
 }
 
-int ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
 int ft_contain(char *text, char search)
 {
 	int	i;
@@ -62,21 +53,6 @@ int ft_contain(char *text, char search)
 		i++;
 	}
 	return (1);
-}
-
-void	ft_lstadd_back(t_lst_env **lst, t_lst_env *new)
-{
-	t_lst_env	*temp;
-
-	if (!*lst)
-		*lst = new;
-	else
-	{
-		temp = *lst;
-		while (temp->next != NULL)
-			temp = temp->next;
-		temp->next = new;
-	}
 }
 
 void	liberar_memoria(char **matr)
@@ -155,64 +131,6 @@ int	ntimes(char const *s, char c)
 	return (cont);
 }
 
-char	**ft_split(char const *s, char c)
-{
-	char	**final;
-	int		palabras;
-
-	if (s == NULL)
-		return (NULL);
-	palabras = ntimes(s, c);
-	final = (char **)malloc((palabras + 1) * sizeof(char *));
-	if (!final)
-		return (NULL);
-	aux(final, s, c);
-	return (final);
-}
-
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*final;
-	int		len;
-	int		cont;
-	int		lentotal;
-
-	cont = 0;
-	lentotal = ft_strlen(s1) + ft_strlen(s2) + 1;
-	final = (char *)malloc(lentotal * sizeof(char));
-	if (!final || !s1 || !s2)
-		return (0);
-	len = ft_strlen(s1);
-	while (len--)
-	{
-		final[cont] = *s1++;
-		cont++;
-	}
-	len = ft_strlen(s2);
-	while (len--)
-	{
-		final[cont] = *s2++;
-		cont++;
-	}
-	final[cont] = '\0';
-	return (final);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	int	cont;
-
-	cont = 0;
-	while ((s1[cont] != '\0' || s2[cont] != '\0') && 0 < n)
-	{
-		if (s1[cont] != s2[cont])
-			return ((unsigned char)s1[cont] - (unsigned char)s2[cont]);
-		cont++;
-		n--;
-	}
-	return (0);
-}
 int ft_lst_contain_change(t_lst_env **lst, char *search)
 {
 	t_lst_env	*temp;
