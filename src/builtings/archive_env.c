@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:48 by user42            #+#    #+#             */
-/*   Updated: 2024/04/25 08:19:35 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/25 13:55:10 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	srch_path(char **env, char *search)
 
 char	*ft_getenv(char **env, char *search)
 {
-    char	*result;
-    int		i;
-	
+	char	*result;
+	int		i;
+
 	i = 0;
-    while (search[i] != '\0')
-        i++;
-    result = env[srch_path(env, search)] + i;
-    return (result);
+	while (search[i] != '\0')
+		i++;
+	result = env[srch_path(env, search)] + i;
+	return (result);
 }
 
 //INIZIALIZA LA LISTA DE VARIABLES GLOBALES
@@ -42,7 +42,7 @@ void	init_lst_env(char **env, t_lst_env *lst)
 {
 	t_lst_env	*aux;
 	int			i;
-	
+
 	i = 0;
 	while (env[i])
 	{
@@ -75,5 +75,5 @@ char	*ft_fusion_string(char *s1, char *s2)
 		j++;
 	}
 	result[i] = '\0';
-	return (result);	
+	return (result);
 }
