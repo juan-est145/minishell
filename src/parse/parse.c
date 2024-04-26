@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/24 16:54:21 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/26 12:15:15 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
 #include "../../include/minishell.h"
 
-static t_AST			*precedence_climbing(int precedence,
+static t_ast			*precedence_climbing(int precedence,
 							t_token_list **copy);
-static t_AST			*process_current_token(t_token_list **head);
+static t_ast			*process_current_token(t_token_list **head);
 static char				*handle_cmd_args(t_token_list **head);
 static t_redirections	*handle_redir(t_token_list **head);
 
-t_AST	*create_ast(t_token_list **head)
+t_ast	*create_ast(t_token_list **head)
 {
-	t_AST			*ast_head;
+	t_ast			*ast_head;
 	t_token_list	*head_copy;
 
 	head_copy = *head;
@@ -29,10 +29,10 @@ t_AST	*create_ast(t_token_list **head)
 	return (ast_head);
 }
 
-static t_AST	*precedence_climbing(int precedence, t_token_list **copy)
+static t_ast	*precedence_climbing(int precedence, t_token_list **copy)
 {
-	t_AST				*left;
-	t_AST				*right;
+	t_ast				*left;
+	t_ast				*right;
 	int					updated_prec;
 	t_token_identifier	current_parse;
 
@@ -57,9 +57,9 @@ static t_AST	*precedence_climbing(int precedence, t_token_list **copy)
 	return (left);
 }
 
-static t_AST	*process_current_token(t_token_list **head)
+static t_ast	*process_current_token(t_token_list **head)
 {
-	t_AST	*ast_node;
+	t_ast	*ast_node;
 
 	ast_node = new_ast_node();
 	ast_node->parse_identifier = PARSE_CMD;

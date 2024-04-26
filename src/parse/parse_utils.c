@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:30:29 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/24 16:53:28 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/26 12:14:58 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ bool	token_is_binary_operator(t_token_list **head)
 	return (false);
 }
 
-t_AST	*new_ast_node(void)
+t_ast	*new_ast_node(void)
 {
-	t_AST	*new_node;
+	t_ast	*new_node;
 
-	new_node = malloc(sizeof(t_AST));
+	new_node = malloc(sizeof(t_ast));
 	if (new_node == NULL)
 		return (NULL);
 	new_node->args = NULL;
@@ -42,12 +42,12 @@ int	current_precedence(t_token_list **head)
 	return (1);
 }
 
-t_AST	*join_left_right_nodes(t_AST *left, t_AST *right,
+t_ast	*join_left_right_nodes(t_ast *left, t_ast *right,
 		t_token_identifier current_parse)
 {
-	t_AST	*new_node;
+	t_ast	*new_node;
 
-	new_node = malloc(sizeof(t_AST));
+	new_node = malloc(sizeof(t_ast));
 	if (new_node == NULL)
 		return (NULL);
 	if (current_parse == PIPE)

@@ -5,11 +5,11 @@ INCLUDE_PATH = include
 BUILTINGS_PATH = $(SRC_PATH)/builtings
 PARSE_PATH = $(SRC_PATH)/parse
 TOKEN_PATH = $(SRC_PATH)/token
+PROCESS_AST_PATH = $(SRC_PATH)/process_ast
 
 NAME = minishell
 
 SCRS = $(SRC_PATH)/main.c\
-$(TOKEN_PATH)/ft_isspace.c\
 $(TOKEN_PATH)/tokenizer.c\
 $(TOKEN_PATH)/tokenizer_utils.c\
 $(PARSE_PATH)/parse.c\
@@ -21,6 +21,7 @@ $(BUILTINGS_PATH)/archive_utils1.c\
 $(BUILTINGS_PATH)/archive_utils2.c\
 $(BUILTINGS_PATH)/builtings.c\
 $(BUILTINGS_PATH)/builtings1.c\
+$(PROCESS_AST_PATH)/read_cmd.c\
 
 OBJS = $(SCRS:.c=.o)
 
@@ -28,6 +29,7 @@ HEADER = $(INCLUDE_PATH)/minishell.h\
 $(INCLUDE_PATH)/builtings.h\
 $(INCLUDE_PATH)/parse.h\
 $(INCLUDE_PATH)/token.h\
+$(INCLUDE_PATH)/process_ast.h\
 
 COMPILER = $(CC)
 

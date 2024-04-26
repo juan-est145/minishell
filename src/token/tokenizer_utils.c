@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:44:18 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/24 16:52:42 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/26 11:31:02 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,12 @@ t_token_list	*get_next_token(t_token_list **head)
 		return (NULL);
 	*head = (*head)->next;
 	return (*head);
+}
+
+bool	ft_isspace(unsigned char c)
+{
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+		|| c == ' ')
+		return (true);
+	return (false);
 }

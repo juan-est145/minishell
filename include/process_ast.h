@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   process_ast.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 12:01:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/24 16:52:51 by user42           ###   ########.fr       */
+/*   Created: 2024/04/26 12:06:11 by juan-est145       #+#    #+#             */
+/*   Updated: 2024/04/26 12:32:59 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
-#include "../../include/minishell.h"
+#ifndef PROCESS_AST_H
+# define PROCESS_AST_H
 
-bool	ft_isspace(unsigned char c)
-{
-	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
-		|| c == ' ')
-		return (true);
-	return (false);
-}
+typedef struct s_ast		t_ast;
+typedef struct s_lst_env	t_lst_env;
+
+void						read_cmd(t_ast *node, t_lst_env *lst_env);
+#endif

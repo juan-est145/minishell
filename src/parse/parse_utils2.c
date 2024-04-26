@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:57:57 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/24 16:53:26 by user42           ###   ########.fr       */
+/*   Updated: 2024/04/26 12:15:10 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void		clean_node_list(t_redirections **head);
 
-void	clean_ast(t_AST *node)
+void	clean_ast(t_ast *node)
 {
 	if (node == NULL)
 		return ;
