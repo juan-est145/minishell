@@ -6,12 +6,12 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:57:33 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/26 12:36:22 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/26 12:47:55 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
 #include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
 void	read_cmd(t_ast *node, t_lst_env *lst_env)
 {
@@ -28,6 +28,12 @@ void	read_cmd(t_ast *node, t_lst_env *lst_env)
 		ft_unset(node->args, lst_env);
 	if (ft_strncmp(node->args, "cd ", 3) == 0)
 		ft_cd(node->args, lst_env);
+}
+
+void	read_pipe(t_ast *node, t_lst_env *lst_env)
+{
+	(void)node;
+	(void)lst_env;
 }
 
 /*if (ft_strncmp(node->args, "exit", 4) == 0)

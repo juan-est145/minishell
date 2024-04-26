@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/04/26 12:28:01 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/26 12:56:43 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,18 @@ static t_ast	*execute_ast(t_ast *node, t_lst_env *lst_env)
 		return (NULL);
 	else if (node->parse_identifier == PARSE_CMD)
 		return (read_cmd(node, lst_env), node);
+	else if (node->parse_identifier == PARSE_PIPE
+		&& node->left->parse_identifier == PARSE_CMD
+		&& node->right->parse_identifier == PARSE_CMD)
+		return (read_pipe(node, lst_env), node);
+	execute_ast(node->left, lst_env);
+	execute_ast(node->right, lst_env);
 	return (node);
 }
 
-/*if (ft_strncmp(text, "pwd\0", 4) == 0 || ft_strncmp(text, "pwd ", 4) == 0)
-			ft_getpwd(text, &lst_env);
-		if (ft_strncmp(text, "echo ", 4) == 0)
-			ft_echo(ft_split(text, ' '));
-		if (ft_strncmp(text, "env\0", 4) == 0)
-			ft_env(&lst_env, text);
-		if (ft_strncmp(text, "export ", 7) == 0)
-			ft_export(text, &lst_env);
-		if (ft_strncmp(text, "unset ", 6) == 0)
-			ft_unset(text, &lst_env);
-		if (ft_strncmp(text, "cd ", 3) == 0)
-			ft_cd(text, &lst_env);
-		if(ft_strncmp(text, "exit", 4) == 0)
-		{
-			flag = true;
-		}*/
+//Perhaps there should be another if to check that
+// if the current node is a pipe, i'ts left node
+// is also a pipe but right node is a cmd, it should
+// perhaps only traverse to the left node and then execute
+// the right node. Will need to check once we start using
+// real pipes
