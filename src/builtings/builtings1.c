@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/25 17:27:52 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:11:53 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 #include "../../libft/libft.h"
 
 // IMITA EL COMANDO PWD
-int	ft_getpwd_normi(t_lst_env *temp, int len, char **split)
+int	ft_getpwd_normi(t_lst_env *temp, int len)
 {
+	char	**pwd_len;
+
 	while (temp->next != NULL)
 	{
 		if (ft_strncmp(temp->next->text, "PWD", 3) == 0)
 		{
-			split = ft_split(temp->next->text, '=');
-			len = ft_strlen(split[1]);
+			pwd_len = ft_split(temp->next->text, '=');
+			len = ft_strlen(pwd_len[1]);
+			free_matrix(pwd_len);
 		}
 		temp = temp->next;
 	}
@@ -38,8 +41,7 @@ void	ft_getpwd(char *text, t_lst_env *lst_env)
 	temp = lst_env;
 	len = 0;
 	split = NULL;
-	len = ft_getpwd_normi(temp, len, split);
-	free_matrix(split);
+	len = ft_getpwd_normi(temp, len);
 	split = ft_split(text, ' ');
 	pwd = malloc(sizeof(char) * len);
 	if (split[1] != NULL)
