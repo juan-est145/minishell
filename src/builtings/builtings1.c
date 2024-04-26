@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/26 13:36:39 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/26 18:04:32 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,11 @@ void	ft_cd(char *text, t_lst_env *lst_env)
 		aux = ft_fusion_string("export OLDPWD=", pwd);
 		ft_export(aux, lst_env);
 		chdir(split[1]);
-		free(aux);
-		getcwd(pwd, sizeof(pwd));
+		free(aux); 
+/* 		getcwd(pwd, sizeof(pwd));
 		aux = ft_fusion_string("export PWD=", pwd);
 		ft_export(aux, lst_env);
-		free(aux);
+		free(aux); */
 	}
 	free_matrix(split);
 }
