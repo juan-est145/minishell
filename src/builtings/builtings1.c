@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/26 18:04:32 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:48:23 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_getpwd(char *text, t_lst_env *lst_env)
 		printf("too many arguments\n");
 		return ;
 	}
+	printf("%d\n", len);
 	if (getcwd(pwd, sizeof(char) * len + 1) == NULL)
 		printf("Error al obtener el pwd\n");
 	printf("%s\n", pwd);
@@ -122,15 +123,17 @@ void	ft_cd(char *text, t_lst_env *lst_env)
 	}
 	else
 	{
-		getcwd(pwd, sizeof(pwd));
+		if (getcwd(pwd, sizeof(pwd)) == NULL)
+			printf("Primer get cwd de cd se ha roto");
 		aux = ft_fusion_string("export OLDPWD=", pwd);
 		ft_export(aux, lst_env);
 		chdir(split[1]);
-		free(aux); 
-/* 		getcwd(pwd, sizeof(pwd));
+		//free(aux); 
+		if (getcwd(pwd, sizeof(pwd)) == NULL)
+			printf("Segundo get cwd de cd se ha roto");
 		aux = ft_fusion_string("export PWD=", pwd);
 		ft_export(aux, lst_env);
-		free(aux); */
+		//free(aux);
 	}
 	free_matrix(split);
 }

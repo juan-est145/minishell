@@ -33,7 +33,7 @@ $(INCLUDE_PATH)/process_ast.h\
 
 COMPILER = $(CC)
 
-CFLAGS = 
+CFLAGS = -Wall -Werror -Wextra
 LIB_FLAGS = -Llibft -lft
 EXEC-NAME-FLAG = -lreadline -lhistory -o
 

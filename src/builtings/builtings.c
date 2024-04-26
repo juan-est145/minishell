@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/26 18:00:28 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:57:15 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	ft_export(char *new, t_lst_env *lst_env)
 			{
 				new_env = ft_substr(split[i], 0, ft_strlen(split[i]));
 				copia = ft_lstnew_ms(new_env);
-				printf("%s\n", copia->text);
 				ft_lstadd_back_ms(&lst_env, copia);
 			}
 		}
