@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/26 13:11:53 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/26 13:36:39 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_getpwd_normi(t_lst_env *temp, int len)
 			pwd_len = ft_split(temp->next->text, '=');
 			len = ft_strlen(pwd_len[1]);
 			free_matrix(pwd_len);
+			break ;
 		}
 		temp = temp->next;
 	}
@@ -43,7 +44,7 @@ void	ft_getpwd(char *text, t_lst_env *lst_env)
 	split = NULL;
 	len = ft_getpwd_normi(temp, len);
 	split = ft_split(text, ' ');
-	pwd = malloc(sizeof(char) * len);
+	pwd = malloc(sizeof(char) * len + 1);
 	if (split[1] != NULL)
 	{
 		printf("too many arguments\n");
