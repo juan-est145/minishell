@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/27 11:32:19 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/27 20:12:54 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 #include "../../libft/libft.h"
 
 // IMITA EL COMANDO PWD
-int	ft_getpwd_normi(t_lst_env *temp, int len)
+/*int	ft_getpwd_normi(t_lst_env *temp, int len, char *string_to_search)
 {
 	char	**pwd_len;
 
 	while (temp->next != NULL)
 	{
-		if (ft_strncmp(temp->next->text, "PWD", 3) == 0)
+		if (ft_strncmp(temp->next->text, string_to_search,
+				ft_strlen(string_to_search)) == 0)
 		{
 			pwd_len = ft_split(temp->next->text, '=');
 			len = ft_strlen(pwd_len[1]);
@@ -30,27 +31,21 @@ int	ft_getpwd_normi(t_lst_env *temp, int len)
 		temp = temp->next;
 	}
 	return (len);
-}
+}*/
 
-void	ft_getpwd(char *text, t_lst_env *lst_env)
+void	ft_getpwd(char *text)
 {
 	char		*pwd;
 	char		**split;
-	t_lst_env	*temp;
-	int			len;
 
-	temp = lst_env;
-	len = 0;
-	split = NULL;
-	len = ft_getpwd_normi(temp, len);
 	split = ft_split(text, ' ');
-	pwd = malloc(sizeof(char) * len + 1);
 	if (split[1] != NULL)
 	{
 		printf("too many arguments\n");
 		return ;
 	}
-	if (getcwd(pwd, sizeof(char) * len + 1) == NULL)
+	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
 		printf("Error al obtener el pwd\n");
 	printf("%s\n", pwd);
 	free(pwd);
@@ -111,27 +106,16 @@ void	ft_echo(char **cmd)
 void	ft_cd(char *text, t_lst_env *lst_env)
 {
 	char	**split;
-	char	pwd[1024];
-	char	*aux;
 
 	split = ft_split(text, ' ');
 	if (split[2] != NULL)
-	{
-		printf("too many arguments\n ");
-	}
+		printf("too many arguments\n");
 	else
 	{
-		if (getcwd(pwd, sizeof(pwd)) == NULL)
-			printf("Primer get cwd de cd se ha roto");
-		aux = ft_fusion_string("export OLDPWD=", pwd);
-		ft_export(aux, lst_env);
-		chdir(split[1]);
-		free(aux); 
-		if (getcwd(pwd, sizeof(pwd)) == NULL)
-			printf("Segundo get cwd de cd se ha roto");
-		aux = ft_fusion_string("export PWD=", pwd);
-		ft_export(aux, lst_env);
-		free(aux);
+		handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=");
+		if (chdir(split[1]) == -1)
+			printf("Couldn't change directory\n");
+		handle_cd_env(lst_env, ft_fusion_string, "export PWD=");
 	}
 	free_matrix(split);
 }
