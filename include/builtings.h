@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/04/27 20:10:43 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/27 21:33:49 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int						ft_lst_contain_change(t_lst_env **lst, char *search);
 int						ft_lst_contain(t_lst_env **lst, char *search);
 t_lst_env				*ft_lstnew_ms(char *content);
 char					*get_pwd_cd(t_lst_env *lst_env);
-//int						ft_getpwd_normi(t_lst_env *temp, int len,
-//							char *string_to_search);
 
 // BUILTINGS
 void					ft_getpwd(char *text);
@@ -54,8 +52,7 @@ void					ft_export(char *new, t_lst_env *lst_env);
 bool					ft_unset_normi(t_lst_env *temp, bool flag);
 void					ft_unset(char *text, t_lst_env *lst_env);
 void					ft_cd(char *text, t_lst_env *lst_env);
-//int						get_pwd_cd_length(t_lst_env *lst_env,
-//							char *string_to_search);
+
 void					handle_cd_env(t_lst_env *lst_env, char *f(char *s1,
 								char *s2), char *export_text);
 
