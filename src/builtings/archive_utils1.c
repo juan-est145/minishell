@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:59:06 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/26 18:59:10 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/27 11:24:57 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	ft_lst_contain_change(t_lst_env **lst, char *search)
 			result = ft_substr(search, 0, ft_strlen(search));
 			temp->next->text = result;
 			free_matrix(new);
-			ft_env(temp, "env");
 			return (0);
 		}
 		temp = temp->next;
