@@ -67,4 +67,5 @@ re: fclean
 debug: CFLAGS += -g
 debug: make-library-debug $(NAME)
 
-#valgrind --suppressions=readline.supp  --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
+val: 
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)

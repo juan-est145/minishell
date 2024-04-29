@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:57:33 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/29 13:45:55 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 14:55:41 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,3 @@ void	read_pipe(t_ast *node, t_lst_env *lst_env)
 	(void)node;
 	(void)lst_env;
 }
-
-/*if (ft_strncmp(node->args, "exit", 4) == 0)
-	{
-		flag = true;
-	}*/
