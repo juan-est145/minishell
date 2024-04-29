@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 18:05:32 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 18:56:54 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,21 @@ void	ft_export(char *new, t_lst_env *lst_env)
 }
 
 // IMITA EL COMANDO UNSET
-bool	ft_unset_normi(t_lst_env *temp, bool flag)
+bool	ft_unset_normi(t_lst_env **temp, bool flag)
 {
 	t_lst_env	*aux;
 
-	if (temp->next != NULL)
+	if ((*temp)->next != NULL)
 	{
-		aux = temp;
-		temp = temp->next;
+		aux = *temp;
+		*temp = (*temp)->next;
+		free(aux->text);
 		free(aux);
 	}
 	else
 	{
-		aux = temp;
-		temp = NULL;
+		aux = *temp;
+		*temp = NULL;
 		free(aux);
 		flag = true;
 		return (flag);
@@ -86,7 +87,7 @@ bool	ft_unset_normi(t_lst_env *temp, bool flag)
 }
 
 static bool	ft_unset_normi2(char **split, char **name, bool flag,
-		t_lst_env *temp)
+		t_lst_env **temp)
 {
 	int	i;
 
@@ -104,9 +105,9 @@ static bool	ft_unset_normi2(char **split, char **name, bool flag,
 	return (flag);
 }
 
-void	ft_unset(char *text, t_lst_env *lst_env)
+void	ft_unset(char *text, t_lst_env **lst_env)
 {
-	t_lst_env	*temp;
+	t_lst_env	**temp;
 	bool		flag;
 	char		**name;
 	char		**split;
@@ -114,14 +115,14 @@ void	ft_unset(char *text, t_lst_env *lst_env)
 	temp = lst_env;
 	flag = false;
 	split = ft_split(text, ' ');
-	while (temp != NULL)
+	while ((*temp) != NULL)
 	{
-		name = ft_split(temp->text, '=');
+		name = ft_split((*temp)->text, '=');
 		flag = ft_unset_normi2(split, name, flag, temp);
 		free_matrix(name);
 		if (flag == true)
 			break ;
-		temp = temp->next;
+		*temp = (*temp)->next;
 	}
 	free_matrix(split);
 }
