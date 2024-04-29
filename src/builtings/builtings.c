@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 16:36:25 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 18:05:32 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_env(t_lst_env *lst_env, char *text)
 		printf("%s\n", temp->text);
 		temp = temp->next;
 	}
+	free_matrix(split);
 }
 
 // IMITA EL COMANDO EXPORT
