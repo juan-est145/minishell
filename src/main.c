@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 15:55:15 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 17:26:59 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	main(int argc, char **argv, char **env)
 	while (i++ < 1500)
 		printf("\n");
 	lst_env = init_lst_env(env);
+	if (lst_env == NULL)
+		return (1);
 	read_input(prompt, lst_env);
 	free_lst_env(lst_env);
 	free(prompt);

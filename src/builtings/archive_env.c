@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:48 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 16:51:11 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 17:27:44 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,17 @@ t_lst_env	*init_lst_env(char **env)
 {
 	t_lst_env	*node;
 	t_lst_env	*head;
+	char		*content;
 	int			i;
 
 	i = 0;
 	head = NULL;
 	while (env[i])
 	{
-		node = ft_lstnew_ms(env[i]);
+		content = ft_substr(env[i], 0, ft_strlen(env[i]));
+		node = ft_lstnew_ms(content);
+		if (content == NULL || node == NULL)
+			return (free_lst_env(head), NULL);
 		ft_lstadd_back_ms(&head, node);
 		i++;
 	}
