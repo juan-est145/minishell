@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/04/27 21:33:49 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 13:46:30 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_lst_env
 	char				*text;
 	struct s_lst_env	*next;
 }						t_lst_env;
+
+typedef struct s_ast		t_ast;
 
 // ARCHIVE ENV
 int						srch_path(char **env, char *search);
@@ -52,6 +54,7 @@ void					ft_export(char *new, t_lst_env *lst_env);
 bool					ft_unset_normi(t_lst_env *temp, bool flag);
 void					ft_unset(char *text, t_lst_env *lst_env);
 void					ft_cd(char *text, t_lst_env *lst_env);
+void					ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt);
 
 void					handle_cd_env(t_lst_env *lst_env, char *f(char *s1,
 								char *s2), char *export_text);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:15:43 by user42            #+#    #+#             */
-/*   Updated: 2024/04/25 14:00:07 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:16:35 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	free_lst_env(t_lst_env *lst)
 
 	while (lst->next != NULL)
 	{
-		free(lst->next->text);
+		if (lst->next->text != NULL)
+			free(lst->next->text);
 		temp = lst;
 		lst = lst->next;
 		free(temp);

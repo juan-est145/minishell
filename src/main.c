@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/04/26 17:26:48 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:49:10 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "../libft/libft.h"
 
 static void		read_input(char *prompt, t_lst_env *lst_env);
-static t_ast	*execute_ast(t_ast *node, t_lst_env *lst_env);
+static t_ast	*execute_ast(t_ast *node, t_lst_env *lst_env, char *prompt,
+					t_ast **head);
 
 int	main(int argc, char **argv, char **env)
 {
@@ -38,41 +39,40 @@ int	main(int argc, char **argv, char **env)
 
 static void	read_input(char *prompt, t_lst_env *lst_env)
 {
-	bool			flag;
 	char			*text;
 	t_token_list	*head;
 	t_ast			*ast_head;
 
-	flag = false;
-	while (flag == false)
+	while (1)
 	{
 		text = readline(prompt);
 		add_history(text);
 		head = tokenize_cmd(text);
-		ast_head = create_ast(&head);
-		execute_ast(ast_head, lst_env);
-		clean_tokens(&head);
-		clean_ast(ast_head);
 		free(text);
+		ast_head = create_ast(&head);
+		clean_tokens(&head);
+		execute_ast(ast_head, lst_env, prompt, &ast_head);
+		clean_ast(ast_head);
 	}
 }
 
-static t_ast	*execute_ast(t_ast *node, t_lst_env *lst_env)
+static t_ast	*execute_ast(t_ast *node, t_lst_env *lst_env, char *prompt,
+		t_ast **head)
 {
 	if (node == NULL)
 		return (NULL);
 	else if (node->parse_identifier == PARSE_CMD)
-		return (read_cmd(node, lst_env), node);
+		return (read_cmd(node, lst_env, head, prompt), node);
 	else if (node->parse_identifier == PARSE_PIPE
 		&& node->left->parse_identifier == PARSE_CMD
 		&& node->right->parse_identifier == PARSE_CMD)
 		return (read_pipe(node, lst_env), node);
-	execute_ast(node->left, lst_env);
-	execute_ast(node->right, lst_env);
+	execute_ast(node->left, lst_env, prompt, head);
+	execute_ast(node->right, lst_env, prompt, head);
 	return (node);
 }
 
-//Perhaps there should be another if to check that
+// Perhaps there should be another if to check that
 // if the current node is a pipe, i'ts left node
 // is also a pipe but right node is a cmd, it should
 // perhaps only traverse to the left node and then execute

@@ -6,37 +6,17 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/27 20:12:54 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 14:18:21 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-// IMITA EL COMANDO PWD
-/*int	ft_getpwd_normi(t_lst_env *temp, int len, char *string_to_search)
-{
-	char	**pwd_len;
-
-	while (temp->next != NULL)
-	{
-		if (ft_strncmp(temp->next->text, string_to_search,
-				ft_strlen(string_to_search)) == 0)
-		{
-			pwd_len = ft_split(temp->next->text, '=');
-			len = ft_strlen(pwd_len[1]);
-			free_matrix(pwd_len);
-			break ;
-		}
-		temp = temp->next;
-	}
-	return (len);
-}*/
-
 void	ft_getpwd(char *text)
 {
-	char		*pwd;
-	char		**split;
+	char	*pwd;
+	char	**split;
 
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)
@@ -118,4 +98,13 @@ void	ft_cd(char *text, t_lst_env *lst_env)
 		handle_cd_env(lst_env, ft_fusion_string, "export PWD=");
 	}
 	free_matrix(split);
+}
+
+void	ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt)
+{
+	(void)lst_env;
+	clean_ast(*head);
+	//free_lst_env(lst_env);
+	free(prompt);
+	exit(0);
 }
