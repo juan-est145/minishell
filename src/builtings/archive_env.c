@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:48 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 15:57:09 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 16:51:11 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_fusion_string(char *s1, char *s2)
 	int		i;
 	int		j;
 
-	len_total = ft_strlen(s1) + ft_strlen(s2);
+	len_total = ft_strlen(s1) + ft_strlen(s2) + 1;
 	result = malloc(sizeof(char) * len_total);
 	i = 0;
 	while (s1[i])

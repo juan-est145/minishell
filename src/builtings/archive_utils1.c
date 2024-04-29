@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:59:06 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:57:09 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 16:18:53 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ int	ft_lst_contain_change(t_lst_env **lst, char *search)
 	new = ft_split(search, '=');
 	len = ft_strlen(new[0]);
 	temp = *lst;
-	while (temp->next != NULL)
+	while (temp != NULL)
 	{
-		if (ft_strncmp(temp->next->text, new[0], len) == 0)
+		if (ft_strncmp(temp->text, new[0], len) == 0)
 		{
 			result = ft_substr(search, 0, ft_strlen(search));
-			temp->next->text = result;
+			temp->text = result;
 			free_matrix(new);
 			return (0);
 		}

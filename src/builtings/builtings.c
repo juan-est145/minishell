@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/26 18:57:15 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:36:25 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,28 @@
 // IMITA EL COMANDO ENV
 void	ft_env(t_lst_env *lst_env, char *text)
 {
-	char	**split;
+	char		**split;
+	t_lst_env	*temp;
 
+	temp = lst_env;
 	split = ft_split(text, ' ');
-	if (split[1] == NULL)
+	if (split[1] != NULL)
 	{
-		while (lst_env != NULL)
-		{
-			if (lst_env->next != NULL)
-				printf("%s\n", lst_env->next->text);
-			lst_env = lst_env->next;
-		}
+		free_matrix(split);
+		printf("Too many arguments\n");
+		return ;
 	}
-	else
+	while (temp != NULL)
 	{
-		printf("To many argument");
+		printf("%s\n", temp->text);
+		temp = temp->next;
 	}
 }
 
 // IMITA EL COMANDO EXPORT
 void	ft_export(char *new, t_lst_env *lst_env)
 {
-	t_lst_env	*copia;
+	t_lst_env	*node;
 	char		*new_env;
 	char		**split;
 	int			i;
@@ -53,8 +53,8 @@ void	ft_export(char *new, t_lst_env *lst_env)
 			else
 			{
 				new_env = ft_substr(split[i], 0, ft_strlen(split[i]));
-				copia = ft_lstnew_ms(new_env);
-				ft_lstadd_back_ms(&lst_env, copia);
+				node = ft_lstnew_ms(new_env);
+				ft_lstadd_back_ms(&lst_env, node);
 			}
 		}
 		i++;
@@ -67,16 +67,16 @@ bool	ft_unset_normi(t_lst_env *temp, bool flag)
 {
 	t_lst_env	*aux;
 
-	if (temp->next->next != NULL)
+	if (temp->next != NULL)
 	{
-		aux = temp->next;
-		temp->next = temp->next->next;
+		aux = temp;
+		temp = temp->next;
 		free(aux);
 	}
 	else
 	{
-		aux = temp->next;
-		temp->next = NULL;
+		aux = temp;
+		temp = NULL;
 		free(aux);
 		flag = true;
 		return (flag);
@@ -113,9 +113,9 @@ void	ft_unset(char *text, t_lst_env *lst_env)
 	temp = lst_env;
 	flag = false;
 	split = ft_split(text, ' ');
-	while (temp->next != NULL)
+	while (temp != NULL)
 	{
-		name = ft_split(temp->next->text, '=');
+		name = ft_split(temp->text, '=');
 		flag = ft_unset_normi2(split, name, flag, temp);
 		free_matrix(name);
 		if (flag == true)
