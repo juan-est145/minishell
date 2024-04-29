@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:59:06 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/27 11:24:57 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:57:09 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ t_lst_env	*ft_lstnew_ms(char *content)
 
 	nodo = malloc(sizeof(t_lst_env));
 	if (!nodo)
-		return (0);
+		return (NULL);
 	nodo->text = content;
-	nodo->next = 0;
+	nodo->next = NULL;
 	return (nodo);
 }

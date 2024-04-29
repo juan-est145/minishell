@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 13:46:30 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 15:54:39 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ typedef struct s_lst_env
 	struct s_lst_env	*next;
 }						t_lst_env;
 
-typedef struct s_ast		t_ast;
+typedef struct s_ast	t_ast;
 
 // ARCHIVE ENV
 int						srch_path(char **env, char *search);
 char					*ft_getenv(char **env, char *search);
-void					init_lst_env(char **env, t_lst_env *lst);
+t_lst_env				*init_lst_env(char **env);
 char					*ft_fusion_string(char *s1, char *s2);
 // ARCHIVE UTILS
 void					free_matrix(char **matrix);

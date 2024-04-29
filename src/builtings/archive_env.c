@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   archive_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:48 by user42            #+#    #+#             */
-/*   Updated: 2024/04/25 17:10:31 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:57:09 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
 #include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
 int	srch_path(char **env, char *search)
 {
@@ -37,19 +37,22 @@ char	*ft_getenv(char **env, char *search)
 	return (result);
 }
 
-//INIZIALIZA LA LISTA DE VARIABLES GLOBALES
-void	init_lst_env(char **env, t_lst_env *lst)
+// INIZIALIZA LA LISTA DE VARIABLES GLOBALES
+t_lst_env	*init_lst_env(char **env)
 {
-	t_lst_env	*aux;
+	t_lst_env	*node;
+	t_lst_env	*head;
 	int			i;
 
 	i = 0;
+	head = NULL;
 	while (env[i])
 	{
-		aux = ft_lstnew_ms(env[i]);
-		ft_lstadd_back_ms(&lst, aux);
+		node = ft_lstnew_ms(env[i]);
+		ft_lstadd_back_ms(&head, node);
 		i++;
 	}
+	return (head);
 }
 
 char	*ft_fusion_string(char *s1, char *s2)

@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 13:49:10 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 15:55:15 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_ast	*execute_ast(t_ast *node, t_lst_env *lst_env, char *prompt,
 
 int	main(int argc, char **argv, char **env)
 {
-	t_lst_env	lst_env;
+	t_lst_env	*lst_env;
 	int			i;
 	char		*prompt;
 
@@ -30,9 +30,9 @@ int	main(int argc, char **argv, char **env)
 	prompt = ft_strjoin(prompt, "$ ");
 	while (i++ < 1500)
 		printf("\n");
-	init_lst_env(env, &lst_env);
-	read_input(prompt, &lst_env);
-	free_lst_env(&lst_env);
+	lst_env = init_lst_env(env);
+	read_input(prompt, lst_env);
+	free_lst_env(lst_env);
 	free(prompt);
 	return (0);
 }

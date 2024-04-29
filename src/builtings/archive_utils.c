@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:15:43 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 14:16:35 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 16:05:29 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	free_lst_env(t_lst_env *lst)
 {
 	t_lst_env	*temp;
 
-	while (lst->next != NULL)
+	while (lst != NULL)
 	{
-		if (lst->next->text != NULL)
-			free(lst->next->text);
+		/*if (lst->next->text != NULL)
+			free(lst->next->text);*/
 		temp = lst;
 		lst = lst->next;
 		free(temp);

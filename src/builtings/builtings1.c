@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:37:31 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/29 16:07:57 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,9 @@ void	ft_cd(char *text, t_lst_env *lst_env)
 
 void	ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt)
 {
-	(void)lst_env;
 	clean_ast(*head);
-	//rl_clear_history();
-	//free_lst_env(lst_env);
+	rl_clear_history();
+	free_lst_env(lst_env);
 	free(prompt);
 	exit(0);
 }
