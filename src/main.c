@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 17:26:59 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 12:57:57 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ static void	read_input(char *prompt, t_lst_env *lst_env)
 	{
 		text = readline(prompt);
 		add_history(text);
+		if (*text == '\0')
+		{
+			printf("You need to enter a command\n");
+			free(text);
+			continue ;
+		}
 		head = tokenize_cmd(text);
 		free(text);
 		ast_head = create_ast(&head);

@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:12:37 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/29 13:19:14 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 12:58:57 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ t_token_list	*tokenize_cmd(char *full_cmd)
 	t_token_list	*token_list;
 
 	token_list = NULL;
-	if (*full_cmd == '\0')
-		return (free(full_cmd), NULL);
 	while (ft_isspace(*full_cmd) == true && *full_cmd != '\0')
 		full_cmd++;
 	if (find_tokens(full_cmd, &token_list) == NULL)
