@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/30 15:52:26 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 16:08:19 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ static bool	ft_unset_normi2(char **split, t_lst_env *previous, bool flag,
 		}
 		i++;
 	}
+	free_matrix(name);
 	return (flag);
 }
 
