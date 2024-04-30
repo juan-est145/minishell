@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/30 15:38:03 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:52:26 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,38 +64,37 @@ void	ft_export(char *new, t_lst_env **lst_env)
 }
 
 // IMITA EL COMANDO UNSET
-bool	ft_unset_normi(t_lst_env *temp, bool flag, t_lst_env *previous)
+bool	ft_unset_normi(t_lst_env **temp, bool flag, t_lst_env *previous)
 {
 	t_lst_env	*aux;
 
-	if (temp->next != NULL)
+	if ((*temp)->next != NULL)
 	{
-		aux = temp;
-		previous->next = temp->next;
-//		temp = temp->next;
+		aux = *temp;
+		previous->next = (*temp)->next;
 		free(aux->text);
 		free(aux);
 	}
 	else
 	{
-		aux = temp;
+		aux = *temp;
 		previous->next = NULL;
-//		temp = NULL;
 		free(aux);
 		flag = true;
 		return (flag);
 	}
+	*temp = previous->next;
 	return (flag);
 }
 
 static bool	ft_unset_normi2(char **split, t_lst_env *previous, bool flag,
-		t_lst_env *temp)
+		t_lst_env **temp)
 {
 	int		i;
 	char	**name;
 
 	i = 1;
-	name = ft_split(temp->text, '=');
+	name = ft_split((*temp)->text, '=');
 	while (split[i])
 	{
 		if (ft_strncmp(name[0], split[i], ft_strlen(name[0])) == 0)
@@ -122,7 +121,7 @@ void	ft_unset(char *text, t_lst_env **lst_env)
 	previous = temp;
 	while (temp != NULL)
 	{
-		flag = ft_unset_normi2(split, previous, flag, temp);
+		flag = ft_unset_normi2(split, previous, flag, &temp);
 		if (flag == true)
 			break ;
 		previous = temp;

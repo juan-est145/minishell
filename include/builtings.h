@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/04/30 15:38:27 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:53:04 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void					ft_getpwd(char *text);
 void					ft_echo(char **cmd);
 void					ft_env(t_lst_env **lst_env, char *text);
 void					ft_export(char *new, t_lst_env **lst_env);
-bool					ft_unset_normi(t_lst_env *temp, bool flag, t_lst_env *previous);
 void					ft_unset(char *text, t_lst_env **lst_env);
+bool					ft_unset_normi(t_lst_env **temp, bool flag,
+							t_lst_env *previous);
 void					ft_cd(char *text, t_lst_env **lst_env);
 void					ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt);
 
