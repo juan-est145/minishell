@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/30 15:11:55 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 15:30:40 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,12 @@ static t_ast	*process_current_token(t_token_list **head)
 	{
 		if (*head != NULL && (*head)->token_identifer == EXPRESSION)
 			ast_node->args = handle_cmd_args(head);
+		if (ast_node->args == NULL)
+			return (NULL);
 		if (*head != NULL && is_redir((*head)->token_identifer) == true)
 			ast_node->redirections = handle_redir(head);
+		if (ast_node->redirections == NULL && ast_node->args == NULL)
+			return (NULL);
 	}
 	return (ast_node);
 }
@@ -125,7 +129,7 @@ static t_redirections	*handle_redir(t_token_list **head)
 		redir_tmp->file_location = ft_substr((*head)->token, 0,
 				ft_strlen((*head)->token));
 		if (redir_tmp->file_location == NULL)
-			return (free(redir_tmp), NULL);
+			return (NULL);
 		append_red_node(&redir_head, redir_tmp);
 		get_next_token(head);
 	}
