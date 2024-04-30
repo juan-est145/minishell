@@ -6,12 +6,12 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/26 12:15:15 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 15:30:40 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
 #include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
 static t_ast			*precedence_climbing(int precedence,
 							t_token_list **copy);
@@ -26,6 +26,8 @@ t_ast	*create_ast(t_token_list **head)
 
 	head_copy = *head;
 	ast_head = precedence_climbing(0, &head_copy);
+	if (ast_head == NULL)
+		return (clean_ast(ast_head), clean_tokens(head), NULL);
 	return (ast_head);
 }
 
@@ -36,8 +38,6 @@ static t_ast	*precedence_climbing(int precedence, t_token_list **copy)
 	int					updated_prec;
 	t_token_identifier	current_parse;
 
-	if ((*copy)->token == NULL)
-		return (NULL);
 	left = process_current_token(copy);
 	if (left == NULL)
 		return (NULL);
@@ -50,6 +50,8 @@ static t_ast	*precedence_climbing(int precedence, t_token_list **copy)
 		right = precedence_climbing(updated_prec, copy);
 		if (right == NULL)
 			return (left);
+		else if (right == NULL && errno == ENOMEM)
+			return (NULL);
 		left = join_left_right_nodes(left, right, current_parse);
 		if (left == NULL)
 			return (NULL);
@@ -62,6 +64,8 @@ static t_ast	*process_current_token(t_token_list **head)
 	t_ast	*ast_node;
 
 	ast_node = new_ast_node();
+	if (ast_node == NULL)
+		return (NULL);
 	ast_node->parse_identifier = PARSE_CMD;
 	ast_node->redirections = NULL;
 	ast_node->args = NULL;
@@ -71,8 +75,12 @@ static t_ast	*process_current_token(t_token_list **head)
 	{
 		if (*head != NULL && (*head)->token_identifer == EXPRESSION)
 			ast_node->args = handle_cmd_args(head);
+		if (ast_node->args == NULL)
+			return (NULL);
 		if (*head != NULL && is_redir((*head)->token_identifer) == true)
 			ast_node->redirections = handle_redir(head);
+		if (ast_node->redirections == NULL && ast_node->args == NULL)
+			return (NULL);
 	}
 	return (ast_node);
 }
@@ -121,7 +129,7 @@ static t_redirections	*handle_redir(t_token_list **head)
 		redir_tmp->file_location = ft_substr((*head)->token, 0,
 				ft_strlen((*head)->token));
 		if (redir_tmp->file_location == NULL)
-			return (free(redir_tmp), NULL);
+			return (NULL);
 		append_red_node(&redir_head, redir_tmp);
 		get_next_token(head);
 	}

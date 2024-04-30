@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/04/30 12:19:37 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:59:18 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,19 @@ static void	read_input(char *prompt, t_lst_env **lst_env)
 	{
 		text = readline(prompt);
 		add_history(text);
+		if (*text == '\0')
+		{
+			printf("You need to enter a command\n");
+			free(text);
+			continue ;
+		}
 		head = tokenize_cmd(text);
+		if (head == NULL)
+			error_msgs(TOKEN_MALLOC_FAILURE);
 		free(text);
 		ast_head = create_ast(&head);
+		if (ast_head == NULL)
+			error_msgs(AST_MALLOC_FAILURE);
 		clean_tokens(&head);
 		execute_ast(ast_head, lst_env, prompt, &ast_head);
 		clean_ast(ast_head);

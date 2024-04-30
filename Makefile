@@ -6,6 +6,7 @@ BUILTINGS_PATH = $(SRC_PATH)/builtings
 PARSE_PATH = $(SRC_PATH)/parse
 TOKEN_PATH = $(SRC_PATH)/token
 PROCESS_AST_PATH = $(SRC_PATH)/process_ast
+ERRORS_PATH = $(SRC_PATH)/errors
 
 NAME = minishell
 
@@ -23,6 +24,7 @@ $(BUILTINGS_PATH)/builtings.c\
 $(BUILTINGS_PATH)/builtings1.c\
 $(BUILTINGS_PATH)/builtings2.c\
 $(PROCESS_AST_PATH)/read_cmd.c\
+$(ERRORS_PATH)/print_error_msg.c\
 
 OBJS = $(SCRS:.c=.o)
 
@@ -31,6 +33,7 @@ $(INCLUDE_PATH)/builtings.h\
 $(INCLUDE_PATH)/parse.h\
 $(INCLUDE_PATH)/token.h\
 $(INCLUDE_PATH)/process_ast.h\
+$(INCLUDE_PATH)/errors.h\
 
 COMPILER = $(CC)
 
