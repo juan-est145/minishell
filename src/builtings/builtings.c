@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/30 16:08:19 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 16:19:14 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ bool	ft_unset_normi(t_lst_env **temp, bool flag, t_lst_env *previous)
 	{
 		aux = *temp;
 		previous->next = NULL;
+		free(aux->text);
 		free(aux);
 		flag = true;
 		return (flag);
