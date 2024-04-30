@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/30 14:30:31 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 15:06:45 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@
 # include "errors.h"
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <errno.h>
 #endif
