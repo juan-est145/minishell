@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/30 12:11:19 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:20:58 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,25 @@ void	ft_echo(char **cmd)
 void	ft_cd(char *text, t_lst_env **lst_env)
 {
 	char	**split;
+	char	*old_pwd;
+	char	*pwd;
 
 	split = ft_split(text, ' ');
 	if (split[2] != NULL)
 		printf("too many arguments\n");
 	else
 	{
-		handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=");
-		if (chdir(split[1]) == -1)
-			printf("Couldn't change directory\n");
-		handle_cd_env(lst_env, ft_fusion_string, "export PWD=");
+		old_pwd = getcwd(NULL, 0);
+		if (chdir(split[1]) != 0)
+		{
+			printf("Could not access directory\n");
+			free_matrix(split);
+			free(old_pwd);
+			return ;
+		}
+		pwd = getcwd(NULL, 0);
+		handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
+		handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
 	}
 	free_matrix(split);
 }

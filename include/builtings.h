@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/04/30 16:48:59 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:20:06 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void					ft_cd(char *text, t_lst_env **lst_env);
 void					ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt);
 
 void					handle_cd_env(t_lst_env **lst_env, char *f(char *s1,
-								char *s2), char *export_text);
+								char *s2), char *export_text, char *pwd);
 void					is_first(char *text, t_lst_env **lst_env);
 
 #endif
