@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/30 14:30:31 by juan-est145      ###   ########.fr       */
+/*   Created: 2024/04/30 14:30:38 by juan-est145       #+#    #+#             */
+/*   Updated: 2024/04/30 14:42:45 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "builtings.h"
-# include "token.h"
-# include "parse.h"
-# include "process_ast.h"
-# include "errors.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+#ifndef ERRORS_H
+# define ERRORS_H
+
+typedef enum e_errors
+{
+	TOKEN_MALLOC_FAILURE
+}			t_errors;
+
+void	error_msgs(t_errors error);
 #endif
