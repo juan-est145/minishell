@@ -1,6 +1,7 @@
 # Mine
 minishell
 .vscode
+log.txt
 
 # Prerequisites
 *.d

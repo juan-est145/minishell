@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/30 16:46:48 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:27:23 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,10 @@ void	ft_unset(char *text, t_lst_env **lst_env)
 	bool		flag;
 	char		**split;
 
-	temp = *lst_env;
 	flag = false;
 	split = ft_split(text, ' ');
+	is_first(text, lst_env);
+	temp = *lst_env;
 	previous = temp;
 	while (temp != NULL)
 	{
