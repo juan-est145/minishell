@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 17:26:59 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 12:19:37 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../libft/libft.h"
 
-static void		read_input(char *prompt, t_lst_env *lst_env);
-static t_ast	*execute_ast(t_ast *node, t_lst_env *lst_env, char *prompt,
+static void		read_input(char *prompt, t_lst_env **lst_env);
+static t_ast	*execute_ast(t_ast *node, t_lst_env **lst_env, char *prompt,
 					t_ast **head);
 
 int	main(int argc, char **argv, char **env)
@@ -33,13 +33,13 @@ int	main(int argc, char **argv, char **env)
 	lst_env = init_lst_env(env);
 	if (lst_env == NULL)
 		return (1);
-	read_input(prompt, lst_env);
+	read_input(prompt, &lst_env);
 	free_lst_env(lst_env);
 	free(prompt);
 	return (0);
 }
 
-static void	read_input(char *prompt, t_lst_env *lst_env)
+static void	read_input(char *prompt, t_lst_env **lst_env)
 {
 	char			*text;
 	t_token_list	*head;
@@ -58,7 +58,7 @@ static void	read_input(char *prompt, t_lst_env *lst_env)
 	}
 }
 
-static t_ast	*execute_ast(t_ast *node, t_lst_env *lst_env, char *prompt,
+static t_ast	*execute_ast(t_ast *node, t_lst_env **lst_env, char *prompt,
 		t_ast **head)
 {
 	if (node == NULL)
@@ -68,7 +68,7 @@ static t_ast	*execute_ast(t_ast *node, t_lst_env *lst_env, char *prompt,
 	else if (node->parse_identifier == PARSE_PIPE
 		&& node->left->parse_identifier == PARSE_CMD
 		&& node->right->parse_identifier == PARSE_CMD)
-		return (read_pipe(node, lst_env), node);
+		return (read_pipe(node, *lst_env), node);
 	execute_ast(node->left, lst_env, prompt, head);
 	execute_ast(node->right, lst_env, prompt, head);
 	return (node);

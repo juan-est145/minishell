@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:00:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/27 20:23:09 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 12:11:19 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_lstadd_back_ms(t_lst_env **lst, t_lst_env *new)
 	}
 }
 
-void	handle_cd_env(t_lst_env *lst_env, char *f(char *s1, char *s2),
+void	handle_cd_env(t_lst_env **lst_env, char *f(char *s1, char *s2),
 		char *export_text)
 {
 	char	*pwd;

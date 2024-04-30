@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/29 16:24:32 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 12:11:19 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_echo(char **cmd)
 }
 
 // IMITA EL COMANDO CD
-void	ft_cd(char *text, t_lst_env *lst_env)
+void	ft_cd(char *text, t_lst_env **lst_env)
 {
 	char	**split;
 

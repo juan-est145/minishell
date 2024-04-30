@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/04/29 18:56:54 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:38:03 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "../../libft/libft.h"
 
 // IMITA EL COMANDO ENV
-void	ft_env(t_lst_env *lst_env, char *text)
+void	ft_env(t_lst_env **lst_env, char *text)
 {
 	char		**split;
 	t_lst_env	*temp;
 
-	temp = lst_env;
+	temp = *lst_env;
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)
 	{
@@ -36,7 +36,7 @@ void	ft_env(t_lst_env *lst_env, char *text)
 }
 
 // IMITA EL COMANDO EXPORT
-void	ft_export(char *new, t_lst_env *lst_env)
+void	ft_export(char *new, t_lst_env **lst_env)
 {
 	t_lst_env	*node;
 	char		*new_env;
@@ -49,13 +49,13 @@ void	ft_export(char *new, t_lst_env *lst_env)
 	{
 		if (ft_contain(split[i], '=') == 0 && (ft_strlen(split[i]) > 2))
 		{
-			if (ft_lst_contain_change(&lst_env, split[i]) == 0)
+			if (ft_lst_contain_change(lst_env, split[i]) == 0)
 				;
 			else
 			{
 				new_env = ft_substr(split[i], 0, ft_strlen(split[i]));
 				node = ft_lstnew_ms(new_env);
-				ft_lstadd_back_ms(&lst_env, node);
+				ft_lstadd_back_ms(lst_env, node);
 			}
 		}
 		i++;
@@ -64,21 +64,23 @@ void	ft_export(char *new, t_lst_env *lst_env)
 }
 
 // IMITA EL COMANDO UNSET
-bool	ft_unset_normi(t_lst_env **temp, bool flag)
+bool	ft_unset_normi(t_lst_env *temp, bool flag, t_lst_env *previous)
 {
 	t_lst_env	*aux;
 
-	if ((*temp)->next != NULL)
+	if (temp->next != NULL)
 	{
-		aux = *temp;
-		*temp = (*temp)->next;
+		aux = temp;
+		previous->next = temp->next;
+//		temp = temp->next;
 		free(aux->text);
 		free(aux);
 	}
 	else
 	{
-		aux = *temp;
-		*temp = NULL;
+		aux = temp;
+		previous->next = NULL;
+//		temp = NULL;
 		free(aux);
 		flag = true;
 		return (flag);
@@ -86,17 +88,19 @@ bool	ft_unset_normi(t_lst_env **temp, bool flag)
 	return (flag);
 }
 
-static bool	ft_unset_normi2(char **split, char **name, bool flag,
-		t_lst_env **temp)
+static bool	ft_unset_normi2(char **split, t_lst_env *previous, bool flag,
+		t_lst_env *temp)
 {
-	int	i;
+	int		i;
+	char	**name;
 
 	i = 1;
+	name = ft_split(temp->text, '=');
 	while (split[i])
 	{
 		if (ft_strncmp(name[0], split[i], ft_strlen(name[0])) == 0)
 		{
-			flag = ft_unset_normi(temp, flag);
+			flag = ft_unset_normi(temp, flag, previous);
 			if (flag == true)
 				break ;
 		}
@@ -107,22 +111,22 @@ static bool	ft_unset_normi2(char **split, char **name, bool flag,
 
 void	ft_unset(char *text, t_lst_env **lst_env)
 {
-	t_lst_env	**temp;
+	t_lst_env	*temp;
+	t_lst_env	*previous;
 	bool		flag;
-	char		**name;
 	char		**split;
 
-	temp = lst_env;
+	temp = *lst_env;
 	flag = false;
 	split = ft_split(text, ' ');
-	while ((*temp) != NULL)
+	previous = temp;
+	while (temp != NULL)
 	{
-		name = ft_split((*temp)->text, '=');
-		flag = ft_unset_normi2(split, name, flag, temp);
-		free_matrix(name);
+		flag = ft_unset_normi2(split, previous, flag, temp);
 		if (flag == true)
 			break ;
-		*temp = (*temp)->next;
+		previous = temp;
+		temp = temp->next;
 	}
 	free_matrix(split);
 }
