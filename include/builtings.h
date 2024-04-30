@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/04/30 18:20:06 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/04/30 18:52:41 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define BUILTINGS_H
 
 # include <stdbool.h>
-# include <stddef.h>
 
 // LISTA ENLAZADA DE VARIABLES DE ENTORNO
 typedef struct s_lst_env
@@ -40,7 +39,6 @@ void					ft_lstadd_back_ms(t_lst_env **lst, t_lst_env *new);
 
 void					aux(char **matr, char const *s, char c);
 int						ntimes(char const *s, char c);
-int						ft_strncmp(const char *s1, const char *s2, size_t n);
 int						ft_lst_contain_change(t_lst_env **lst, char *search);
 int						ft_lst_contain(t_lst_env **lst, char *search);
 t_lst_env				*ft_lstnew_ms(char *content);
