@@ -21,6 +21,7 @@ $(BUILTINGS_PATH)/archive_utils1.c\
 $(BUILTINGS_PATH)/archive_utils2.c\
 $(BUILTINGS_PATH)/builtings.c\
 $(BUILTINGS_PATH)/builtings1.c\
+$(BUILTINGS_PATH)/builtings2.c\
 $(PROCESS_AST_PATH)/read_cmd.c\
 
 OBJS = $(SCRS:.c=.o)
