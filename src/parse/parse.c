@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/01 16:43:17 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 17:05:34 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static t_ast			*precedence_climbing(int precedence,
 							t_token_list **copy, bool *syntax_error);
 static t_ast			*process_current_token(t_token_list **head,
 							bool *syntax_error);
-static char				*handle_cmd_args(t_token_list **head,
-							bool *syntax_error);
+static char				*handle_cmd_args(t_token_list **head);
 static t_redirections	*handle_redir(t_token_list **head, bool *syntax_error);
 
 t_ast	*create_ast(t_token_list **head, bool *syntax_error)
@@ -80,7 +79,7 @@ static t_ast	*process_current_token(t_token_list **head, bool *syntax_error)
 	while (*head != NULL && token_is_binary_operator(head) == false)
 	{
 		if (*head != NULL && (*head)->token_identifer == EXPRESSION)
-			ast_node->args = handle_cmd_args(head, syntax_error);
+			ast_node->args = handle_cmd_args(head);
 		if (ast_node->args == NULL)
 			return (NULL);
 		if (*head != NULL && is_redir((*head)->token_identifer) == true)
@@ -91,12 +90,11 @@ static t_ast	*process_current_token(t_token_list **head, bool *syntax_error)
 	return (ast_node);
 }
 
-static char	*handle_cmd_args(t_token_list **head, bool *syntax_error)
+static char	*handle_cmd_args(t_token_list **head)
 {
 	char	*cmds_args;
 	char	*copy_to_free;
 
-	(void)syntax_error;
 	cmds_args = ft_substr((*head)->token, 0, ft_strlen((*head)->token));
 	if (cmds_args == NULL)
 		return (NULL);
@@ -125,7 +123,6 @@ static t_redirections	*handle_redir(t_token_list **head, bool *syntax_error)
 	t_token_identifier	redir_type;
 	t_redirections		*redir_tmp;
 
-	(void)syntax_error;
 	redir_head = NULL;
 	while (*head != NULL && is_redir((*head)->token_identifer) == true)
 	{
@@ -134,6 +131,9 @@ static t_redirections	*handle_redir(t_token_list **head, bool *syntax_error)
 		if (redir_tmp == NULL)
 			return (NULL);
 		get_next_token(head);
+		if (*head == NULL || (*head)->token_identifer != EXPRESSION)
+			return (*syntax_error = true, append_red_node(&redir_head,
+					redir_tmp), redir_head);
 		redir_tmp->file_location = ft_substr((*head)->token, 0,
 				ft_strlen((*head)->token));
 		if (redir_tmp->file_location == NULL)

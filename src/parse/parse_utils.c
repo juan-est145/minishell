@@ -6,12 +6,12 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:30:29 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/26 12:14:58 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 16:50:25 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
 #include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
 bool	token_is_binary_operator(t_token_list **head)
 {
@@ -49,7 +49,7 @@ t_ast	*join_left_right_nodes(t_ast *left, t_ast *right,
 
 	new_node = malloc(sizeof(t_ast));
 	if (new_node == NULL)
-		return (NULL);
+		return (free(left), free(right), NULL);
 	if (current_parse == PIPE)
 		new_node->parse_identifier = PARSE_PIPE;
 	else if (current_parse == AND)

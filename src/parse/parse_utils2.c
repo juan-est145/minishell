@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:57:57 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/01 15:46:03 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 17:07:12 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_redirections	*create_red_node(t_token_identifier red_type)
 	new_node->redirection_type = red_type;
 	new_node->next = NULL;
 	new_node->prev = NULL;
+	new_node->file_location = NULL;
 	return (new_node);
 }
 
