@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:12:37 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/30 14:44:08 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 15:22:28 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 static t_token_list	*find_tokens(char *full_cmd, t_token_list **token_list);
 static char			*save_token(t_token_list **token_list, char *full_cmd,
 						unsigned int *start_index, unsigned int *i);
-static void			set_delimiter(char *delimiter, char *full_cmd,
-						unsigned int i);
 static void			token_node_add_last(t_token_list **head,
 						t_token_list *node);
 
@@ -78,7 +76,7 @@ static char	*save_token(t_token_list **token_list, char *full_cmd,
 	return (new_node->token);
 }
 
-static void	set_delimiter(char *delimiter, char *full_cmd, unsigned int i)
+void	set_delimiter(char *delimiter, char *full_cmd, unsigned int i)
 {
 	if (*delimiter == '\0')
 		*delimiter = full_cmd[i];

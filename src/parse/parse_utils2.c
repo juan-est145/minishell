@@ -6,12 +6,12 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:57:57 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/26 12:15:10 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 17:07:12 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
 #include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
 static void		clean_node_list(t_redirections **head);
 
@@ -52,6 +52,7 @@ t_redirections	*create_red_node(t_token_identifier red_type)
 	new_node->redirection_type = red_type;
 	new_node->next = NULL;
 	new_node->prev = NULL;
+	new_node->file_location = NULL;
 	return (new_node);
 }
 
@@ -69,4 +70,11 @@ void	append_red_node(t_redirections **head, t_redirections *node)
 		temp = temp->next;
 	temp->next = node;
 	node->prev = temp;
+}
+
+t_ast	*malloc_check(t_ast *left)
+{
+	if (errno == ENOMEM)
+		return (NULL);
+	return (left);
 }
