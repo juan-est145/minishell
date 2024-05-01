@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/30 15:30:40 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 13:29:51 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_ast	*create_ast(t_token_list **head)
 	ast_head = precedence_climbing(0, &head_copy);
 	if (ast_head == NULL)
 		return (clean_ast(ast_head), clean_tokens(head), NULL);
+	clean_tokens(head);
 	return (ast_head);
 }
 

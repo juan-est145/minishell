@@ -6,12 +6,12 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:44:18 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/04/26 11:31:02 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 13:33:34 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
 #include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
 void	clean_tokens(t_token_list **head)
 {
@@ -64,4 +64,13 @@ bool	ft_isspace(unsigned char c)
 		|| c == ' ')
 		return (true);
 	return (false);
+}
+
+bool	tokens_syntax_correct(t_token_list *head)
+{
+	while (head != NULL)
+	{
+		head = head->next;
+	}
+	return (true);
 }
