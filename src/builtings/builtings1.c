@@ -91,21 +91,22 @@ void	ft_cd(char *text, t_lst_env **lst_env)
 	char	*pwd;
 
 	split = ft_split(text, ' ');
-	if (split[2] != NULL)
-		printf("too many arguments\n");
+	if (check_array_length(split) >= 3)
+		printf("Too many arguments in cd\n");
 	else
 	{
 		old_pwd = getcwd(NULL, 0);
-		if (chdir(split[1]) != 0)
+		if (split[1] == NULL)
+			cd_no_argument(old_pwd, split, lst_env);
+		else
 		{
-			printf("Could not access directory\n");
-			free_matrix(split);
-			free(old_pwd);
-			return ;
+			if (errors_cd(old_pwd, split, split,
+					"Could not access directory") == 1)
+				return ;
+			pwd = getcwd(NULL, 0);
+			handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
 		}
-		pwd = getcwd(NULL, 0);
 		handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
-		handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
 	}
 	free_matrix(split);
 }
