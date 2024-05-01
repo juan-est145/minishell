@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:44:18 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/01 13:33:34 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 13:38:12 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,13 @@ bool	ft_isspace(unsigned char c)
 	return (false);
 }
 
-bool	tokens_syntax_correct(t_token_list *head)
+bool	tokens_syntax_correct(t_token_list *node)
 {
-	while (head != NULL)
+	while (node != NULL)
 	{
-		head = head->next;
+		if (*node->token == '\0')
+			return (false);
+		node = node->next;
 	}
 	return (true);
 }

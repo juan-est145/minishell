@@ -6,16 +6,17 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/05/01 13:29:56 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 13:52:15 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../libft/libft.h"
 
-static void		read_input(char *prompt, t_lst_env **lst_env);
-static t_ast	*execute_ast(t_ast *node, t_lst_env **lst_env, char *prompt,
-					t_ast **head);
+static void			read_input(char *prompt, t_lst_env **lst_env);
+static t_ast		*execute_ast(t_ast *node, t_lst_env **lst_env, char *prompt,
+						t_ast **head);
+static t_token_list	*start_token_list(char *text);
 
 int	main(int argc, char **argv, char **env)
 {
@@ -55,16 +56,28 @@ static void	read_input(char *prompt, t_lst_env **lst_env)
 			free(text);
 			continue ;
 		}
-		head = tokenize_cmd(text);
+		head = start_token_list(text);
 		if (head == NULL)
-			error_msgs(TOKEN_MALLOC_FAILURE);
-		free(text);
+			continue ;
 		ast_head = create_ast(&head);
 		if (ast_head == NULL)
 			error_msgs(AST_MALLOC_FAILURE);
 		execute_ast(ast_head, lst_env, prompt, &ast_head);
 		clean_ast(ast_head);
 	}
+}
+
+static t_token_list	*start_token_list(char *text)
+{
+	t_token_list	*head;
+
+	head = tokenize_cmd(text);
+	if (head == NULL)
+		error_msgs(TOKEN_MALLOC_FAILURE);
+	free(text);
+	if (tokens_syntax_correct(head) == false)
+		return (clean_tokens(&head), printf("Syntax error\n"), NULL);
+	return (head);
 }
 
 static t_ast	*execute_ast(t_ast *node, t_lst_env **lst_env, char *prompt,
