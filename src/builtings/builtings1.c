@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/01 15:54:02 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:00:11 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_cd(char *text, t_lst_env **lst_env)
 
 	split = ft_split(text, ' ');
 	if (check_array_length(split) == 3)
-		printf("too many arguments\n");
+		printf("Too many arguments in cd\n");
 	else
 	{
 		old_pwd = getcwd(NULL, 0);
