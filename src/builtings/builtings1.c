@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/01 16:42:27 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:28:27 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,17 @@ void	ft_cd(char *text, t_lst_env **lst_env)
 	char	*pwd;
 
 	split = ft_split(text, ' ');
-	if (check_array_length(split) == 3)
+	if (check_array_length(split) >= 3)
 		printf("Too many arguments in cd\n");
 	else
 	{
 		old_pwd = getcwd(NULL, 0);
 		if (split[1] == NULL)
-		{
-			if (cd_no_argument(old_pwd, split, lst_env) == 1)
-				return ;
-		}
+			cd_no_argument(old_pwd, split, lst_env);
 		else
 		{
-			if (errors_cd(old_pwd, split, split, "Could not access directory") == 1)
+			if (errors_cd(old_pwd, split, split,
+					"Could not access directory") == 1)
 				return ;
 			pwd = getcwd(NULL, 0);
 			handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);

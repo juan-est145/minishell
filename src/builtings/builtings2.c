@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:45:34 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/01 16:42:15 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:39:44 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ int	errors_cd(char *old_pwd, char **dir, char **split, char *text)
 		if (dir == NULL)
 		{
 			printf("%s\n", text);
-			free_matrix(split);
-			free(old_pwd);
 			return (1);
 		}
 	}
