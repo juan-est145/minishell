@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:45:34 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/01 15:55:45 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:42:15 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_array_length(char **array)
 	return (i);
 }
 
-int	errors_cd(char **dir, char **split, char *text)
+int	errors_cd(char *old_pwd, char **dir, char **split, char *text)
 {
 	if (ft_strncmp(text, "HOME no set", ft_strlen(text)) == 0)
 	{
@@ -74,6 +74,7 @@ int	errors_cd(char **dir, char **split, char *text)
 		{
 			printf("%s\n", text);
 			free_matrix(split);
+			free(old_pwd);
 			return (1);
 		}
 	}
@@ -83,22 +84,23 @@ int	errors_cd(char **dir, char **split, char *text)
 		{
 			printf("%s\n", text);
 			free_matrix(split);
+			free(old_pwd);
 			return (1);
 		}
 	}
 	return (0);
 }
 
-int	cd_no_argument(char **split, t_lst_env **lst_env)
+int	cd_no_argument(char *old_pwd, char **split, t_lst_env **lst_env)
 {
 	char	**dir;
 
 	dir = search_lst_env("HOME", lst_env);
-	if (errors_cd(dir, split, "HOME no set") == 1)
+	if (errors_cd(old_pwd, dir, split, "HOME no set") == 1)
 		return (1);
 	else
 	{
-		if (errors_cd(dir, split, "Could not access directory") == 1)
+		if (errors_cd(old_pwd, dir, split, "Could not access directory") == 1)
 			return (1);
 		handle_cd_env(lst_env, ft_fusion_string, "export PWD=", dir[1]);
 		free(dir[0]);
