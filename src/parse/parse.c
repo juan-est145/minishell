@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/01 16:16:12 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 16:38:35 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ t_ast	*create_ast(t_token_list **head, bool *syntax_error)
 {
 	t_ast			*ast_head;
 	t_token_list	*head_copy;
-	bool			syntax_error;
 
 	head_copy = *head;
-	ast_head = precedence_climbing(0, &head_copy, &syntax_error);
-	if (ast_head == NULL)
-		return (clean_ast(ast_head), clean_tokens(head), NULL);
+	ast_head = precedence_climbing(0, &head_copy, syntax_error);
 	clean_tokens(head);
+	if (ast_head == NULL && errno == ENOMEM)
+		return (clean_ast(ast_head), NULL);
+	if (*syntax_error == true)
+		return (printf("Syntax error\n"), clean_ast(ast_head), NULL);
 	return (ast_head);
 }
 
@@ -43,7 +44,7 @@ static t_ast	*precedence_climbing(int precedence, t_token_list **copy,
 	int					updated_prec;
 	t_token_identifier	current_parse;
 
-	left = process_current_token(copy);
+	left = process_current_token(copy, syntax_error);
 	if (left == NULL)
 		return (NULL);
 	while ((*copy) != NULL && token_is_binary_operator(copy) == true
@@ -51,8 +52,10 @@ static t_ast	*precedence_climbing(int precedence, t_token_list **copy,
 	{
 		current_parse = (*copy)->token_identifer;
 		get_next_token(copy);
+		if (*copy == NULL)
+			return (*syntax_error = true, left);
 		updated_prec = current_precedence(copy) + 1;
-		right = precedence_climbing(updated_prec, copy);
+		right = precedence_climbing(updated_prec, copy, syntax_error);
 		if (right == NULL)
 			return (malloc_check(left));
 		left = join_left_right_nodes(left, right, current_parse);
@@ -77,11 +80,11 @@ static t_ast	*process_current_token(t_token_list **head, bool *syntax_error)
 	while (*head != NULL && token_is_binary_operator(head) == false)
 	{
 		if (*head != NULL && (*head)->token_identifer == EXPRESSION)
-			ast_node->args = handle_cmd_args(head);
+			ast_node->args = handle_cmd_args(head, syntax_error);
 		if (ast_node->args == NULL)
 			return (NULL);
 		if (*head != NULL && is_redir((*head)->token_identifer) == true)
-			ast_node->redirections = handle_redir(head);
+			ast_node->redirections = handle_redir(head, syntax_error);
 		if (ast_node->redirections == NULL && ast_node->args == NULL)
 			return (NULL);
 	}
@@ -93,6 +96,7 @@ static char	*handle_cmd_args(t_token_list **head, bool *syntax_error)
 	char	*cmds_args;
 	char	*copy_to_free;
 
+	(void)syntax_error;
 	cmds_args = ft_substr((*head)->token, 0, ft_strlen((*head)->token));
 	if (cmds_args == NULL)
 		return (NULL);
@@ -121,6 +125,7 @@ static t_redirections	*handle_redir(t_token_list **head, bool *syntax_error)
 	t_token_identifier	redir_type;
 	t_redirections		*redir_tmp;
 
+	(void)syntax_error;
 	redir_head = NULL;
 	while (*head != NULL && is_redir((*head)->token_identifer) == true)
 	{

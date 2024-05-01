@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/05/01 16:16:34 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 16:35:08 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static void	read_input(char *prompt, t_lst_env **lst_env)
 	t_ast			*ast_head;
 	bool			syntax_error;
 
-	syntax_error = false;
 	while (1)
 	{
+		syntax_error = false;
 		text = readline(prompt);
 		add_history(text);
 		if (is_input_empty(text) == true)
@@ -59,7 +59,9 @@ static void	read_input(char *prompt, t_lst_env **lst_env)
 		if (head == NULL)
 			continue ;
 		ast_head = create_ast(&head, &syntax_error);
-		if (ast_head == NULL)
+		if (syntax_error == true)
+			continue ;
+		if (ast_head == NULL && errno == ENOMEM)
 			error_msgs(AST_MALLOC_FAILURE);
 		execute_ast(ast_head, lst_env, prompt, &ast_head);
 		clean_ast(ast_head);
