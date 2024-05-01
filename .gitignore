@@ -2,6 +2,7 @@
 minishell
 .vscode
 log.txt
+bug.txt
 
 # Prerequisites
 *.d

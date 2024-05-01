@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/01 17:28:27 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 15:33:36 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void	ft_getpwd(char *text)
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)
 	{
-		printf("too many arguments\n");
+		printf("Too many arguments with PWD command\n");
+		free_matrix(split);
 		return ;
 	}
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		printf("Error al obtener el pwd\n");
+		printf("Error obtaining PWD\n");
 	printf("%s\n", pwd);
 	free(pwd);
 	free_matrix(split);
