@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:40:26 by user42            #+#    #+#             */
-/*   Updated: 2024/05/01 15:46:48 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 16:16:26 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef struct s_ast
 	struct s_ast			*right;
 }							t_ast;
 
-t_ast						*create_ast(t_token_list **head);
+t_ast						*create_ast(t_token_list **head,
+								bool *syntax_error);
 t_token_list				*get_next_token(t_token_list **head);
 bool						token_is_binary_operator(t_token_list **head);
 t_ast						*new_ast_node(void);

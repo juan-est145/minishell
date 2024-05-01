@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/01 15:47:20 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 16:16:12 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 #include "../../libft/libft.h"
 
 static t_ast			*precedence_climbing(int precedence,
-							t_token_list **copy);
-static t_ast			*process_current_token(t_token_list **head);
-static char				*handle_cmd_args(t_token_list **head);
-static t_redirections	*handle_redir(t_token_list **head);
+							t_token_list **copy, bool *syntax_error);
+static t_ast			*process_current_token(t_token_list **head,
+							bool *syntax_error);
+static char				*handle_cmd_args(t_token_list **head,
+							bool *syntax_error);
+static t_redirections	*handle_redir(t_token_list **head, bool *syntax_error);
 
-t_ast	*create_ast(t_token_list **head)
+t_ast	*create_ast(t_token_list **head, bool *syntax_error)
 {
 	t_ast			*ast_head;
 	t_token_list	*head_copy;
+	bool			syntax_error;
 
 	head_copy = *head;
-	ast_head = precedence_climbing(0, &head_copy);
+	ast_head = precedence_climbing(0, &head_copy, &syntax_error);
 	if (ast_head == NULL)
 		return (clean_ast(ast_head), clean_tokens(head), NULL);
 	clean_tokens(head);
 	return (ast_head);
 }
 
-static t_ast	*precedence_climbing(int precedence, t_token_list **copy)
+static t_ast	*precedence_climbing(int precedence, t_token_list **copy,
+		bool *syntax_error)
 {
 	t_ast				*left;
 	t_ast				*right;
@@ -58,7 +62,7 @@ static t_ast	*precedence_climbing(int precedence, t_token_list **copy)
 	return (left);
 }
 
-static t_ast	*process_current_token(t_token_list **head)
+static t_ast	*process_current_token(t_token_list **head, bool *syntax_error)
 {
 	t_ast	*ast_node;
 
@@ -84,7 +88,7 @@ static t_ast	*process_current_token(t_token_list **head)
 	return (ast_node);
 }
 
-static char	*handle_cmd_args(t_token_list **head)
+static char	*handle_cmd_args(t_token_list **head, bool *syntax_error)
 {
 	char	*cmds_args;
 	char	*copy_to_free;
@@ -111,7 +115,7 @@ static char	*handle_cmd_args(t_token_list **head)
 	return (cmds_args);
 }
 
-static t_redirections	*handle_redir(t_token_list **head)
+static t_redirections	*handle_redir(t_token_list **head, bool *syntax_error)
 {
 	t_redirections		*redir_head;
 	t_token_identifier	redir_type;
