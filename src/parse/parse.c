@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/01 16:38:35 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 16:43:17 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_ast	*create_ast(t_token_list **head, bool *syntax_error)
 	ast_head = precedence_climbing(0, &head_copy, syntax_error);
 	clean_tokens(head);
 	if (ast_head == NULL && errno == ENOMEM)
-		return (clean_ast(ast_head), NULL);
+		return (NULL);
 	if (*syntax_error == true)
 		return (printf("Syntax error\n"), clean_ast(ast_head), NULL);
 	return (ast_head);
