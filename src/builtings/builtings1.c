@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/30 18:20:58 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 13:16:58 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,25 +86,56 @@ void	ft_echo(char **cmd)
 void	ft_cd(char *text, t_lst_env **lst_env)
 {
 	char	**split;
+	char	**dir;
 	char	*old_pwd;
 	char	*pwd;
 
 	split = ft_split(text, ' ');
-	if (split[2] != NULL)
+	if (check_array_length(split) == 3)
 		printf("too many arguments\n");
 	else
 	{
 		old_pwd = getcwd(NULL, 0);
-		if (chdir(split[1]) != 0)
+		if (split[1] == NULL)
 		{
-			printf("Could not access directory\n");
-			free_matrix(split);
-			free(old_pwd);
-			return ;
+			dir = search_lst_env("HOME", lst_env);
+			handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
+			if (dir == NULL)
+			{
+				printf("HOME no set\n");
+				free_matrix(dir);
+				free_matrix(split);
+				free(old_pwd);
+				return ;
+			}
+			else
+			{
+				if (chdir(dir[1]) != 0)
+				{
+					printf("Could not access directory\n");
+					free_matrix(dir);
+					free_matrix(split);
+					free(old_pwd);
+					return ;
+				}
+				handle_cd_env(lst_env, ft_fusion_string, "export PWD=", dir[1]);
+				free(dir[0]);
+				free(dir);
+			}
 		}
-		pwd = getcwd(NULL, 0);
-		handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
-		handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
+		else
+		{
+			if (chdir(split[1]) != 0)
+			{
+				printf("Could not access directory\n");
+				free_matrix(split);
+				free(old_pwd);
+				return ;
+			}
+			pwd = getcwd(NULL, 0);
+			handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
+			handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
+		}
 	}
 	free_matrix(split);
 }

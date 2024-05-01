@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/04/30 18:52:41 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 13:02:15 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ void					ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt);
 void					handle_cd_env(t_lst_env **lst_env, char *f(char *s1,
 								char *s2), char *export_text, char *pwd);
 void					is_first(char *text, t_lst_env **lst_env);
+char					**search_lst_env(char *text, t_lst_env **lst_env);
+int						check_array_length(char **array);
 
 #endif
