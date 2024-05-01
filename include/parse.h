@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:40:26 by user42            #+#    #+#             */
-/*   Updated: 2024/04/26 12:27:34 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 15:46:48 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ bool						is_redir(t_token_identifier identifier);
 t_redirections				*create_red_node(t_token_identifier red_type);
 void						append_red_node(t_redirections **head,
 								t_redirections *node);
+t_ast						*malloc_check(t_ast *left);
 #endif

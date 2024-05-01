@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:15:52 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/01 13:29:51 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/01 15:47:20 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ static t_ast	*precedence_climbing(int precedence, t_token_list **copy)
 		updated_prec = current_precedence(copy) + 1;
 		right = precedence_climbing(updated_prec, copy);
 		if (right == NULL)
-			return (left);
-		else if (right == NULL && errno == ENOMEM)
-			return (NULL);
+			return (malloc_check(left));
 		left = join_left_right_nodes(left, right, current_parse);
 		if (left == NULL)
 			return (NULL);
