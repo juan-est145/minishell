@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:44:18 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/01 15:22:11 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/02 19:01:54 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ bool	tokens_syntax_correct(t_token_list *node)
 	{
 		i = 0;
 		delimiter = '\0';
-		if (*node->token == '\0')
-			return (false);
 		while (node->token[i] != '\0')
 		{
 			if (node->token[i] == '\"' || node->token[i] == '\'')

@@ -13,6 +13,7 @@ NAME = minishell
 SCRS = $(SRC_PATH)/main.c\
 $(TOKEN_PATH)/tokenizer.c\
 $(TOKEN_PATH)/tokenizer_utils.c\
+$(TOKEN_PATH)/tokenizer_utils2.c\
 $(PARSE_PATH)/parse.c\
 $(PARSE_PATH)/parse_utils.c\
 $(PARSE_PATH)/parse_utils2.c\
