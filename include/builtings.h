@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/05/01 16:42:57 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:24:36 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ int						ft_lst_contain_change(t_lst_env **lst, char *search);
 int						ft_lst_contain(t_lst_env **lst, char *search);
 t_lst_env				*ft_lstnew_ms(char *content);
 char					*get_pwd_cd(t_lst_env *lst_env);
+int						ignore_space(char *text, int i);
 
 // BUILTINGS
 void					ft_getpwd(char *text);
-void					ft_echo(char **cmd);
+void					ft_echo(char *text);
 void					ft_env(t_lst_env **lst_env, char *text);
 void					ft_export(char *new, t_lst_env **lst_env);
 void					ft_unset(char *text, t_lst_env **lst_env);
