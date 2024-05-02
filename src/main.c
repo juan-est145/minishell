@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/05/02 19:55:37 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/02 20:15:49 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static t_token_list	*start_token_list(char *text)
 	if (head == NULL)
 		error_msgs(TOKEN_MALLOC_FAILURE);
 	free(text);
+	if (*head->token == '\0' && head->next == NULL)
+		return (clean_tokens(&head), printf("Syntax error\n"), NULL);
 	delete_empty_nodes(head);
 	if (tokens_syntax_correct(head) == false)
 		return (clean_tokens(&head), printf("Syntax error\n"), NULL);

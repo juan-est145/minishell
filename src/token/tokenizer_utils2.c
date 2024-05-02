@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 19:46:34 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/02 20:00:15 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/02 20:27:16 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	delete_empty_nodes(t_token_list *head)
 		if (*head->token == '\0')
 		{
 			previous->next = head->next;
-			head->next->prev = previous;
+			if (head->next != NULL)
+				head->next->prev = previous;
 			temp = head;
 			head = head->next;
 			free(temp->token);
