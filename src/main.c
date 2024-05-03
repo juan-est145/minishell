@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/05/02 20:15:49 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/03 17:23:11 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ int	main(int argc, char **argv, char **env)
 	t_lst_env	*lst_env;
 	int			i;
 	char		*prompt;
+	char		*color_prompt;
 
 	(void)argc;
 	(void)argv;
 	i = 0;
 	prompt = ft_getenv(env, "LOGNAME=");
 	prompt = ft_strjoin(prompt, "$ ");
+	color_prompt = ft_strjoin(GREEN, prompt);
+	free(prompt);
+	prompt = ft_strjoin(color_prompt, RESET);
+	free(color_prompt);
 	while (i++ < 1500)
 		printf("\n");
 	lst_env = init_lst_env(env);

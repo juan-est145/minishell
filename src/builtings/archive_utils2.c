@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:00:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/04/30 18:21:06 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/02 11:13:04 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,11 @@ void	handle_cd_env(t_lst_env **lst_env, char *f(char *s1, char *s2),
 	ft_export(aux, lst_env);
 	free(aux);
 	free(pwd);
+}
+
+int	ignore_space(char *text, int i)
+{
+	while (text[i] == ' ' && text[i + 1] == ' ')
+		i++;
+	return (i);
 }

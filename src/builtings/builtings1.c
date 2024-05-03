@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/01 15:33:36 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/02 16:25:47 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,54 +33,58 @@ void	ft_getpwd(char *text)
 	free_matrix(split);
 }
 
-bool	ft_echo_normi(char **cmd, int i, int j, bool open)
+bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 {
-	static char	chr = '\0';
-
-	if ((cmd[i][j] == '\"' || cmd[i][j] == '\'') && open == false)
+	while (text[i] != '\0')
 	{
-		open = true;
-		chr = cmd[i][j];
-	}
-	else
-	{
-		if (cmd[i][j] == chr && open == true)
+		if (open == false)
+			i = ignore_space(text, i);
+		if ((text[i] == '\"' || text[i] == '\'') && open == false)
+		{
+			open = true;
+			delimiter = text[i];
+			i++;
+			continue;
+		}
+		if (text[i] == delimiter && open == true)
 		{
 			open = false;
-			chr = '\0';
+			delimiter = '\0';
+			i++;
+			continue;
 		}
-		else
-			printf("%c", cmd[i][j]);
+		printf("%c", text[i]);
+		i++;
 	}
 	return (open);
 }
 
 // IMITA LA FUNCION ECHO
-void	ft_echo(char **cmd)
+void	ft_echo(char *text)
 {
 	int		i;
-	int		j;
 	bool	open;
+	bool	flag;
+	char	delimiter;
 
-	i = 1;
+	i = 4;
 	open = false;
-	if (ft_strncmp(cmd[1], "-n\0", 3) == 0)
-		i = 2;
-	while (cmd[i] != 0)
+	flag = false;
+	delimiter = '\0';
+	
+	i = ignore_space(text, i);
+	i++;
+	if (text[i] == '-' && text[i + 1] == 'n' 
+		&& text[i + 2] == ' ')
 	{
-		j = 0;
-		while (cmd[i][j] != '\0')
-		{
-			open = ft_echo_normi(cmd, i, j, open);
-			j++;
-		}
-		i++;
-		if (cmd[i] != 0)
-			printf(" ");
+		flag = true;
+		i += 3;
 	}
-	if (ft_strncmp(cmd[1], "-n\0", 3) != 0)
+	open = ft_echo_normi(text, i, open , delimiter);
+	if (open == true)
+		printf("%c Syntax error\n", delimiter);
+	if (flag == false)
 		printf("\n");
-	free_matrix(cmd);
 }
 
 // IMITA EL COMANDO CD
