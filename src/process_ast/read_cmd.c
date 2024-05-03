@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:57:33 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/02 15:50:50 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:35:09 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	read_cmd(t_ast *node, t_lst_env **lst_env, t_ast **head, char *prompt)
 	if (ft_strncmp(node->args, "pwd\0", 4) == 0 || ft_strncmp(node->args,
 			"pwd ", 4) == 0)
 		ft_getpwd(node->args);
-	if (ft_strncmp(node->args, "echo ", 4  ) == 0)
+	if (ft_strncmp(node->args, "echo ", 4) == 0)
 		ft_echo(node->args);
 	if (ft_strncmp(node->args, "env\0", 4) == 0)
 		ft_env(lst_env, node->args);
