@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/05/02 11:24:36 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:40:10 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_lst_env
 {
 	char				*text;
+	char				**env;
 	struct s_lst_env	*next;
 }						t_lst_env;
 

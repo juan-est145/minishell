@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/05/03 17:23:11 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/08 12:10:10 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static t_ast	*execute_ast(t_ast *node, t_lst_env **lst_env, char *prompt,
 	else if (node->parse_identifier == PARSE_PIPE
 		&& node->left->parse_identifier == PARSE_CMD
 		&& node->right->parse_identifier == PARSE_CMD)
-		return (read_pipe(node, *lst_env), node);
+		return (read_pipe(node, lst_env), node);
 	execute_ast(node->left, lst_env, prompt, head);
 	execute_ast(node->right, lst_env, prompt, head);
 	return (node);
