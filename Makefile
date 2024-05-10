@@ -25,7 +25,7 @@ $(BUILTINGS_PATH)/builtings.c\
 $(BUILTINGS_PATH)/builtings1.c\
 $(BUILTINGS_PATH)/builtings2.c\
 $(PROCESS_AST_PATH)/read_cmd.c\
-$(PROCESS_AST_PATH)/update_env.c\
+$(PROCESS_AST_PATH)/archive_utils_cmd.c\
 $(ERRORS_PATH)/print_error_msg.c\
 
 OBJS = $(SCRS:.c=.o)

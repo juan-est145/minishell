@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/02 16:25:47 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:51:28 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 			open = true;
 			delimiter = text[i];
 			i++;
-			continue;
+			continue ;
 		}
 		if (text[i] == delimiter && open == true)
 		{
 			open = false;
 			delimiter = '\0';
 			i++;
-			continue;
+			continue ;
 		}
 		printf("%c", text[i]);
 		i++;
@@ -71,16 +71,15 @@ void	ft_echo(char *text)
 	open = false;
 	flag = false;
 	delimiter = '\0';
-	
 	i = ignore_space(text, i);
 	i++;
-	if (text[i] == '-' && text[i + 1] == 'n' 
+	if (text[i] == '-' && text[i + 1] == 'n'
 		&& text[i + 2] == ' ')
 	{
 		flag = true;
 		i += 3;
 	}
-	open = ft_echo_normi(text, i, open , delimiter);
+	open = ft_echo_normi(text, i, open, delimiter);
 	if (open == true)
 		printf("%c Syntax error\n", delimiter);
 	if (flag == false)
