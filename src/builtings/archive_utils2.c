@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:00:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/02 11:13:04 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:56:59 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ void	ft_lstadd_back_ms(t_lst_env **lst, t_lst_env *new)
 			temp = temp->next;
 		temp->next = new;
 	}
+}
+
+int	ft_lstsize_ms(t_lst_env *lst)
+{
+	int		i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
 
 void	handle_cd_env(t_lst_env **lst_env, char *f(char *s1, char *s2),

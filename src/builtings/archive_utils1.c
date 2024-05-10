@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:59:06 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/09 18:40:21 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:55:08 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	ft_lst_contain(t_lst_env **lst, char *search)
 	return (1);
 }
 
-t_lst_env	*ft_lstnew_ms(char *content)
+t_lst_env	*ft_lstnew_ms(char *content, char **env)
 {
 	t_lst_env	*nodo;
 
@@ -116,6 +116,7 @@ t_lst_env	*ft_lstnew_ms(char *content)
 	if (!nodo)
 		return (NULL);
 	nodo->text = content;
+	nodo->env = env;
 	nodo->next = NULL;
 	return (nodo);
 }
