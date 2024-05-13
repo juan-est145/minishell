@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/05/10 16:54:05 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/11 10:43:28 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void					aux(char **matr, char const *s, char c);
 int						ntimes(char const *s, char c);
 int						ft_lst_contain_change(t_lst_env **lst, char *search);
 int						ft_lst_contain(t_lst_env **lst, char *search);
-t_lst_env				*ft_lstnew_ms(char *content, char **env);
+t_lst_env				*ft_lstnew_ms(char *content);	
 char					*get_pwd_cd(t_lst_env *lst_env);
 int						ignore_space(char *text, int i);
 

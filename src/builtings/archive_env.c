@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:48 by user42            #+#    #+#             */
-/*   Updated: 2024/05/10 14:54:02 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/11 10:58:17 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_lst_env	*init_lst_env(char **env)
 	while (env[i])
 	{
 		content = ft_substr(env[i], 0, ft_strlen(env[i]));
-		node = ft_lstnew_ms(content, env);
+		node = ft_lstnew_ms(content);
 		if (content == NULL || node == NULL)
 			return (free_lst_env(head), NULL);
 		ft_lstadd_back_ms(&head, node);

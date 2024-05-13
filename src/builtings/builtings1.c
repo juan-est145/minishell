@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/10 18:51:28 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:29:09 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt)
 {
 	clean_ast(*head);
 	rl_clear_history();
+	free_copie_env(&lst_env);
 	free_lst_env(lst_env);
 	free(prompt);
 	exit(0);

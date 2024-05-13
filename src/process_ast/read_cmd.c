@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:57:33 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/10 18:53:20 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:32:02 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void	read_cmd(t_ast *node, t_lst_env **lst_env, t_ast **head, char *prompt)
 	else if (ft_strncmp(node->args, "export ", 7) == 0)
 	{
 		ft_export(node->args, lst_env);
+		free_copie_env(lst_env);
 		up_env(lst_env);
 	}
 	else if (ft_strncmp(node->args, "unset ", 6) == 0)
 	{
 		ft_unset(node->args, lst_env);
+		free_copie_env(lst_env);
 		up_env(lst_env);
 	}
 	else if (ft_strncmp(node->args, "cd", 2) == 0)
@@ -57,7 +59,8 @@ void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
 		command = ft_split(node->args, ' ');
 		segmention_path(lst_env, &str_pipes);
 		dir_cmd = search_comand(&str_pipes, command);
-		execve(dir_cmd, command, (*lst_env)->env);
+		if (execve(dir_cmd, command, (*lst_env)->env) == -1)
+			exit(EXIT_FAILURE);
 	}
 	waitpid(pid, NULL, CHILD);
 }

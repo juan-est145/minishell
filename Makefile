@@ -39,7 +39,7 @@ $(INCLUDE_PATH)/errors.h\
 
 COMPILER = $(CC)
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 LIB_FLAGS = -Llibft -lft
 EXEC-NAME-FLAG = -lreadline -lhistory -o
 
