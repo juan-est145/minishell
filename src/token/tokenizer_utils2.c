@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 19:46:34 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/02 20:27:16 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/13 16:49:16 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,18 @@ void	delete_empty_nodes(t_token_list *head)
 			continue ;
 		}
 		head = head->next;
+	}
+}
+
+void	expand_variables(t_token_list **head)
+{
+	t_token_list	*temp;
+
+	temp = *head;
+	while (temp != NULL)
+	{
+		if (temp->token_identifer == EXPRESSION)
+			(void)temp;
+		temp = temp->next;
 	}
 }
