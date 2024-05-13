@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/05/02 11:24:36 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:38:07 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ void					handle_cd_env(t_lst_env **lst_env, char *f(char *s1,
 void					is_first(char *text, t_lst_env **lst_env);
 char					**search_lst_env(char *text, t_lst_env **lst_env);
 int						check_array_length(char **array);
-int						errors_cd(char *old_pwd, char **dir, char **split, char *text);
-int						cd_no_argument(char *old_pwd, char **split, t_lst_env **lst_env);
+int						errors_cd(char *old_pwd, char **dir, char **split,
+							char *text);
+int						cd_no_argument(char *old_pwd, char **split,
+							t_lst_env **lst_env);
 
 #endif

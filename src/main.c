@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/05/03 17:23:11 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/13 17:51:02 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void			read_input(char *prompt, t_lst_env **lst_env);
 static bool			is_input_empty(char *text);
-static t_token_list	*start_token_list(char *text);
+static t_token_list	*start_token_list(char *text, t_lst_env **lst_env);
 static t_ast		*execute_ast(t_ast *node, t_lst_env **lst_env, char *prompt,
 						t_ast **head);
 
@@ -60,7 +60,7 @@ static void	read_input(char *prompt, t_lst_env **lst_env)
 		add_history(text);
 		if (is_input_empty(text) == true)
 			continue ;
-		head = start_token_list(text);
+		head = start_token_list(text, lst_env);
 		if (head == NULL)
 			continue ;
 		ast_head = create_ast(&head, &syntax_error);
@@ -84,7 +84,7 @@ static bool	is_input_empty(char *text)
 	return (false);
 }
 
-static t_token_list	*start_token_list(char *text)
+static t_token_list	*start_token_list(char *text, t_lst_env **lst_env)
 {
 	t_token_list	*head;
 
@@ -97,6 +97,7 @@ static t_token_list	*start_token_list(char *text)
 	delete_empty_nodes(head);
 	if (tokens_syntax_correct(head) == false)
 		return (clean_tokens(&head), printf("Syntax error\n"), NULL);
+	expand_variables(&head, lst_env);
 	return (head);
 }
 
