@@ -17,3 +17,4 @@ echo "'$SHELL'"
 
 Notations
 Still need to implement what to do when env does not exist
+Need to implement what to do with "$?"
