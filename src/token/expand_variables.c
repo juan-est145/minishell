@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:00:57 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/14 18:19:42 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/14 18:35:10 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*find_env_var(char *text, t_lst_env **lst_env)
 
 	i = 0;
 	delimiter = '\0';
+	temp = NULL;
 	while (text[i] != '\0')
 	{
 		if (text[i] == '\'')

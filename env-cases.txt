@@ -1,12 +1,19 @@
+Test cases:
+
 echo $PWD$SHELL
 /home/juan-est145/Escritorio/Code/minishell/bin/bash
 
-echo $PWD $SHELL (Works)
+echo $PWD $SHELL
 /home/juan-est145/Escritorio/Code/minishell /bin/bash
 
-echo "'Hola caracola' $PWD dsadas" (This case works because the double quotes are at the end)
+echo "'Hola caracola' $PWD dsadas"
 'Hola caracola' /home/juan-est145/Escritorio/Code/minishell dsadas
 
-echo "$PWD" (This case breaks everything)
+echo "$PWD"
+home/juan-est145/Escritorio/Code/minishell
 
-Need to check what happens with double quotes
+echo "'$SHELL'" (This case is currently no working)
+'/bin/bash'
+
+Notations
+Still need to implement what to do when env does not exist

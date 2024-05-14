@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 19:46:34 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/14 18:01:40 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/14 18:42:46 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ unsigned int	find_last_env_index(char *text, unsigned int env_i)
 	unsigned int	i;
 
 	i = env_i;
-	while (text[i] != '\0' && ft_isspace(text[i]) == false)
+	while (text[i] != '\0' && ft_isspace(text[i]) == false && text[i] != '\"')
 	{
-		if (text[i] == '$' && i != env_i)
+		if ((text[i] == '$' || (ft_isalnum(text[i]) == false && text[i] != '_'))
+			&& i != env_i)
 			break ;
 		i++;
 	}
