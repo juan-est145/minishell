@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:37:27 by user42            #+#    #+#             */
-/*   Updated: 2024/05/14 13:02:39 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/14 14:38:55 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void					set_delimiter(char *delimiter, char *full_cmd,
 void					delete_empty_nodes(t_token_list *head);
 void					expand_variables(t_token_list **head,
 							t_lst_env **lst_env);
-void					find_env_var(char *text, t_lst_env **lst_env);
+char					*find_env_var(char *text, t_lst_env **lst_env);
+char					set_env_delimiter(char delimiter);
 #endif
