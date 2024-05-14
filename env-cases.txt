@@ -12,7 +12,7 @@ echo "'Hola caracola' $PWD dsadas"
 echo "$PWD"
 home/juan-est145/Escritorio/Code/minishell
 
-echo "'$SHELL'" (This case is currently no working)
+echo "'$SHELL'"
 '/bin/bash'
 
 Notations

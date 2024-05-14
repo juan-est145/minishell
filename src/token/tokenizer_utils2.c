@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 19:46:34 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/14 18:42:46 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/14 19:07:27 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,6 @@ void	expand_variables(t_token_list **head, t_lst_env **lst_env)
 			temp->token = find_env_var(temp->token, lst_env);
 		temp = temp->next;
 	}
-}
-
-char	set_env_delimiter(char delimiter)
-{
-	if (delimiter == '\0')
-		return ('\'');
-	return ('\0');
 }
 
 unsigned int	find_last_env_index(char *text, unsigned int env_i)
