@@ -1,0 +1,7 @@
+echo $PWD$SHELL
+/home/juan-est145/Escritorio/Code/minishell/bin/bash
+
+echo $PWD $SHELL (Works)
+/home/juan-est145/Escritorio/Code/minishell /bin/bash
+
+Need to check what happens with double quotes

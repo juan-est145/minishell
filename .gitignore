@@ -2,6 +2,7 @@
 minishell
 .vscode
 *.txt
+!env-cases.txt
 
 # Prerequisites
 *.d
