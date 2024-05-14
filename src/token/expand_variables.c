@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:00:57 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/14 18:14:17 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/14 18:19:42 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,3 @@ static char	*append_env_value(char *env_value, char *text,
 	free(temp);
 	return (result);
 }
-//&& (text[i] == '$' && i == env_i))
