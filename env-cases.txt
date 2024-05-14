@@ -4,4 +4,9 @@ echo $PWD$SHELL
 echo $PWD $SHELL (Works)
 /home/juan-est145/Escritorio/Code/minishell /bin/bash
 
+echo "'Hola caracola' $PWD dsadas" (This case works because the double quotes are at the end)
+'Hola caracola' /home/juan-est145/Escritorio/Code/minishell dsadas
+
+echo "$PWD" (This case breaks everything)
+
 Need to check what happens with double quotes
