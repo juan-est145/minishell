@@ -6,14 +6,14 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:00:57 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/14 14:38:40 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/14 18:14:17 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-static char	*search_env_value(char *text, unsigned int env_i,
+static char	*search_env_value(char *text, unsigned int *env_i,
 				t_lst_env **lst_env);
 static char	*append_env_value(char *env_value, char *text,
 				unsigned int env_start, unsigned int env_end);
@@ -33,7 +33,7 @@ char	*find_env_var(char *text, t_lst_env **lst_env)
 		if (text[i] == '$' && ft_isspace(text[i + 1]) \
 		== false && text[i + 1] != '\0' && delimiter == '\0')
 		{
-			temp = search_env_value(text, i, lst_env);
+			temp = search_env_value(text, &i, lst_env);
 			free(text);
 			text = temp;
 		}
@@ -42,7 +42,7 @@ char	*find_env_var(char *text, t_lst_env **lst_env)
 	return (text);
 }
 
-static char	*search_env_value(char *text, unsigned int env_i,
+static char	*search_env_value(char *text, unsigned int *env_i,
 		t_lst_env **lst_env)
 {
 	unsigned int	i;
@@ -50,10 +50,8 @@ static char	*search_env_value(char *text, unsigned int env_i,
 	char			*result;
 	char			**env_path;
 
-	i = env_i;
-	while (text[i] != '\0' && ft_isspace(text[i]) == false)
-		i++;
-	env = ft_substr(text, 0, i - env_i);
+	i = find_last_env_index(text, *env_i);
+	env = ft_substr(text, *env_i, i - (*env_i));
 	env_path = search_lst_env(env + 1, lst_env);
 	if (env_path != NULL)
 	{
@@ -61,7 +59,8 @@ static char	*search_env_value(char *text, unsigned int env_i,
 		free_matrix(env_path);
 		free(env);
 		env = result;
-		result = append_env_value(result, text, env_i, i);
+		result = append_env_value(result, text, *env_i, i);
+		*env_i += ft_strlen(env) - 1;
 		free(env);
 	}
 	return (result);
@@ -82,3 +81,4 @@ static char	*append_env_value(char *env_value, char *text,
 	free(temp);
 	return (result);
 }
+//&& (text[i] == '$' && i == env_i))
