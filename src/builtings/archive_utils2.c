@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:00:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/10 12:56:59 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/15 18:10:44 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,24 @@ int	ignore_space(char *text, int i)
 	while (text[i] == ' ' && text[i + 1] == ' ')
 		i++;
 	return (i);
+}
+
+int	redirected_destination(t_redirections **node)
+{
+	t_redirections	*temp;
+	int				fd;
+
+	temp = *node;
+	fd = -1;
+	while (temp != NULL)
+	{
+		if (temp->redirection_type == REDIR_INSERT)
+			fd = open(temp->file_location, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		if (temp->redirection_type == REDIR_APPEND)
+			fd = open(temp->file_location, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		if (fd == -1)
+			break;
+		temp = temp->next;
+	}
+	return (fd);
 }

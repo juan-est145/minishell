@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:40:26 by user42            #+#    #+#             */
-/*   Updated: 2024/05/01 16:16:26 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/15 17:47:38 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,6 @@ t_redirections				*create_red_node(t_token_identifier red_type);
 void						append_red_node(t_redirections **head,
 								t_redirections *node);
 t_ast						*malloc_check(t_ast *left);
+int						redirected_destination(t_redirections **node);//MIO
+
 #endif

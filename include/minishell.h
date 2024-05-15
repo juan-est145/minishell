@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/09 17:40:41 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:45:53 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <readline/readline.h>
 # include <errno.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # define RED     	"\x1b[31m"
