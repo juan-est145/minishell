@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/05/16 13:06:28 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:20:40 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int						redirect_stdout(t_ast *node);
 // BUILTINGS
 void					ft_getpwd(char *text, t_ast *node);
 void					ft_echo(char *text, t_ast *node);
-void					ft_env(t_lst_env **lst_env, char *text);
+void					ft_env(t_lst_env **lst_env, char *text, t_ast *node);
 void					ft_export(char *new, t_lst_env **lst_env);
 void					ft_unset(char *text, t_lst_env **lst_env);
 bool					ft_unset_normi(t_lst_env **temp, bool flag,

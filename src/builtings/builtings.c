@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/05/11 11:20:38 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:25:24 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #include "../../libft/libft.h"
 
 // IMITA EL COMANDO ENV
-void	ft_env(t_lst_env **lst_env, char *text)
+void	ft_env(t_lst_env **lst_env, char *text, t_ast *node)
 {
 	char		**split;
 	t_lst_env	*temp;
+	int			fd;
 
+	fd = redirect_stdout(node);
 	temp = *lst_env;
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)
@@ -32,6 +34,9 @@ void	ft_env(t_lst_env **lst_env, char *text)
 		printf("%s\n", temp->text);
 		temp = temp->next;
 	}
+	if (fd > 0)
+		close(fd);
+	dup2(0, STDOUT_FILENO);
 	free_matrix(split);
 }
 
