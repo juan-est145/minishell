@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:57:33 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/15 11:32:39 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:07:08 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	read_cmd(t_ast *node, t_lst_env **lst_env, t_ast **head, char *prompt)
 {
 	if (ft_strncmp(node->args, "pwd\0", 4) == 0 || ft_strncmp(node->args,
 			"pwd ", 4) == 0)
-		ft_getpwd(node->args);
+		ft_getpwd(node->args, node);
 	else if (ft_strncmp(node->args, "echo ", 4) == 0)
 		ft_echo(node->args, node);
 	else if (ft_strncmp(node->args, "env\0", 4) == 0)

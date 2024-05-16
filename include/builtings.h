@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/05/16 12:33:06 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:06:28 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int						ignore_space(char *text, int i);
 int						redirect_stdout(t_ast *node);
 
 // BUILTINGS
-void					ft_getpwd(char *text);
+void					ft_getpwd(char *text, t_ast *node);
 void					ft_echo(char *text, t_ast *node);
 void					ft_env(t_lst_env **lst_env, char *text);
 void					ft_export(char *new, t_lst_env **lst_env);

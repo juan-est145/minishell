@@ -6,18 +6,20 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/16 12:43:01 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:30:11 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-void	ft_getpwd(char *text)
+void	ft_getpwd(char *text, t_ast *node)
 {
 	char	*pwd;
 	char	**split;
+	int		fd;
 
+	fd = redirect_stdout(node);
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)
 	{
@@ -30,6 +32,9 @@ void	ft_getpwd(char *text)
 		printf("Error obtaining PWD\n");
 	printf("%s\n", pwd);
 	free(pwd);
+	if (fd > 0)
+		close(fd);
+	dup2(0, STDOUT_FILENO);
 	free_matrix(split);
 }
 
