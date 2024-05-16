@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:00:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/15 18:10:44 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:37:00 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	redirected_destination(t_redirections **node)
 		if (temp->redirection_type == REDIR_APPEND)
 			fd = open(temp->file_location, O_WRONLY | O_CREAT | O_APPEND, 0777);
 		if (fd == -1)
-			break;
+			break ;
 		temp = temp->next;
 	}
 	return (fd);

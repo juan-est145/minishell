@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/15 18:25:33 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:43:01 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,15 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 }
 
 // IMITA LA FUNCION ECHO
+// NOTA FALTA EL CLOSE AL FINAL DE LA FUNCION
 void	ft_echo(char *text, t_ast *node)
 {
-	int		i; 
+	int		i;
 	bool	open;
 	bool	flag;
 	char	delimiter;
-	int		fd;
 
-	if (node->redirections != NULL)
-	{
-		if (redirected_destination(&node->redirections) == -1)
-		{
-			printf("ERROR en la creacion del archivo\n");
-			return ;
-		}
-		else
-		{
-			fd = redirected_destination(&node->redirections);
-			dup2(fd, STDOUT_FILENO);
-		}
-	}
+	redirect_stdout(node);
 	i = 4;
 	open = false;
 	flag = false;
