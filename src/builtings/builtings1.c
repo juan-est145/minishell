@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/16 13:30:11 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/17 10:56:56 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 		printf("%c", text[i]);
 		i++;
 	}
+	if (open == true)
+		printf("Syntax error\n");
 	return (open);
 }
 
@@ -72,14 +74,14 @@ void	ft_echo(char *text, t_ast *node)
 	bool	open;
 	bool	flag;
 	char	delimiter;
+	int		fd;
 
-	redirect_stdout(node);
+	fd = redirect_stdout(node);
 	i = 4;
 	open = false;
 	flag = false;
 	delimiter = '\0';
-	i = ignore_space(text, i);
-	i++;
+	i = ignore_space(text, i) + 1;
 	if (text[i] == '-' && text[i + 1] == 'n'
 		&& text[i + 2] == ' ')
 	{
@@ -87,10 +89,10 @@ void	ft_echo(char *text, t_ast *node)
 		i += 3;
 	}
 	open = ft_echo_normi(text, i, open, delimiter);
-	if (open == true)
-		printf("%c Syntax error\n", delimiter);
 	if (flag == false)
 		printf("\n");
+	if (fd > 0)
+		close(fd);
 	dup2(0, STDOUT_FILENO);
 }
 

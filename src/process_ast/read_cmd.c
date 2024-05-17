@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:57:33 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/16 15:22:24 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:56:18 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
 	pid_t	pid;
 	char	*dir_cmd;
 	char	**command;
+	int		fd;
 
 	pid = fork();
+	fd = redirect_stdout(node);
 	if (pid == CHILD)
 	{
 		command = ft_split(node->args, ' ');
@@ -62,6 +64,9 @@ void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
 		if (execve(dir_cmd, command, (*lst_env)->env) == -1)
 			exit(EXIT_FAILURE);
 	}
+	if (fd > 0)
+		close(fd);
+	dup2(0, STDOUT_FILENO);
 	waitpid(pid, NULL, CHILD);
 }
 
