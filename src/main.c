@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/05/11 10:58:52 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/18 12:16:24 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv, char **env)
 	free(color_prompt);
 	while (i++ < 1500)
 		printf("\n");
+	print_swamp();
 	lst_env = init_lst_env(env);
 	up_env(&lst_env);
 	if (lst_env == NULL)

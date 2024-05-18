@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/05/16 15:20:40 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/18 12:19:39 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char					*get_pwd_cd(t_lst_env *lst_env);
 int						ignore_space(char *text, int i);
 
 int						redirect_stdout(t_ast *node);
+
+void					print_swamp();
 
 // BUILTINGS
 void					ft_getpwd(char *text, t_ast *node);

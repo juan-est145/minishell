@@ -11,6 +11,7 @@ ERRORS_PATH = $(SRC_PATH)/errors
 NAME = minishell
 
 SCRS = $(SRC_PATH)/main.c\
+$(SRC_PATH)/printf_swamp.c\
 $(TOKEN_PATH)/tokenizer.c\
 $(TOKEN_PATH)/tokenizer_utils.c\
 $(TOKEN_PATH)/tokenizer_utils2.c\

@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:57:33 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/16 17:56:18 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:17:40 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ void	read_cmd(t_ast *node, t_lst_env **lst_env, t_ast **head, char *prompt)
 		ft_exit(head, *lst_env, prompt);
 	else
 		porcess_cmd(node, lst_env);
+}
+
+void	read_pipe(t_ast *node, t_lst_env **lst_env)
+{
+	(void)node;
+	(void)lst_env;
 }
 
 void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
@@ -104,10 +110,4 @@ char	*search_comand(t_pipex *str_pipes, char **comand)
 			dir_cmd = NULL;
 	}
 	return (dir_cmd);
-}
-
-void	read_pipe(t_ast *node, t_lst_env **lst_env)
-{
-	(void)node;
-	(void)lst_env;
 }
