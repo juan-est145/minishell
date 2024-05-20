@@ -1,0 +1,29 @@
+Test cases:
+
+echo $PWD$SHELL
+/home/juan-est145/Escritorio/Code/minishell/bin/bash
+
+echo $PWD $SHELL
+/home/juan-est145/Escritorio/Code/minishell /bin/bash
+
+echo "'Hola caracola' $PWD dsadas"
+'Hola caracola' /home/juan-est145/Escritorio/Code/minishell dsadas
+
+echo "$PWD"
+home/juan-est145/Escritorio/Code/minishell
+
+echo "'$SHELL'"
+'/bin/bash'
+
+echo (Non existing ENV)
+
+
+echo (Non existing ENV) $PWD $SHELL
+/home/juan-est145/Escritorio/Code/minishell /bin/bash
+
+echo (Non existing ENV)$PWD$SHELL
+/home/juan-est145/Escritorio/Code/minishell /bin/bash (Not working)
+
+Notations
+Still need to implement what to do when env does not exist
+Need to implement what to do with "$?"

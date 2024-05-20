@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:37:27 by user42            #+#    #+#             */
-/*   Updated: 2024/05/02 19:55:27 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/14 19:07:19 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,8 @@ bool					tokens_syntax_correct(t_token_list *node);
 void					set_delimiter(char *delimiter, char *full_cmd,
 							unsigned int i);
 void					delete_empty_nodes(t_token_list *head);
-
+void					expand_variables(t_token_list **head,
+							t_lst_env **lst_env);
+char					*find_env_var(char *text, t_lst_env **lst_env);
+unsigned int			find_last_env_index(char *text, unsigned int env_i);
 #endif
