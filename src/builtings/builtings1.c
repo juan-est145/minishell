@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/17 10:56:56 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/18 20:29:51 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 }
 
 // IMITA LA FUNCION ECHO
-// NOTA FALTA EL CLOSE AL FINAL DE LA FUNCION
 void	ft_echo(char *text, t_ast *node)
 {
 	int		i;
