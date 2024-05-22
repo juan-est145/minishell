@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:57:33 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/20 10:30:34 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:50:32 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes);
 char	*search_comand(t_pipex *str_pipes, char **comand);
 void	porcess_cmd(t_ast *node, t_lst_env **lst_env);
 
-void	read_cmd(t_ast *node, t_lst_env **lst_env, t_ast **head, char *prompt)
+void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 {
 	if (ft_strncmp(node->args, "pwd\0", 4) == 0 || ft_strncmp(node->args,
 			"pwd ", 4) == 0)
@@ -25,25 +25,25 @@ void	read_cmd(t_ast *node, t_lst_env **lst_env, t_ast **head, char *prompt)
 	else if (ft_strncmp(node->args, "echo ", 4) == 0)
 		ft_echo(node->args, node);
 	else if (ft_strncmp(node->args, "env\0", 4) == 0)
-		ft_env(lst_env, node->args, node);
+		ft_env(str_pipe->lst_env, node->args, node);
 	else if (ft_strncmp(node->args, "export ", 7) == 0)
 	{
-		ft_export(node->args, lst_env);
-		free_copie_env(lst_env);
-		up_env(lst_env);
+		ft_export(node->args, str_pipe->lst_env);
+		free_copie_env(str_pipe->lst_env);
+		up_env(str_pipe->lst_env);
 	}
 	else if (ft_strncmp(node->args, "unset ", 6) == 0)
 	{
-		ft_unset(node->args, lst_env);
-		free_copie_env(lst_env);
-		up_env(lst_env);
+		ft_unset(node->args, str_pipe->lst_env);
+		free_copie_env(str_pipe->lst_env);
+		up_env(str_pipe->lst_env);
 	}
 	else if (ft_strncmp(node->args, "cd", 2) == 0)
-		ft_cd(node->args, lst_env);
+		ft_cd(node->args, str_pipe->lst_env);
 	else if (ft_strncmp(node->args, "exit", 4) == 0)
-		ft_exit(head, *lst_env, prompt);
+		ft_exit(&str_pipe->ast_head, *str_pipe->lst_env, prompt);
 	else
-		porcess_cmd(node, lst_env);
+		porcess_cmd(node, str_pipe->lst_env);
 }
 
 void	read_pipe(t_ast *node, t_lst_env **lst_env)

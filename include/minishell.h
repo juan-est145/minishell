@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/18 12:17:38 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:40:15 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # include "builtings.h"
 # include "token.h"
 # include "parse.h"
+# include "pipes.h"
 # include "process_ast.h"
 # include "errors.h"
-# include "pipes.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <errno.h>

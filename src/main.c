@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/05/20 10:28:57 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:47:55 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 static void			read_input(char *prompt, t_lst_env **lst_env);
 static bool			is_input_empty(char *text);
 static t_token_list	*start_token_list(char *text, t_lst_env **lst_env);
-static t_ast		*execute_ast(t_ast *node, t_lst_env **lst_env, char *prompt,
-						t_ast **head);
+static t_ast		*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe);
 
 int	main(int argc, char **argv, char **env)
 {
@@ -52,9 +51,10 @@ static void	read_input(char *prompt, t_lst_env **lst_env)
 {
 	char			*text;
 	t_token_list	*head;
-	t_ast			*ast_head;
+	t_pipex			str_pipe;
 	bool			syntax_error;
 
+	str_pipe.lst_env = lst_env;
 	while (1)
 	{
 		syntax_error = false;
@@ -65,13 +65,13 @@ static void	read_input(char *prompt, t_lst_env **lst_env)
 		head = start_token_list(text, lst_env);
 		if (head == NULL)
 			continue ;
-		ast_head = create_ast(&head, &syntax_error);
+		str_pipe.ast_head = create_ast(&head, &syntax_error);
 		if (syntax_error == true)
 			continue ;
-		if (ast_head == NULL && errno == ENOMEM)
+		if (str_pipe.ast_head == NULL && errno == ENOMEM)
 			error_msgs(AST_MALLOC_FAILURE);
-		execute_ast(ast_head, lst_env, prompt, &ast_head);
-		clean_ast(ast_head);
+		execute_ast(str_pipe.ast_head, prompt, &str_pipe);
+		clean_ast(str_pipe.ast_head);
 	}
 }
 
@@ -103,19 +103,19 @@ static t_token_list	*start_token_list(char *text, t_lst_env **lst_env)
 	return (head);
 }
 
-static t_ast	*execute_ast(t_ast *node, t_lst_env **lst_env, char *prompt,
-		t_ast **head)
+static t_ast	*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe)
 {
+	
 	if (node == NULL)
 		return (NULL);
 	else if (node->parse_identifier == PARSE_CMD)
-		return (read_cmd(node, lst_env, head, prompt), node);
+		return (read_cmd(node, str_pipe, prompt), node);
 	else if (node->parse_identifier == PARSE_PIPE
 		&& node->left->parse_identifier == PARSE_CMD
 		&& node->right->parse_identifier == PARSE_CMD)
-		return (read_pipe(node, lst_env), node);
-	execute_ast(node->left, lst_env, prompt, head);
-	execute_ast(node->right, lst_env, prompt, head);
+		return (read_pipe(node, str_pipe->lst_env), node);
+	execute_ast(node->left, prompt, str_pipe);
+	execute_ast(node->right, prompt, str_pipe);
 	return (node);
 }
 
