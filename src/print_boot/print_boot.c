@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_swamp.c                                     :+:      :+:    :+:   */
+/*   print_boot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:06:54 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/23 15:24:41 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:09:58 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-#include "../libft/libft.h"
+#include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
-void	initial_print(char **env)
+char	*initial_print(char **env)
 {
 	int		i;
 	char	*prompt;
@@ -29,6 +29,7 @@ void	initial_print(char **env)
 	while (i++ < 1500)
 		printf("\n");
 	print_swamp();
+	return (prompt);
 }
 
 void	print_swamp(void)

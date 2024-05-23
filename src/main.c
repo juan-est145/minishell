@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 15:24:31 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:05:22 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv, char **env)
 {
 	t_lst_env	*lst_env;
 	char		*prompt;
-	char		*color_prompt;
 
 	(void)argc;
 	(void)argv;
@@ -30,6 +29,7 @@ int	main(int argc, char **argv, char **env)
 	up_env(&lst_env);
 	if (lst_env == NULL)
 		return (1);
+	prompt = initial_print(env);
 	read_input(prompt, &lst_env);
 	return (0);
 }

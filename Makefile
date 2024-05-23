@@ -42,7 +42,7 @@ $(INCLUDE_PATH)/process_ast.h\
 $(INCLUDE_PATH)/errors.h\
 $(INCLUDE_PATH)/print_boot.h\
 
-COMPILER = $(CC)
+CC = clang
 
 CFLAGS = -Wall -Werror -Wextra -g
 LIB_FLAGS = -Llibft -lft
@@ -62,7 +62,7 @@ make-library-debug:
 	$(MAKE) -C $(LIBFT_PATH) debug
 
 $(NAME): $(OBJS) $(HEADER)
-	$(COMPILER) $(CFLAGS) $(OBJS) $(LIB_FLAGS) $(EXEC-NAME-FLAG) $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB_FLAGS) $(EXEC-NAME-FLAG) $(NAME)
 
 clean:
 	$(MAKE) clean -C $(LIBFT_PATH)

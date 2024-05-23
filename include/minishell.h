@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:47 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:12:49 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:05:04 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "pipes.h"
 # include "process_ast.h"
 # include "errors.h"
+# include "print_boot.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <errno.h>
