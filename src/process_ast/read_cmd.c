@@ -46,8 +46,9 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 		porcess_cmd(node, str_pipe->lst_env);
 }
 
-void	read_pipe(t_ast *node, t_lst_env **lst_env)
+void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
 {
+	pipe(str_pipe->fd);
 	(void)node;
 	(void)lst_env;
 }
