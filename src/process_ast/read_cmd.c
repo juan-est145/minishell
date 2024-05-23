@@ -21,9 +21,9 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 {
 	if (ft_strncmp(node->args, "pwd\0", 4) == 0 || ft_strncmp(node->args,
 			"pwd ", 4) == 0)
-		ft_getpwd(node->args, node);
+		ft_getpwd(node->args, node, str_pipe->fd);
 	else if (ft_strncmp(node->args, "echo ", 4) == 0)
-		ft_echo(node->args, node);
+		ft_echo(node->args, node, str_pipe->fd);
 	else if (ft_strncmp(node->args, "env\0", 4) == 0)
 		ft_env(str_pipe->lst_env, node->args, node, str_pipe->fd);
 	else if (ft_strncmp(node->args, "export ", 7) == 0)
