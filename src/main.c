@@ -105,7 +105,6 @@ static t_token_list	*start_token_list(char *text, t_lst_env **lst_env)
 
 static t_ast	*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe)
 {
-	
 	if (node == NULL)
 		return (NULL);
 	else if (node->parse_identifier == PARSE_CMD)

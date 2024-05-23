@@ -16,6 +16,8 @@
 typedef struct s_ast		t_ast;
 typedef struct s_lst_env	t_lst_env;
 
-void						read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt);
-void						read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe);
+void						read_cmd(t_ast *node, t_pipex *str_pipe,
+								char *prompt);
+void						read_pipe(t_ast *node, t_lst_env **lst_env,
+								t_pipex *str_pipe);
 #endif

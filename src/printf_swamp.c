@@ -13,7 +13,7 @@
 #include "../include/minishell.h"
 #include "../libft/libft.h"
 
-void	print_swamp()
+void	print_swamp(void)
 {
 	printf("           ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡶⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n");
 	printf("        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠟⠀⣠⠙⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⣶⣦⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀\n");

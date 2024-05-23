@@ -50,7 +50,7 @@ int						ignore_space(char *text, int i);
 
 int						redirect_stdout(t_ast *node);
 
-void					print_swamp();
+void					print_swamp(void);
 
 // BUILTINGS
 void					ft_getpwd(char *text, t_ast *node);

@@ -22,12 +22,11 @@
 
 typedef struct s_pipex
 {
-	char			**path_seg;	// VARIABLE DE ENTORNO, SEGMENTADA
-	int				fd[2];		// FD DE LA FUNCION PIPE
+	char			**path_seg;
+	int				fd[2];
 	t_ast			*ast_head;
 	t_lst_env		**lst_env;
-}	t_pipex;					// APODO
-
+}	t_pipex;					
 // ARCHIVE_UTILS_CMD
 void	up_env(t_lst_env **lst_env);
 char	*create_path(t_pipex *str_pipes, char **comand, int i);
