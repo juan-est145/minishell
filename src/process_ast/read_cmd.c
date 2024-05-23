@@ -6,16 +6,16 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:06:16 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:21:38 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes);
-char	*search_comand(t_pipex *str_pipes, char **comand);
-void	porcess_cmd(t_ast *node, t_lst_env **lst_env);
+static void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes);
+static char	*search_comand(t_pipex *str_pipes, char **comand);
+static void	porcess_cmd(t_ast *node, t_lst_env **lst_env);
 
 void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 {
@@ -46,14 +46,14 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 		porcess_cmd(node, str_pipe->lst_env);
 }
 
-void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
+static void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
 {
 	pipe(str_pipe->fd);
 	(void)node;
 	(void)lst_env;
 }
 
-void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
+static void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
 {
 	t_pipex	str_pipes;
 	pid_t	pid;
@@ -77,7 +77,7 @@ void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
 	waitpid(pid, NULL, CHILD);
 }
 
-void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes)
+static void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes)
 {
 	t_lst_env	*temp;
 
@@ -90,7 +90,7 @@ void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes)
 	}
 }
 
-char	*search_comand(t_pipex *str_pipes, char **comand)
+static char	*search_comand(t_pipex *str_pipes, char **comand)
 {
 	int		i;
 	char	*dir_cmd;

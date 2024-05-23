@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:04:09 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:24:31 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,16 @@ static t_ast		*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe);
 int	main(int argc, char **argv, char **env)
 {
 	t_lst_env	*lst_env;
-	int			i;
 	char		*prompt;
 	char		*color_prompt;
 
 	(void)argc;
 	(void)argv;
-	i = 0;
-	prompt = ft_getenv(env, "LOGNAME=");
-	prompt = ft_strjoin(prompt, "$ ");
-	color_prompt = ft_strjoin(GREEN, prompt);
-	free(prompt);
-	prompt = ft_strjoin(color_prompt, RESET);
-	free(color_prompt);
-	while (i++ < 1500)
-		printf("\n");
-	print_swamp();
 	lst_env = init_lst_env(env);
 	up_env(&lst_env);
 	if (lst_env == NULL)
 		return (1);
 	read_input(prompt, &lst_env);
-	free_lst_env(lst_env);
-	free(prompt);
 	return (0);
 }
 
@@ -105,7 +92,6 @@ static t_token_list	*start_token_list(char *text, t_lst_env **lst_env)
 
 static t_ast	*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe)
 {
-	
 	if (node == NULL)
 		return (NULL);
 	else if (node->parse_identifier == PARSE_CMD)

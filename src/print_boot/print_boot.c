@@ -3,17 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   printf_swamp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:06:54 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/20 10:22:13 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:24:41 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../libft/libft.h"
 
-void	print_swamp()
+void	initial_print(char **env)
+{
+	int		i;
+	char	*prompt;
+	char	*color_prompt;
+
+	i = 0;
+	prompt = ft_getenv(env, "LOGNAME=");
+	prompt = ft_strjoin(prompt, "$ ");
+	color_prompt = ft_strjoin(GREEN, prompt);
+	free(prompt);
+	prompt = ft_strjoin(color_prompt, RESET);
+	free(color_prompt);
+	while (i++ < 1500)
+		printf("\n");
+	print_swamp();
+}
+
+void	print_swamp(void)
 {
 	printf("           ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡶⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n");
 	printf("        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠟⠀⣠⠙⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⣶⣦⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀\n");

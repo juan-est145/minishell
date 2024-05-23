@@ -7,11 +7,11 @@ PARSE_PATH = $(SRC_PATH)/parse
 TOKEN_PATH = $(SRC_PATH)/token
 PROCESS_AST_PATH = $(SRC_PATH)/process_ast
 ERRORS_PATH = $(SRC_PATH)/errors
+PRINT_BOOT = $(SRC_PATH)/print_boot
 
 NAME = minishell
 
 SCRS = $(SRC_PATH)/main.c\
-$(SRC_PATH)/printf_swamp.c\
 $(TOKEN_PATH)/tokenizer.c\
 $(TOKEN_PATH)/tokenizer_utils.c\
 $(TOKEN_PATH)/tokenizer_utils2.c\
@@ -30,6 +30,7 @@ $(BUILTINGS_PATH)/builtings2.c\
 $(PROCESS_AST_PATH)/read_cmd.c\
 $(PROCESS_AST_PATH)/archive_utils_cmd.c\
 $(ERRORS_PATH)/print_error_msg.c\
+$(PRINT_BOOT)/print_boot.c
 
 OBJS = $(SCRS:.c=.o)
 
@@ -39,6 +40,7 @@ $(INCLUDE_PATH)/parse.h\
 $(INCLUDE_PATH)/token.h\
 $(INCLUDE_PATH)/process_ast.h\
 $(INCLUDE_PATH)/errors.h\
+$(INCLUDE_PATH)/print_boot.h\
 
 COMPILER = $(CC)
 

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:12:23 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:28:51 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ char					*get_pwd_cd(t_lst_env *lst_env);
 int						ignore_space(char *text, int i);
 
 int						redirect_stdout(t_ast *node);
-
-void					print_swamp();
 
 // BUILTINGS
 void					ft_getpwd(char *text, t_ast *node);
