@@ -40,7 +40,7 @@ $(INCLUDE_PATH)/token.h\
 $(INCLUDE_PATH)/process_ast.h\
 $(INCLUDE_PATH)/errors.h\
 
-COMPILER = $(CC)
+COMPILER = clang
 
 CFLAGS = -Wall -Werror -Wextra -g
 LIB_FLAGS = -Llibft -lft

@@ -13,7 +13,7 @@
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-int	redirect_stdout(t_ast *node)
+int	redirect_stdout(t_ast *node, int fd_pipe[2])
 {
 	int	fd;
 
@@ -29,7 +29,12 @@ int	redirect_stdout(t_ast *node)
 		{
 			fd = redirected_destination(&node->redirections);
 			dup2(fd, STDOUT_FILENO);
+			return (fd);
 		}
+	}
+	if (fd_pipe != NULL)
+	{
+		dup2(fd_pipe[WRITE], STDOUT_FILENO);
 	}
 	return (fd);
 }

@@ -13,9 +13,9 @@
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes);
-char	*search_comand(t_pipex *str_pipes, char **comand);
-void	porcess_cmd(t_ast *node, t_lst_env **lst_env);
+static void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes);
+static char	*search_comand(t_pipex *str_pipes, char **comand);
+static void	porcess_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe);
 
 void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 {
@@ -25,7 +25,7 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 	else if (ft_strncmp(node->args, "echo ", 4) == 0)
 		ft_echo(node->args, node);
 	else if (ft_strncmp(node->args, "env\0", 4) == 0)
-		ft_env(str_pipe->lst_env, node->args, node);
+		ft_env(str_pipe->lst_env, node->args, node, str_pipe->fd);
 	else if (ft_strncmp(node->args, "export ", 7) == 0)
 	{
 		ft_export(node->args, str_pipe->lst_env);
@@ -43,17 +43,18 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 	else if (ft_strncmp(node->args, "exit", 4) == 0)
 		ft_exit(&str_pipe->ast_head, *str_pipe->lst_env, prompt);
 	else
-		porcess_cmd(node, str_pipe->lst_env);
+		porcess_cmd(node, str_pipe->lst_env, str_pipe);
 }
 
 void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
 {
-	pipe(str_pipe->fd);
+	if (str_pipe->fd == NULL)
+		pipe(str_pipe->fd);
 	(void)node;
 	(void)lst_env;
 }
 
-void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
+static void	porcess_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
 {
 	t_pipex	str_pipes;
 	pid_t	pid;
@@ -62,7 +63,7 @@ void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
 	int		fd;
 
 	pid = fork();
-	fd = redirect_stdout(node);
+	fd = redirect_stdout(node, str_pipe->fd);
 	if (pid == CHILD)
 	{
 		command = ft_split(node->args, ' ');
@@ -77,7 +78,7 @@ void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
 	waitpid(pid, NULL, CHILD);
 }
 
-void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes)
+static void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes)
 {
 	t_lst_env	*temp;
 
@@ -90,7 +91,7 @@ void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes)
 	}
 }
 
-char	*search_comand(t_pipex *str_pipes, char **comand)
+static char	*search_comand(t_pipex *str_pipes, char **comand)
 {
 	int		i;
 	char	*dir_cmd;
