@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/22 11:40:15 by mfuente-         ###   ########.fr       */
+/*   Created: 2024/05/23 13:12:47 by juestrel          #+#    #+#             */
+/*   Updated: 2024/05/23 16:05:04 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "pipes.h"
 # include "process_ast.h"
 # include "errors.h"
+# include "print_boot.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <errno.h>

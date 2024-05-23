@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error_msg.c                                  :+:      :+:    :+:   */
+/*   print_boot.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 13:07:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:07:03 by juestrel         ###   ########.fr       */
+/*   Created: 2024/05/23 15:26:18 by juestrel          #+#    #+#             */
+/*   Updated: 2024/05/23 16:06:10 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include "../../libft/libft.h"
+#ifndef PRINT_BOOT_H
+# define PRINT_BOOT_H
 
-void	error_msgs(t_errors error)
-{
-	if (error == TOKEN_MALLOC_FAILURE)
-		printf("Error with malloc in token list, exiting program\n");
-	else if (error == AST_MALLOC_FAILURE)
-		printf("Error with malloc in AST, exiting program\n");
-	exit(1);
-}
+char	*initial_print(char **env);
+void	print_swamp(void);
+#endif

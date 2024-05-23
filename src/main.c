@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 15:38:24 by user42            #+#    #+#             */
-/*   Updated: 2024/05/22 11:47:55 by mfuente-         ###   ########.fr       */
+/*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
+/*   Updated: 2024/05/23 16:05:22 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,16 @@ static t_ast		*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe);
 int	main(int argc, char **argv, char **env)
 {
 	t_lst_env	*lst_env;
-	int			i;
 	char		*prompt;
-	char		*color_prompt;
 
 	(void)argc;
 	(void)argv;
-	i = 0;
-	prompt = ft_getenv(env, "LOGNAME=");
-	prompt = ft_strjoin(prompt, "$ ");
-	color_prompt = ft_strjoin(GREEN, prompt);
-	free(prompt);
-	prompt = ft_strjoin(color_prompt, RESET);
-	free(color_prompt);
-	while (i++ < 1500)
-		printf("\n");
-	print_swamp();
 	lst_env = init_lst_env(env);
 	up_env(&lst_env);
 	if (lst_env == NULL)
 		return (1);
+	prompt = initial_print(env);
 	read_input(prompt, &lst_env);
-	free_lst_env(lst_env);
-	free(prompt);
 	return (0);
 }
 

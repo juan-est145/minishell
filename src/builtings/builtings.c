@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 15:12:06 by user42            #+#    #+#             */
-/*   Updated: 2024/05/16 15:25:24 by mfuente-         ###   ########.fr       */
+/*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
+/*   Updated: 2024/05/23 13:08:28 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_env(t_lst_env **lst_env, char *text, t_ast *node, int fd_pipe[2])
 	t_lst_env	*temp;
 	int			fd;
 
-	fd = redirect_stdout(node, fd_pipe[2]);
+	fd = redirect_stdout(node, fd_pipe);
 	temp = *lst_env;
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)

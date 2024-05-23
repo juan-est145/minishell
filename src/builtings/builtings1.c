@@ -19,7 +19,7 @@ void	ft_getpwd(char *text, t_ast *node, int fd_pipe[2])
 	char	**split;
 	int		fd;
 
-	fd = redirect_stdout(node, fd_pipe[2]);
+	fd = redirect_stdout(node, fd_pipe);
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)
 	{
@@ -75,7 +75,7 @@ void	ft_echo(char *text, t_ast *node, int fd_pipe[2])
 	char	delimiter;
 	int		fd;
 
-	fd = redirect_stdout(node, fd_pipe[2]);
+	fd = redirect_stdout(node, fd_pipe);
 	i = 4;
 	open = false;
 	flag = false;

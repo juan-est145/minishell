@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 10:17:28 by user42            #+#    #+#             */
-/*   Updated: 2024/05/20 10:32:06 by mfuente-         ###   ########.fr       */
+/*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
+/*   Updated: 2024/05/23 15:28:51 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ char					*get_pwd_cd(t_lst_env *lst_env);
 int						ignore_space(char *text, int i);
 
 int						redirect_stdout(t_ast *node, int fd_pipe[2]);
-
-void					print_swamp(void);
 
 // BUILTINGS
 void					ft_getpwd(char *text, t_ast *node, int fd_pipe[2]);

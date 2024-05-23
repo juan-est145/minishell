@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 11:57:33 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/22 11:50:32 by mfuente-         ###   ########.fr       */
+/*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
+/*   Updated: 2024/05/23 16:07:26 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 
 void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
 {
-	if (str_pipe->fd == NULL)
+	if (str_pipe->fd[0] == '\0')
 		pipe(str_pipe->fd);
 	(void)node;
 	(void)lst_env;
