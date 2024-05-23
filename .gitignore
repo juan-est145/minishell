@@ -1,6 +1,10 @@
 # Mine
 minishell
 .vscode
+*.txt
+!bug.txt
+!env-cases.txt
+!log.txt
 
 # Prerequisites
 *.d
