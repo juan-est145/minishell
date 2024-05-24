@@ -12,6 +12,7 @@ SET_UP = $(SRC_PATH)/set_up
 NAME = minishell
 
 SCRS = $(SRC_PATH)/main.c\
+$(SRC_PATH)/read_input.c\
 $(TOKEN_PATH)/tokenizer.c\
 $(TOKEN_PATH)/tokenizer_utils.c\
 $(TOKEN_PATH)/tokenizer_utils2.c\

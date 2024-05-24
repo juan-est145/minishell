@@ -6,14 +6,14 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/24 14:26:21 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/24 14:49:41 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../libft/libft.h"
 
-static void			read_input(char *prompt, t_lst_env **lst_env);
+static void			process_input(char *prompt, t_lst_env **lst_env);
 static bool			is_input_empty(char *text);
 static t_token_list	*start_token_list(char *text, t_lst_env **lst_env);
 static t_ast		*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe);
@@ -31,11 +31,11 @@ int	main(int argc, char **argv, char **env)
 	if (lst_env == NULL)
 		return (1);
 	prompt = initial_print(env);
-	read_input(prompt, &lst_env);
+	process_input(prompt, &lst_env);
 	return (0);
 }
 
-static void	read_input(char *prompt, t_lst_env **lst_env)
+static void	process_input(char *prompt, t_lst_env **lst_env)
 {
 	char			*text;
 	t_token_list	*head;
@@ -46,10 +46,7 @@ static void	read_input(char *prompt, t_lst_env **lst_env)
 	while (1)
 	{
 		syntax_error = false;
-		text = readline(prompt);
-		if (text == NULL)
-			exit(0);
-		add_history(text);
+		text = read_input(prompt, lst_env);
 		if (is_input_empty(text) == true)
 			continue ;
 		head = start_token_list(text, lst_env);

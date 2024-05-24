@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:47 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/24 12:01:09 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/24 14:50:01 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@
 # define BOLD		"\033[1m"
 # define RESET   	"\x1b[0m"
 
+char	*read_input(char *prompt, t_lst_env **lst_env);
 #endif
