@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:06:54 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/24 12:27:02 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/24 14:18:14 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,12 @@ void	prepare_signals(void)
 void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
-		printf("Esto ha funcionado");
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 void	print_swamp(void)
