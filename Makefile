@@ -31,7 +31,7 @@ $(BUILTINGS_PATH)/builtings2.c\
 $(PROCESS_AST_PATH)/read_cmd.c\
 $(PROCESS_AST_PATH)/archive_utils_cmd.c\
 $(ERRORS_PATH)/print_error_msg.c\
-$(SET_UP)/print_boot.c
+$(SET_UP)/set_up.c
 
 OBJS = $(SCRS:.c=.o)
 
