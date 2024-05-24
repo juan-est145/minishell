@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_boot.c                                       :+:      :+:    :+:   */
+/*   set_up.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:06:54 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/24 14:57:45 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/24 15:54:10 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
+
+void	my_sigemptyset(sigset_t *set);
 
 char	*initial_print(char **env)
 {
@@ -37,10 +39,24 @@ void	prepare_signals(void)
 	struct sigaction	sa;
 
 	sa.sa_handler = &signal_handler;
-	sigemptyset(&sa.sa_mask);
+	my_sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
+}
+
+void	my_sigemptyset(sigset_t *set)
+{
+	unsigned long	i;
+	unsigned long	set_size;
+
+	i = 0;
+	set_size = sizeof(*set) / sizeof(((sigset_t *)0)->__val[0]);
+	while (i < set_size)
+	{
+		set->__val[i] = 0;
+		i++;
+	}
 }
 
 void	signal_handler(int signum)
