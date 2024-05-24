@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/24 12:25:28 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/24 14:26:21 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	read_input(char *prompt, t_lst_env **lst_env)
 	{
 		syntax_error = false;
 		text = readline(prompt);
+		if (text == NULL)
+			exit(0);
 		add_history(text);
 		if (is_input_empty(text) == true)
 			continue ;
