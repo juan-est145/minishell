@@ -43,7 +43,7 @@ $(INCLUDE_PATH)/process_ast.h\
 $(INCLUDE_PATH)/errors.h\
 $(INCLUDE_PATH)/set_up.h\
 
-CC = clang
+CC = $(shell which cc clang gcc | head -n 1)
 
 CFLAGS = -Wall -Werror -Wextra -g
 LIB_FLAGS = -Llibft -lft
