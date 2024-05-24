@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:06:54 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/24 12:00:44 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/24 12:27:02 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ char	*initial_print(char **env)
 		printf("\n");
 	print_swamp();
 	return (prompt);
+}
+
+void	prepare_signals(void)
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = &signal_handler;
+	sa.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &sa, NULL);
+}
+
+void	signal_handler(int signum)
+{
+	if (signum == SIGINT)
+		printf("Esto ha funcionado");
 }
 
 void	print_swamp(void)
