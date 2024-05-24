@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_boot.h                                       :+:      :+:    :+:   */
+/*   set_up.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:26:18 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 16:06:10 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:59:12 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_BOOT_H
-# define PRINT_BOOT_H
+#ifndef SET_UP_H
+# define SET_UP_H
 
 char	*initial_print(char **env);
 void	print_swamp(void);
