@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:06:54 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/24 14:35:25 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/24 14:57:45 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	prepare_signals(void)
 	struct sigaction	sa;
 
 	sa.sa_handler = &signal_handler;
+	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
