@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:00:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/25 13:23:31 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:07:02 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	redirected_destination(t_redirections **node)
 	int				fd;
 
 	temp = *node;
-	fd = -1;
+	fd = -2;
 	while (temp != NULL)
 	{
 		if (temp->redirection_type == REDIR_INSERT)
