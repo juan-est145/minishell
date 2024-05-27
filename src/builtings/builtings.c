@@ -14,13 +14,13 @@
 #include "../../libft/libft.h"
 
 // IMITA EL COMANDO ENV
-void	ft_env(t_lst_env **lst_env, char *text, t_ast *node)
+void	ft_env(t_lst_env **lst_env, char *text, t_ast *node, int fd_pipe[2])
 {
 	char		**split;
 	t_lst_env	*temp;
 	int			fd;
 
-	fd = redirect_stdout(node);
+	fd = redirect_stdout(node, fd_pipe);
 	temp = *lst_env;
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)

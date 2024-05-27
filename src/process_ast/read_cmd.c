@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 16:07:26 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:29:13 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 static void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes);
 static char	*search_comand(t_pipex *str_pipes, char **comand);
-static void	porcess_cmd(t_ast *node, t_lst_env **lst_env);
+static void	porcess_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe);
 
 void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 {
 	if (ft_strncmp(node->args, "pwd\0", 4) == 0 || ft_strncmp(node->args,
 			"pwd ", 4) == 0)
-		ft_getpwd(node->args, node);
+		ft_getpwd(node->args, node, str_pipe->fd);
 	else if (ft_strncmp(node->args, "echo ", 4) == 0)
-		ft_echo(node->args, node);
-	else if (ft_strncmp(node->args, "env\0", 4) == 0)
-		ft_env(str_pipe->lst_env, node->args, node);
+		ft_echo(node->args, node, str_pipe->fd);
+	else if (ft_strncmp(node->args, "e5nv\0", 4) == 0)
+		ft_env(str_pipe->lst_env, node->args, node, str_pipe->fd);
 	else if (ft_strncmp(node->args, "export ", 7) == 0)
 	{
 		ft_export(node->args, str_pipe->lst_env);
@@ -43,17 +43,22 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 	else if (ft_strncmp(node->args, "exit", 4) == 0)
 		ft_exit(&str_pipe->ast_head, *str_pipe->lst_env, prompt);
 	else
-		porcess_cmd(node, str_pipe->lst_env);
+		porcess_cmd(node, str_pipe->lst_env, str_pipe);
 }
 
-void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
+void	read_pipe(t_ast *node, t_lst_env **lst_env,
+					t_pipex *str_pipe, char *prompt)
 {
-	pipe(str_pipe->fd);
-	(void)node;
+	if (str_pipe->fd[0] != READ && str_pipe->fd[1] != WRITE)
+		pipe(str_pipe->fd);
+	read_cmd(node->left, str_pipe, prompt);
+	read_cmd(node->right, str_pipe, prompt);
+	close(str_pipe->fd[READ]);
+	close(str_pipe->fd[WRITE]);
 	(void)lst_env;
 }
 
-static void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
+static void	porcess_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
 {
 	t_pipex	str_pipes;
 	pid_t	pid;
@@ -62,9 +67,10 @@ static void	porcess_cmd(t_ast *node, t_lst_env **lst_env)
 	int		fd;
 
 	pid = fork();
-	fd = redirect_stdout(node);
+	fd = 0;
 	if (pid == CHILD)
 	{
+		fd = redirect_stdout(node, str_pipe->fd);
 		command = ft_split(node->args, ' ');
 		segmention_path(lst_env, &str_pipes);
 		dir_cmd = search_comand(&str_pipes, command);

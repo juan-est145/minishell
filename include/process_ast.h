@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_ast.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:14:04 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:14:05 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/24 10:45:58 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ typedef struct s_lst_env	t_lst_env;
 void						read_cmd(t_ast *node, t_pipex *str_pipe,
 								char *prompt);
 void						read_pipe(t_ast *node, t_lst_env **lst_env,
-								t_pipex *str_pipe);
+								t_pipex *str_pipe, char *prompt);
 #endif

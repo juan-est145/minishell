@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_up.h                                           :+:      :+:    :+:   */
+/*   archive_utils_cmd1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 16:20:22 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/27 16:20:23 by mfuente-         ###   ########.fr       */
+/*   Created: 2024/05/23 17:54:43 by mfuente-          #+#    #+#             */
+/*   Updated: 2024/05/27 14:57:36 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SET_UP_H
-# define SET_UP_H
-# ifndef _POSIX_C_SOURCE
-#  define _POSIX_C_SOURCE 200809L
-# endif
+#include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
-# include <signal.h>
+void	print_pipes(int fd[2])
+{
+	char	*line;
 
-char	*initial_print(char **env);
-void	print_swamp(void);
-void	prepare_signals(void);
-void	signal_handler(int signum);
-#endif
+	if (fd[0] == '\0')
+	{
+		line = get_next_line(fd[READ]);
+		while (line != NULL)
+		{
+			free(line);
+			line = get_next_line(fd[READ]);
+		}
+	}
+}

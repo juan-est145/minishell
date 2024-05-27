@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 15:28:51 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:58:05 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,18 @@ void					aux(char **matr, char const *s, char c);
 int						ntimes(char const *s, char c);
 int						ft_lst_contain_change(t_lst_env **lst, char *search);
 int						ft_lst_contain(t_lst_env **lst, char *search);
-t_lst_env				*ft_lstnew_ms(char *content);	
+t_lst_env				*ft_lstnew_ms(char *content);
 char					*get_pwd_cd(t_lst_env *lst_env);
 int						ignore_space(char *text, int i);
 
-int						redirect_stdout(t_ast *node);
+int						redirect_stdout(t_ast *node, int fd_pipe[2]);
+int						here_doc(char *limit);
 
 // BUILTINGS
-void					ft_getpwd(char *text, t_ast *node);
-void					ft_echo(char *text, t_ast *node);
-void					ft_env(t_lst_env **lst_env, char *text, t_ast *node);
+void					ft_getpwd(char *text, t_ast *node, int fd_pipe[2]);
+void					ft_echo(char *text, t_ast *node, int fd_pipe[2]);
+void					ft_env(t_lst_env **lst_env, char *text,
+							t_ast *node, int fd_pipe[2]);
 void					ft_export(char *new, t_lst_env **lst_env);
 void					ft_unset(char *text, t_lst_env **lst_env);
 bool					ft_unset_normi(t_lst_env **temp, bool flag,

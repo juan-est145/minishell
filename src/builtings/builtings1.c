@@ -6,20 +6,20 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/18 20:29:51 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/25 10:57:42 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-void	ft_getpwd(char *text, t_ast *node)
+void	ft_getpwd(char *text, t_ast *node, int fd_pipe[2])
 {
 	char	*pwd;
 	char	**split;
 	int		fd;
 
-	fd = redirect_stdout(node);
+	fd = redirect_stdout(node, fd_pipe);
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)
 	{
@@ -67,7 +67,7 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 }
 
 // IMITA LA FUNCION ECHO
-void	ft_echo(char *text, t_ast *node)
+void	ft_echo(char *text, t_ast *node, int fd_pipe[2])
 {
 	int		i;
 	bool	open;
@@ -75,7 +75,7 @@ void	ft_echo(char *text, t_ast *node)
 	char	delimiter;
 	int		fd;
 
-	fd = redirect_stdout(node);
+	fd = redirect_stdout(node, fd_pipe);
 	i = 4;
 	open = false;
 	flag = false;
