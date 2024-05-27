@@ -1,10 +1,10 @@
 # Mine
 minishell
-.vscode
 *.txt
 !bug.txt
 !env-cases.txt
 !log.txt
+minishell_evaluation_page.pdf
 
 # Prerequisites
 *.d

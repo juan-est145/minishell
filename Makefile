@@ -7,11 +7,12 @@ PARSE_PATH = $(SRC_PATH)/parse
 TOKEN_PATH = $(SRC_PATH)/token
 PROCESS_AST_PATH = $(SRC_PATH)/process_ast
 ERRORS_PATH = $(SRC_PATH)/errors
+SET_UP = $(SRC_PATH)/set_up
 
 NAME = minishell
 
 SCRS = $(SRC_PATH)/main.c\
-$(SRC_PATH)/printf_swamp.c\
+$(SRC_PATH)/read_input.c\
 $(TOKEN_PATH)/tokenizer.c\
 $(TOKEN_PATH)/tokenizer_utils.c\
 $(TOKEN_PATH)/tokenizer_utils2.c\
@@ -30,6 +31,7 @@ $(BUILTINGS_PATH)/builtings2.c\
 $(PROCESS_AST_PATH)/read_cmd.c\
 $(PROCESS_AST_PATH)/archive_utils_cmd.c\
 $(ERRORS_PATH)/print_error_msg.c\
+$(SET_UP)/set_up.c
 
 OBJS = $(SCRS:.c=.o)
 
@@ -39,8 +41,9 @@ $(INCLUDE_PATH)/parse.h\
 $(INCLUDE_PATH)/token.h\
 $(INCLUDE_PATH)/process_ast.h\
 $(INCLUDE_PATH)/errors.h\
+$(INCLUDE_PATH)/set_up.h\
 
-COMPILER = $(CC)
+CC = $(shell which cc clang gcc | head -n 1)
 
 CFLAGS = -Wall -Werror -Wextra -g
 LIB_FLAGS = -Llibft -lft
@@ -60,7 +63,7 @@ make-library-debug:
 	$(MAKE) -C $(LIBFT_PATH) debug
 
 $(NAME): $(OBJS) $(HEADER)
-	$(COMPILER) $(CFLAGS) $(OBJS) $(LIB_FLAGS) $(EXEC-NAME-FLAG) $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB_FLAGS) $(EXEC-NAME-FLAG) $(NAME)
 
 clean:
 	$(MAKE) clean -C $(LIBFT_PATH)

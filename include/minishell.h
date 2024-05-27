@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 11:41:38 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/05/22 11:40:15 by mfuente-         ###   ########.fr       */
+/*   Created: 2024/05/23 13:12:47 by juestrel          #+#    #+#             */
+/*   Updated: 2024/05/24 14:50:01 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "pipes.h"
 # include "process_ast.h"
 # include "errors.h"
+# include "set_up.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <errno.h>
@@ -31,4 +32,5 @@
 # define BOLD		"\033[1m"
 # define RESET   	"\x1b[0m"
 
+char	*read_input(char *prompt, t_lst_env **lst_env);
 #endif
