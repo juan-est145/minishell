@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/27 12:31:32 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:29:13 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 		porcess_cmd(node, str_pipe->lst_env, str_pipe);
 }
 
-void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe, char *prompt)
+void	read_pipe(t_ast *node, t_lst_env **lst_env,
+					t_pipex *str_pipe, char *prompt)
 {
 	if (str_pipe->fd[0] != READ && str_pipe->fd[1] != WRITE)
 		pipe(str_pipe->fd);

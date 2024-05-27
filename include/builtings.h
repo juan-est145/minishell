@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/25 12:55:39 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:58:05 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int						here_doc(char *limit);
 // BUILTINGS
 void					ft_getpwd(char *text, t_ast *node, int fd_pipe[2]);
 void					ft_echo(char *text, t_ast *node, int fd_pipe[2]);
-void					ft_env(t_lst_env **lst_env, char *text, t_ast *node, int fd_pipe[2]);
+void					ft_env(t_lst_env **lst_env, char *text,
+							t_ast *node, int fd_pipe[2]);
 void					ft_export(char *new, t_lst_env **lst_env);
 void					ft_unset(char *text, t_lst_env **lst_env);
 bool					ft_unset_normi(t_lst_env **temp, bool flag,

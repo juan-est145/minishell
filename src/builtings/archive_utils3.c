@@ -6,35 +6,30 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/27 12:39:11 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:27:52 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
+static int	redirect_stdout_aux(t_ast *node, int fd);
+
 int	redirect_stdout(t_ast *node, int fd_pipe[2])
 {
 	int	fd;
 
 	fd = 0;
-	if (node->redirections->redirection_type == REDIR_TERMINAL_LINES)
+	if ((node->redirections != NULL)
+		&& (node->redirections->redirection_type == REDIR_TERMINAL_LINES))
 	{
 		fd = here_doc(node->redirections->file_location);
 		dup2(fd, STDIN_FILENO);
 		return (0);
 	}
-	if (node->redirections != NULL && fd == 0)
-	{
-			if (redirected_destination(&node->redirections) == -1)
-			{
-				printf("ERROR en la redireccion del archivo\n");
-				return (-1);
-			}
-			fd = redirected_destination(&node->redirections);
-			dup2(fd, STDOUT_FILENO);
-			return (fd);
-	}
+	fd = redirect_stdout_aux(node, fd);
+	if (fd != 0)
+		return (fd);
 	if (fd_pipe[0] == READ && fd_pipe[1] == WRITE)
 	{
 		dup2(fd_pipe[WRITE], STDOUT_FILENO);
@@ -43,7 +38,23 @@ int	redirect_stdout(t_ast *node, int fd_pipe[2])
 	return (fd);
 }
 
-static int	ft_strstr(char	*limit, char *escrito)
+static int	redirect_stdout_aux(t_ast *node, int fd)
+{
+	if (node->redirections != NULL && fd == 0)
+	{
+		if (redirected_destination(&node->redirections) == -1)
+		{
+			printf("ERROR en la redireccion del archivo\n");
+			return (-1);
+		}
+		fd = redirected_destination(&node->redirections);
+		dup2(fd, STDOUT_FILENO);
+		return (fd);
+	}
+	return (0);
+}
+
+static int	ft_strstr(char *limit, char *escrito)
 {
 	int	i;
 
@@ -57,7 +68,7 @@ static int	ft_strstr(char	*limit, char *escrito)
 	return (0);
 }
 
-int	here_doc(char	*limit)
+int	here_doc(char *limit)
 {
 	bool	continuar;
 	char	*buffer;
