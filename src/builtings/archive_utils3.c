@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/27 10:44:12 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:39:11 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	ft_strstr(char	*limit, char *escrito)
 	}
 	return (0);
 }
-//PARA EL ECHO CREO QUE NO FUNCIONARIA
+
 int	here_doc(char	*limit)
 {
 	bool	continuar;
