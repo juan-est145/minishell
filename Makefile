@@ -29,6 +29,7 @@ $(BUILTINGS_PATH)/builtings1.c\
 $(BUILTINGS_PATH)/builtings2.c\
 $(PROCESS_AST_PATH)/read_cmd.c\
 $(PROCESS_AST_PATH)/archive_utils_cmd.c\
+$(PROCESS_AST_PATH)/archive_utils_cmd1.c\
 $(ERRORS_PATH)/print_error_msg.c\
 $(PRINT_BOOT)/print_boot.c
 

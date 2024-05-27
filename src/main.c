@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 16:05:22 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/24 10:48:40 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	read_input(char *prompt, t_lst_env **lst_env)
 		if (str_pipe.ast_head == NULL && errno == ENOMEM)
 			error_msgs(AST_MALLOC_FAILURE);
 		execute_ast(str_pipe.ast_head, prompt, &str_pipe);
+		print_pipes( str_pipe.fd);
 		clean_ast(str_pipe.ast_head);
 	}
 }
@@ -99,7 +100,7 @@ static t_ast	*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe)
 	else if (node->parse_identifier == PARSE_PIPE
 		&& node->left->parse_identifier == PARSE_CMD
 		&& node->right->parse_identifier == PARSE_CMD)
-		return (read_pipe(node, str_pipe->lst_env, str_pipe), node);
+		return (read_pipe(node, str_pipe->lst_env, str_pipe, prompt), node);
 	execute_ast(node->left, prompt, str_pipe);
 	execute_ast(node->right, prompt, str_pipe);
 	return (node);

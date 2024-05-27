@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_ast.h                                      :+:      :+:    :+:   */
+/*   archive_utils_cmd1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 13:14:04 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/24 10:45:58 by mfuente-         ###   ########.fr       */
+/*   Created: 2024/05/23 17:54:43 by mfuente-          #+#    #+#             */
+/*   Updated: 2024/05/24 19:03:43 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROCESS_AST_H
-# define PROCESS_AST_H
+#include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
-typedef struct s_ast		t_ast;
-typedef struct s_lst_env	t_lst_env;
-
-void						read_cmd(t_ast *node, t_pipex *str_pipe,
-								char *prompt);
-void						read_pipe(t_ast *node, t_lst_env **lst_env,
-								t_pipex *str_pipe, char *prompt);
-#endif
+void	print_pipes(int fd[2])
+{
+	char	*line;
+	printf("-------------------\n");
+	if (fd[0] == '\0')
+	{
+		printf("ENTRA");
+		line = get_next_line(fd[READ]);
+ 		while (line != NULL)
+		{
+			free(line);
+			line = get_next_line(fd[READ]);
+		}
+	}
+}
