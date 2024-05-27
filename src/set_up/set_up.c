@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_up.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:06:54 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/24 15:54:10 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/05/27 13:41:14 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	signal_handler(int signum)
 		rl_redisplay();
 	}
 	else if (signum == SIGQUIT)
-		exit(0);
+		close(STDIN_FILENO);
 }
 
 void	print_swamp(void)
