@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:19:15 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:01:47 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	process_input(char *prompt, t_lst_env **lst_env)
 	t_pipex			str_pipe;
 	bool			syntax_error;
 
-	str_pipe.lst_env = lst_env;
+	str_pipe = init_str_pipe(lst_env);
 	while (1)
 	{
 		syntax_error = false;
@@ -58,7 +58,6 @@ static void	process_input(char *prompt, t_lst_env **lst_env)
 		if (str_pipe.ast_head == NULL && errno == ENOMEM)
 			error_msgs(AST_MALLOC_FAILURE);
 		execute_ast(str_pipe.ast_head, prompt, &str_pipe);
-		print_pipes(str_pipe.fd);
 		clean_ast(str_pipe.ast_head);
 	}
 }

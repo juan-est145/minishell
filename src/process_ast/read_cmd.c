@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/27 13:29:13 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:56:03 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 		ft_getpwd(node->args, node, str_pipe->fd);
 	else if (ft_strncmp(node->args, "echo ", 4) == 0)
 		ft_echo(node->args, node, str_pipe->fd);
-	else if (ft_strncmp(node->args, "e5nv\0", 4) == 0)
+	else if (ft_strncmp(node->args, "env\0", 4) == 0)
 		ft_env(str_pipe->lst_env, node->args, node, str_pipe->fd);
 	else if (ft_strncmp(node->args, "export ", 7) == 0)
 	{
@@ -77,10 +77,10 @@ static void	porcess_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
 		if (execve(dir_cmd, command, (*lst_env)->env) == -1)
 			exit(EXIT_FAILURE);
 	}
+	waitpid(pid, NULL, CHILD);
 	if (fd > 0)
 		close(fd);
 	dup2(0, STDOUT_FILENO);
-	waitpid(pid, NULL, CHILD);
 }
 
 static void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes)

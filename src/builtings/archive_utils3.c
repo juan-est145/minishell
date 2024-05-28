@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/27 16:12:35 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:51:01 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	redirect_stdout(t_ast *node, int fd_pipe[2])
 	fd = redirect_stdout_output(node, fd);
 	if (fd != 0)
 		return (fd);
-	if (fd_pipe[0] == READ && fd_pipe[1] == WRITE)
+	if (fd_pipe[READ] != 0 && fd_pipe[WRITE] != 0)
 	{
 		dup2(fd_pipe[WRITE], STDOUT_FILENO);
 	}

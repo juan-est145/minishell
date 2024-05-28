@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/25 10:57:42 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:59:22 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ void	ft_getpwd(char *text, t_ast *node, int fd_pipe[2])
 	printf("%s\n", pwd);
 	free(pwd);
 	if (fd > 0)
+	{
 		close(fd);
-	dup2(0, STDOUT_FILENO);
+		dup2(0, STDOUT_FILENO);
+	}
 	free_matrix(split);
 }
 
