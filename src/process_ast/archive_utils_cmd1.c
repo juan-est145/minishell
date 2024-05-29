@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:54:43 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/27 14:57:36 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/29 09:44:08 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 void	print_pipes(int fd[2])
 {
 	char	*line;
-
-	if (fd[0] == '\0')
+	dup2(0, STDOUT_FILENO);
+	if (fd[0] != 0)
 	{
 		line = get_next_line(fd[READ]);
 		while (line != NULL)

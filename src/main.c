@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/28 19:01:47 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/29 09:55:31 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static void	process_input(char *prompt, t_lst_env **lst_env)
 		if (str_pipe.ast_head == NULL && errno == ENOMEM)
 			error_msgs(AST_MALLOC_FAILURE);
 		execute_ast(str_pipe.ast_head, prompt, &str_pipe);
+		str_pipe.fd[READ] = 0;
+		str_pipe.fd[WRITE] = 0;
 		clean_ast(str_pipe.ast_head);
 	}
 }

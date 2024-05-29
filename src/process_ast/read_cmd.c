@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/28 18:56:03 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:45:28 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 void	read_pipe(t_ast *node, t_lst_env **lst_env,
 					t_pipex *str_pipe, char *prompt)
 {
-	if (str_pipe->fd[0] != READ && str_pipe->fd[1] != WRITE)
+	if (str_pipe->fd[READ] == 0 && str_pipe->fd[WRITE] == 0)
 		pipe(str_pipe->fd);
 	read_cmd(node->left, str_pipe, prompt);
 	read_cmd(node->right, str_pipe, prompt);
@@ -81,6 +81,7 @@ static void	porcess_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
 	if (fd > 0)
 		close(fd);
 	dup2(0, STDOUT_FILENO);
+	dup2(0, STDIN_FILENO);
 }
 
 static void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes)
