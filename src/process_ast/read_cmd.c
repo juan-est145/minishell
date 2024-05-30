@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 13:08:22 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:41:51 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 	(void)lst_env;
 	if (str_pipe->fd[READ] == 0 && str_pipe->fd[WRITE] == 0)
 		pipe(str_pipe->fd);
-	pid1 = read_cmd(node->left, str_pipe, prompt ,ENTRY_PIPE);
+	pid1 = read_cmd(node->left, str_pipe, prompt, ENTRY_PIPE);
 	pid2 = read_cmd(node->right, str_pipe, prompt, EXIT_PIPE);
 	close(str_pipe->fd[READ]);
 	close(str_pipe->fd[WRITE]);
