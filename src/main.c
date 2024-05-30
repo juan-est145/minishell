@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/29 09:55:31 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:44:08 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static t_ast	*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe)
 	if (node == NULL)
 		return (NULL);
 	else if (node->parse_identifier == PARSE_CMD)
-		return (read_cmd(node, str_pipe, prompt), node);
+		return (read_cmd(node, str_pipe, prompt, SIMPLE_CMD), node);
 	else if (node->parse_identifier == PARSE_PIPE
 		&& node->left->parse_identifier == PARSE_CMD
 		&& node->right->parse_identifier == PARSE_CMD)

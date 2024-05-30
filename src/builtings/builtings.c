@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 12:17:59 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:54:54 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include "../../libft/libft.h"
 
 // IMITA EL COMANDO ENV
-void	ft_env(t_lst_env **lst_env, char *text, t_ast *node, int fd_pipe[2])
+void	ft_env(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
+		t_process_cmd cmd_type)
 {
 	char		**split;
 	t_lst_env	*temp;
 	int			fd;
 
-	//TO DO: FIX PARAMETERS ENUM OF PIPE OR CMD SIMPLE
-	fd = redirect_stdout(node, fd_pipe, SIMPLE_CMD);
+	fd = redirect_stdout(node, fd_pipe, cmd_type);
 	temp = *lst_env;
-	split = ft_split(text, ' ');
+	split = ft_split(node->args, ' ');
 	if (split[1] != NULL)
 	{
 		free_matrix(split);
@@ -37,13 +37,14 @@ void	ft_env(t_lst_env **lst_env, char *text, t_ast *node, int fd_pipe[2])
 	}
 	if (fd > 0)
 		close(fd);
-	dup2(0, STDOUT_FILENO);
+	//dup2(0, STDOUT_FILENO);
 	free_matrix(split);
 }
 
 // IMITA EL COMANDO EXPORT
 void	ft_export(char *new, t_lst_env **lst_env)
 {
+	//TO DO: CHECK EXPORT WITH PIPES, SEE WHAT HAPPENS
 	t_lst_env	*node;
 	char		*new_env;
 	char		**split;
@@ -122,7 +123,7 @@ void	ft_unset(char *text, t_lst_env **lst_env)
 	t_lst_env	*previous;
 	bool		flag;
 	char		**split;
-
+	//TO DO: CHECK UNSET WITH PIPES, SEE WHAT HAPPENS
 	flag = false;
 	split = ft_split(text, ' ');
 	is_first(text, lst_env);

@@ -6,21 +6,21 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/30 12:19:25 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:56:05 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-void	ft_getpwd(char *text, t_ast *node, int fd_pipe[2])
+void	ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
+		t_process_cmd type_cmd)
 {
 	char	*pwd;
 	char	**split;
 	int		fd;
 
-	//TO DO: FIX PARAMETERS ENUM OF PIPE OR CMD SIMPLE
-	fd = redirect_stdout(node, fd_pipe, SIMPLE_CMD);
+	fd = redirect_stdout(node, fd_pipe, type_cmd);
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)
 	{
@@ -70,22 +70,21 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 }
 
 // IMITA LA FUNCION ECHO
-void	ft_echo(char *text, t_ast *node, int fd_pipe[2])
+void	ft_echo(char *text, t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
 {
 	int		i;
 	bool	open;
 	bool	flag;
 	char	delimiter;
 	int		fd;
-	//TO DO IMPLEMENT ENUM TYPE CMD
-	fd = redirect_stdout(node, fd_pipe, SIMPLE_CMD);
+
+	fd = redirect_stdout(node, fd_pipe, type_cmd);
 	i = 4;
 	open = false;
 	flag = false;
 	delimiter = '\0';
 	i = ignore_space(text, i) + 1;
-	if (text[i] == '-' && text[i + 1] == 'n'
-		&& text[i + 2] == ' ')
+	if (text[i] == '-' && text[i + 1] == 'n' && text[i + 2] == ' ')
 	{
 		flag = true;
 		i += 3;
@@ -95,7 +94,7 @@ void	ft_echo(char *text, t_ast *node, int fd_pipe[2])
 		printf("\n");
 	if (fd > 0)
 		close(fd);
-	dup2(0, STDOUT_FILENO);
+	// dup2(0, STDOUT_FILENO);
 }
 
 // IMITA EL COMANDO CD
@@ -104,7 +103,7 @@ void	ft_cd(char *text, t_lst_env **lst_env)
 	char	**split;
 	char	*old_pwd;
 	char	*pwd;
-
+	// TO DO: CHECK IF IT WORKS WITH PIPES
 	split = ft_split(text, ' ');
 	if (check_array_length(split) >= 3)
 		printf("Too many arguments in cd\n");
@@ -128,6 +127,7 @@ void	ft_cd(char *text, t_lst_env **lst_env)
 
 void	ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt)
 {
+	//TO DO, CHECK WHAT HAPPENS WITH PIPES AND THIS CMD
 	clean_ast(*head);
 	rl_clear_history();
 	free_copie_env(&lst_env);
