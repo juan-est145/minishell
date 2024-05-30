@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 12:31:22 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:34:35 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ static pid_t process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe, t_
 	}
 	if (fd > 0)
 		close(fd);
-	dup2(0, STDOUT_FILENO);
-	dup2(0, STDIN_FILENO);
 	return (pid);
 }
 
