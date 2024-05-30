@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 18:26:22 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:37:06 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,59 @@ void	env_process(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
 		close(fd);
 	free_matrix(split);
 	exit(0);
+}
+
+void	cd_process(char *text, t_lst_env **lst_env)
+{
+	char	**split;
+	char	*old_pwd;
+	char	*pwd;
+
+	split = ft_split(text, ' ');
+	if (check_array_length(split) >= 3)
+		printf("Too many arguments in cd\n");
+	else
+	{
+		old_pwd = getcwd(NULL, 0);
+		if (split[1] == NULL)
+			cd_no_argument(old_pwd, split, lst_env);
+		else
+		{
+			if (errors_cd(old_pwd, split, split,
+					"Could not access directory") == 1)
+				exit(EXIT_FAILURE);
+			pwd = getcwd(NULL, 0);
+			handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
+		}
+		handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
+	}
+	free_matrix(split);
+	exit(0);
+}
+
+void	cd_parent_process(char *text, t_lst_env **lst_env)
+{
+	char	**split;
+	char	*old_pwd;
+	char	*pwd;
+
+	split = ft_split(text, ' ');
+	if (check_array_length(split) >= 3)
+		printf("Too many arguments in cd\n");
+	else
+	{
+		old_pwd = getcwd(NULL, 0);
+		if (split[1] == NULL)
+			cd_no_argument(old_pwd, split, lst_env);
+		else
+		{
+			if (errors_cd(old_pwd, split, split,
+					"Could not access directory") == 1)
+				return ;
+			pwd = getcwd(NULL, 0);
+			handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
+		}
+		handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
+	}
+	free_matrix(split);
 }

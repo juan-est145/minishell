@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 16:59:45 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:33:07 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 		return (up_env(str_pipe->lst_env), -1);
 	}
 	else if (ft_strncmp(node->args, "cd", 2) == 0)
-		return (ft_cd(node->args, str_pipe->lst_env));
+		return (ft_cd(node->args, str_pipe->lst_env, type_cmd));
 	else if (ft_strncmp(node->args, "exit", 4) == 0)
 		return (ft_exit(&str_pipe->ast_head, *str_pipe->lst_env, prompt), -1);
 	else
