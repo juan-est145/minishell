@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 12:34:35 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:35:08 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	read_pipe(t_ast *node, t_lst_env **lst_env,
 	(void) prompt;
 	if (str_pipe->fd[READ] == 0 && str_pipe->fd[WRITE] == 0)
 		pipe(str_pipe->fd);
-/* 	read_cmd(node->left, str_pipe, prompt);
-	read_cmd(node->right, str_pipe, prompt); */
 	pid1 = process_cmd(node->left, lst_env, str_pipe, ENTRY_PIPE);
 	pid2 = process_cmd(node->right, lst_env, str_pipe, EXIT_PIPE);
 	close(str_pipe->fd[READ]);
