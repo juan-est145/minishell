@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/30 18:14:26 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:22:21 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,12 @@
 pid_t	ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
 		t_process_cmd type_cmd)
 {
-	char	*pwd;
-	char	**split;
-	int		fd;
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == CHILD)
-	{
-		fd = redirect_stdout(node, fd_pipe, type_cmd);
-		split = ft_split(text, ' ');
-		if (split[1] != NULL)
-		{
-			printf("Too many arguments with PWD command\n");
-			free_matrix(split);
-			exit(EXIT_FAILURE);
-		}
-		pwd = getcwd(NULL, 0);
-		if (pwd == NULL)
-			printf("Error obtaining PWD\n");
-		printf("%s\n", pwd);
-		free(pwd);
-		if (fd > 0)
-		{
-			close(fd);
-			dup2(0, STDOUT_FILENO);
-		}
-		free_matrix(split);
-		exit(0);
-	}
-	return(pid);
+		pwd_process(text, node, fd_pipe, type_cmd);
+	return (pid);
 }
 
 bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
@@ -120,12 +96,12 @@ pid_t	ft_cd(char *text, t_lst_env **lst_env)
 		free_matrix(split);
 		exit(0);
 	}
-	return(pid);
+	return (pid);
 }
 
 void	ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt)
 {
-	//TO DO, CHECK WHAT HAPPENS WITH PIPES AND THIS CMD
+	// TO DO, CHECK WHAT HAPPENS WITH PIPES AND THIS CMD
 	clean_ast(*head);
 	rl_clear_history();
 	free_copie_env(&lst_env);

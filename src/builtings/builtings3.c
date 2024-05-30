@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 17:58:50 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:21:15 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,34 @@ void	echo_process(char *text, t_ast *node, int fd_pipe[2],
 		printf("\n");
 	if (fd > 0)
 		close(fd);
+	exit(0);
+}
+
+void	pwd_process(char *text, t_ast *node, int fd_pipe[2],
+		t_process_cmd type_cmd)
+{
+	char	*pwd;
+	char	**split;
+	int		fd;
+
+	fd = redirect_stdout(node, fd_pipe, type_cmd);
+	split = ft_split(text, ' ');
+	if (split[1] != NULL)
+	{
+		printf("Too many arguments with PWD command\n");
+		free_matrix(split);
+		exit(EXIT_FAILURE);
+	}
+	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
+		printf("Error obtaining PWD\n");
+	printf("%s\n", pwd);
+	free(pwd);
+	if (fd > 0)
+	{
+		close(fd);
+		dup2(0, STDOUT_FILENO);
+	}
+	free_matrix(split);
 	exit(0);
 }
