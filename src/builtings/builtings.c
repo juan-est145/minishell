@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 12:54:54 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:38:06 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,38 @@
 #include "../../libft/libft.h"
 
 // IMITA EL COMANDO ENV
-void	ft_env(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
+pid_t	ft_env(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
 		t_process_cmd cmd_type)
 {
 	char		**split;
 	t_lst_env	*temp;
 	int			fd;
+	pid_t		pid;
 
-	fd = redirect_stdout(node, fd_pipe, cmd_type);
-	temp = *lst_env;
-	split = ft_split(node->args, ' ');
-	if (split[1] != NULL)
+	pid = fork();
+	if (pid == CHILD)
 	{
+		fd = redirect_stdout(node, fd_pipe, cmd_type);
+		temp = *lst_env;
+		split = ft_split(node->args, ' ');
+		if (split[1] != NULL)
+		{
+			free_matrix(split);
+			printf("Too many arguments\n");
+			exit(EXIT_FAILURE);
+		}
+		while (temp != NULL)
+		{
+			printf("%s\n", temp->text);
+			temp = temp->next;
+		}
+		if (fd > 0)
+			close(fd);
+		//dup2(0, STDOUT_FILENO);
 		free_matrix(split);
-		printf("Too many arguments\n");
-		return ;
+		exit(0);
 	}
-	while (temp != NULL)
-	{
-		printf("%s\n", temp->text);
-		temp = temp->next;
-	}
-	if (fd > 0)
-		close(fd);
-	//dup2(0, STDOUT_FILENO);
-	free_matrix(split);
+	return(pid);
 }
 
 // IMITA EL COMANDO EXPORT
