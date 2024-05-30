@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/30 16:25:17 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:59:24 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,31 +112,39 @@ pid_t	ft_echo(char *text, t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
 }
 
 // IMITA EL COMANDO CD
-void	ft_cd(char *text, t_lst_env **lst_env)
+pid_t	ft_cd(char *text, t_lst_env **lst_env)
 {
 	char	**split;
 	char	*old_pwd;
 	char	*pwd;
+	pid_t	pid;
+
+	pid = fork();
 	// TO DO: CHECK IF IT WORKS WITH PIPES
-	split = ft_split(text, ' ');
-	if (check_array_length(split) >= 3)
-		printf("Too many arguments in cd\n");
-	else
+	if (pid == CHILD)
 	{
-		old_pwd = getcwd(NULL, 0);
-		if (split[1] == NULL)
-			cd_no_argument(old_pwd, split, lst_env);
+		split = ft_split(text, ' ');
+		if (check_array_length(split) >= 3)
+			printf("Too many arguments in cd\n");
 		else
 		{
-			if (errors_cd(old_pwd, split, split,
-					"Could not access directory") == 1)
-				return ;
-			pwd = getcwd(NULL, 0);
-			handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
+			old_pwd = getcwd(NULL, 0);
+			if (split[1] == NULL)
+				cd_no_argument(old_pwd, split, lst_env);
+			else
+			{
+				if (errors_cd(old_pwd, split, split,
+						"Could not access directory") == 1)
+					exit(EXIT_FAILURE);
+				pwd = getcwd(NULL, 0);
+				handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
+			}
+			handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
 		}
-		handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
+		free_matrix(split);
+		exit(0);
 	}
-	free_matrix(split);
+	return(pid);
 }
 
 void	ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt)

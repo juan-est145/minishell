@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 16:32:48 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:59:37 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void						ft_export(char *new, t_lst_env **lst_env);
 void						ft_unset(char *text, t_lst_env **lst_env);
 bool						ft_unset_normi(t_lst_env **temp, bool flag,
 								t_lst_env *previous);
-void						ft_cd(char *text, t_lst_env **lst_env);
+pid_t						ft_cd(char *text, t_lst_env **lst_env);
 void						ft_exit(t_ast **head, t_lst_env *lst_env,
 								char *prompt);
 
