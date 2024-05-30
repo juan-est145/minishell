@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 15:41:51 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:48:30 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 			"pwd ", 4) == 0)
 		return (ft_getpwd(node->args, node, str_pipe->fd, type_cmd), -1);
 	else if (ft_strncmp(node->args, "echo ", 4) == 0)
-		return (ft_echo(node->args, node, str_pipe->fd, type_cmd), -1);
+		return (ft_echo(node->args, node, str_pipe->fd, type_cmd));
 	else if (ft_strncmp(node->args, "env\0", 4) == 0)
 		return (ft_env(str_pipe->lst_env, node, str_pipe->fd, type_cmd), -1);
 	else if (ft_strncmp(node->args, "export ", 7) == 0)

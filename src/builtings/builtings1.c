@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/30 12:56:05 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:47:21 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,31 +70,38 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 }
 
 // IMITA LA FUNCION ECHO
-void	ft_echo(char *text, t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
+pid_t	ft_echo(char *text, t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
 {
 	int		i;
 	bool	open;
 	bool	flag;
 	char	delimiter;
 	int		fd;
+	pid_t	pid;
 
-	fd = redirect_stdout(node, fd_pipe, type_cmd);
-	i = 4;
-	open = false;
-	flag = false;
-	delimiter = '\0';
-	i = ignore_space(text, i) + 1;
-	if (text[i] == '-' && text[i + 1] == 'n' && text[i + 2] == ' ')
+	pid = fork();
+	if (pid == CHILD)
 	{
-		flag = true;
-		i += 3;
+		fd = redirect_stdout(node, fd_pipe, type_cmd);
+		i = 4;
+		open = false;
+		flag = false;
+		delimiter = '\0';
+		i = ignore_space(text, i) + 1;
+		if (text[i] == '-' && text[i + 1] == 'n' && text[i + 2] == ' ')
+		{
+			flag = true;
+			i += 3;
+		}
+		open = ft_echo_normi(text, i, open, delimiter);
+		if (flag == false)
+			printf("\n");
+		if (fd > 0)
+			close(fd);
+		exit(0);
 	}
-	open = ft_echo_normi(text, i, open, delimiter);
-	if (flag == false)
-		printf("\n");
-	if (fd > 0)
-		close(fd);
 	// dup2(0, STDOUT_FILENO);
+	return (pid);
 }
 
 // IMITA EL COMANDO CD

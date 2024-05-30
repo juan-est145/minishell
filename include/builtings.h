@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 12:52:28 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:49:05 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdbool.h>
 # include <stdio.h>
+# include <sys/types.h>
 
 // LISTA ENLAZADA DE VARIABLES DE ENTORNO
 typedef struct s_lst_env
@@ -57,7 +58,7 @@ int							here_doc(char *limit);
 // BUILTINGS
 void						ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
 								t_process_cmd type_cmd);
-void						ft_echo(char *text, t_ast *node, int fd_pipe[2],
+pid_t						ft_echo(char *text, t_ast *node, int fd_pipe[2],
 								t_process_cmd type_cmd);
 void						ft_env(t_lst_env **lst_env, t_ast *node,
 								int fd_pipe[2], t_process_cmd cmd_type);
