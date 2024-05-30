@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 16:38:06 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:27:16 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,46 +17,23 @@
 pid_t	ft_env(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
 		t_process_cmd cmd_type)
 {
-	char		**split;
-	t_lst_env	*temp;
-	int			fd;
-	pid_t		pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid == CHILD)
-	{
-		fd = redirect_stdout(node, fd_pipe, cmd_type);
-		temp = *lst_env;
-		split = ft_split(node->args, ' ');
-		if (split[1] != NULL)
-		{
-			free_matrix(split);
-			printf("Too many arguments\n");
-			exit(EXIT_FAILURE);
-		}
-		while (temp != NULL)
-		{
-			printf("%s\n", temp->text);
-			temp = temp->next;
-		}
-		if (fd > 0)
-			close(fd);
-		//dup2(0, STDOUT_FILENO);
-		free_matrix(split);
-		exit(0);
-	}
-	return(pid);
+		env_process(lst_env, node, fd_pipe, cmd_type);
+	return (pid);
 }
 
 // IMITA EL COMANDO EXPORT
 void	ft_export(char *new, t_lst_env **lst_env)
 {
-	//TO DO: CHECK EXPORT WITH PIPES, SEE WHAT HAPPENS
 	t_lst_env	*node;
 	char		*new_env;
 	char		**split;
 	int			i;
 
+	// TO DO: CHECK EXPORT WITH PIPES, SEE WHAT HAPPENS
 	i = 0;
 	split = ft_split(new, ' ');
 	while (split[i])
@@ -130,7 +107,8 @@ void	ft_unset(char *text, t_lst_env **lst_env)
 	t_lst_env	*previous;
 	bool		flag;
 	char		**split;
-	//TO DO: CHECK UNSET WITH PIPES, SEE WHAT HAPPENS
+
+	// TO DO: CHECK UNSET WITH PIPES, SEE WHAT HAPPENS
 	flag = false;
 	split = ft_split(text, ' ');
 	is_first(text, lst_env);

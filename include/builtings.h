@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 18:21:53 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:26:52 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ bool						ft_echo_normi(char *text, int i, bool open,
 void						echo_process(char *text, t_ast *node,
 								int fd_pipe[2], t_process_cmd type_cmd);
 pid_t						ft_env(t_lst_env **lst_env, t_ast *node,
+								int fd_pipe[2], t_process_cmd cmd_type);
+void						env_process(t_lst_env **lst_env, t_ast *node,
 								int fd_pipe[2], t_process_cmd cmd_type);
 void						ft_export(char *new, t_lst_env **lst_env);
 void						ft_unset(char *text, t_lst_env **lst_env);
