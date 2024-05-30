@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 16:24:08 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:33:00 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 	else if (ft_strncmp(node->args, "echo ", 4) == 0)
 		return (ft_echo(node->args, node, str_pipe->fd, type_cmd));
 	else if (ft_strncmp(node->args, "env\0", 4) == 0)
-		return (ft_env(str_pipe->lst_env, node, str_pipe->fd, type_cmd), -1);
+		return (ft_env(str_pipe->lst_env, node, str_pipe->fd, type_cmd));
 	else if (ft_strncmp(node->args, "export ", 7) == 0)
 	{
 		ft_export(node->args, str_pipe->lst_env);
