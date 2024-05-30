@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/27 14:58:05 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:15:08 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef struct s_lst_env
 	struct s_lst_env	*next;
 }						t_lst_env;
 
-typedef struct s_ast	t_ast;
+typedef struct s_ast		t_ast;
+typedef enum e_process_cmd	t_process_cmd;
 
 // ARCHIVE ENV
 int						srch_path(char **env, char *search);
@@ -48,7 +49,7 @@ t_lst_env				*ft_lstnew_ms(char *content);
 char					*get_pwd_cd(t_lst_env *lst_env);
 int						ignore_space(char *text, int i);
 
-int						redirect_stdout(t_ast *node, int fd_pipe[2]);
+int	redirect_stdout(t_ast *node, int fd_pipe[2], t_process_cmd type_cmd);
 int						here_doc(char *limit);
 
 // BUILTINGS

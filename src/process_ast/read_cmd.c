@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/29 19:45:28 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:31:22 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes);
 static char	*search_comand(t_pipex *str_pipes, char **comand);
-static void	porcess_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe);
+static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe, t_process_cmd cmd_type);
 
 void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 {
@@ -43,22 +43,31 @@ void	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt)
 	else if (ft_strncmp(node->args, "exit", 4) == 0)
 		ft_exit(&str_pipe->ast_head, *str_pipe->lst_env, prompt);
 	else
-		porcess_cmd(node, str_pipe->lst_env, str_pipe);
+		process_cmd(node, str_pipe->lst_env, str_pipe, SIMPLE_CMD);
 }
 
 void	read_pipe(t_ast *node, t_lst_env **lst_env,
 					t_pipex *str_pipe, char *prompt)
 {
+	pid_t	pid1;
+	pid_t	pid2;
+	(void) prompt;
 	if (str_pipe->fd[READ] == 0 && str_pipe->fd[WRITE] == 0)
 		pipe(str_pipe->fd);
-	read_cmd(node->left, str_pipe, prompt);
-	read_cmd(node->right, str_pipe, prompt);
+/* 	read_cmd(node->left, str_pipe, prompt);
+	read_cmd(node->right, str_pipe, prompt); */
+	pid1 = process_cmd(node->left, lst_env, str_pipe, ENTRY_PIPE);
+	pid2 = process_cmd(node->right, lst_env, str_pipe, EXIT_PIPE);
 	close(str_pipe->fd[READ]);
 	close(str_pipe->fd[WRITE]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	str_pipe->fd[READ] = 0;
+	str_pipe->fd[WRITE] = 0;
 	(void)lst_env;
 }
 
-static void	porcess_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
+static pid_t process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe, t_process_cmd cmd_type)
 {
 	t_pipex	str_pipes;
 	pid_t	pid;
@@ -70,18 +79,18 @@ static void	porcess_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe)
 	fd = 0;
 	if (pid == CHILD)
 	{
-		fd = redirect_stdout(node, str_pipe->fd);
+		fd = redirect_stdout(node, str_pipe->fd, cmd_type);
 		command = ft_split(node->args, ' ');
 		segmention_path(lst_env, &str_pipes);
 		dir_cmd = search_comand(&str_pipes, command);
 		if (execve(dir_cmd, command, (*lst_env)->env) == -1)
 			exit(EXIT_FAILURE);
 	}
-	waitpid(pid, NULL, CHILD);
 	if (fd > 0)
 		close(fd);
 	dup2(0, STDOUT_FILENO);
 	dup2(0, STDIN_FILENO);
+	return (pid);
 }
 
 static void	segmention_path(t_lst_env **lst_env, t_pipex *str_pipes)

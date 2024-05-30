@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/29 19:45:51 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:11:50 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,21 @@
 static int	redirect_stdout_output(t_ast *node, int fd);
 static int	redirect_stdout_input(t_ast *node, int fd);
 
-int	redirect_stdout(t_ast *node, int fd_pipe[2])
+int	redirect_stdout(t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
 {
 	int	fd;
-//	static bool prueba = false;
 
 	fd = 0;
 	fd = redirect_stdout_input(node, fd);
 	fd = redirect_stdout_output(node, fd);
-	if (fd != 0)
+	if (fd != 0 || type_cmd == SIMPLE_CMD)
 		return (fd);
-	if (fd_pipe[READ] != 0 && fd_pipe[WRITE] != 0)
-	{
-/* 		if (prueba != true)
-		{
-			dup2(fd_pipe[WRITE], STDOUT_FILENO);
-			ft_putendl_fd("Estamos en primer dup", 2);
-			prueba = true;
-		}
-		else */
-		if (dup2(fd_pipe[WRITE], STDOUT_FILENO) != -1)
-		{
-			dup2(fd_pipe[WRITE], STDOUT_FILENO);
-			close(fd_pipe[WRITE]);
-		}
-		if (dup2(fd_pipe[READ], STDIN_FILENO) != -1)
-		{
-			dup2(fd_pipe[READ], STDIN_FILENO);
-			close(fd_pipe[READ]);
-		}
- 		/*ft_putendl_fd(ft_itoa(dup2(fd_pipe[READ], STDIN_FILENO)), 2);
-		ft_putendl_fd("\n", 2);
-		ft_putendl_fd(ft_itoa(STDIN_FILENO), 2);
-		ft_putendl_fd("\n", 2); */
-	}
+	if (type_cmd == ENTRY_PIPE)
+		dup2(fd_pipe[WRITE], STDOUT_FILENO);
+	else
+		dup2(fd_pipe[READ], STDIN_FILENO);
+	close(fd_pipe[WRITE]);
+	close(fd_pipe[READ]);
 	return (fd);
 }
 

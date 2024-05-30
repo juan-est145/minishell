@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:08:28 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:17:59 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	ft_env(t_lst_env **lst_env, char *text, t_ast *node, int fd_pipe[2])
 	t_lst_env	*temp;
 	int			fd;
 
-	fd = redirect_stdout(node, fd_pipe);
+	//TO DO: FIX PARAMETERS ENUM OF PIPE OR CMD SIMPLE
+	fd = redirect_stdout(node, fd_pipe, SIMPLE_CMD);
 	temp = *lst_env;
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)

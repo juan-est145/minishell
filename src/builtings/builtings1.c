@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/28 18:59:22 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:19:25 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_getpwd(char *text, t_ast *node, int fd_pipe[2])
 	char	**split;
 	int		fd;
 
-	fd = redirect_stdout(node, fd_pipe);
+	//TO DO: FIX PARAMETERS ENUM OF PIPE OR CMD SIMPLE
+	fd = redirect_stdout(node, fd_pipe, SIMPLE_CMD);
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)
 	{
@@ -76,8 +77,8 @@ void	ft_echo(char *text, t_ast *node, int fd_pipe[2])
 	bool	flag;
 	char	delimiter;
 	int		fd;
-
-	fd = redirect_stdout(node, fd_pipe);
+	//TO DO IMPLEMENT ENUM TYPE CMD
+	fd = redirect_stdout(node, fd_pipe, SIMPLE_CMD);
 	i = 4;
 	open = false;
 	flag = false;
