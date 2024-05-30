@@ -28,6 +28,7 @@ $(BUILTINGS_PATH)/archive_utils3.c\
 $(BUILTINGS_PATH)/builtings.c\
 $(BUILTINGS_PATH)/builtings1.c\
 $(BUILTINGS_PATH)/builtings2.c\
+$(BUILTINGS_PATH)/builtings3.c\
 $(PROCESS_AST_PATH)/read_cmd.c\
 $(PROCESS_AST_PATH)/archive_utils_cmd.c\
 $(PROCESS_AST_PATH)/archive_utils_cmd1.c\
