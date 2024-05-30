@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 16:59:37 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:12:42 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ pid_t						ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
 								t_process_cmd type_cmd);
 pid_t						ft_echo(char *text, t_ast *node, int fd_pipe[2],
 								t_process_cmd type_cmd);
+bool						ft_echo_normi(char *text, int i, bool open,
+								char delimiter);
+void						echo_process(char *text, t_ast *node,
+								int fd_pipe[2], t_process_cmd type_cmd);
 pid_t						ft_env(t_lst_env **lst_env, t_ast *node,
 								int fd_pipe[2], t_process_cmd cmd_type);
 void						ft_export(char *new, t_lst_env **lst_env);
