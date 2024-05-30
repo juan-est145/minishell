@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 12:35:08 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:35:58 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	read_pipe(t_ast *node, t_lst_env **lst_env,
 	waitpid(pid2, NULL, 0);
 	str_pipe->fd[READ] = 0;
 	str_pipe->fd[WRITE] = 0;
-	(void)lst_env;
 }
 
 static pid_t process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe, t_process_cmd cmd_type)
