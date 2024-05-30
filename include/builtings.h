@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 18:37:25 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 19:16:32 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_lst_env
 
 typedef struct s_ast		t_ast;
 typedef enum e_process_cmd	t_process_cmd;
+typedef struct s_pipex		t_pipex;
 
 // ARCHIVE ENV
 int							srch_path(char **env, char *search);
@@ -70,29 +71,32 @@ pid_t						ft_env(t_lst_env **lst_env, t_ast *node,
 								int fd_pipe[2], t_process_cmd cmd_type);
 void						env_process(t_lst_env **lst_env, t_ast *node,
 								int fd_pipe[2], t_process_cmd cmd_type);
-void						ft_export(char *new, t_lst_env **lst_env);
+pid_t						ft_export(char *new, t_lst_env **lst_env,
+								t_pipex *str_pipe);
+void						export_process(char *new, t_lst_env **lst_env);
 void						ft_unset(char *text, t_lst_env **lst_env);
 bool						ft_unset_normi(t_lst_env **temp, bool flag,
 								t_lst_env *previous);
 pid_t						ft_cd(char *text, t_lst_env **lst_env,
-								t_process_cmd type_cmd);
-void						cd_process(char *text, t_lst_env **lst_env);
-void						cd_parent_process(char *text, t_lst_env **lst_env);
+								t_process_cmd type_cmd, t_pipex *str_pipes);
+void						cd_process(char *text, t_lst_env **lst_env,
+								t_pipex *str_pipes);
+void						cd_parent_process(char *text, t_lst_env **lst_env,
+								t_pipex *str_pipes);
+int							cd_no_argument(char *old_pwd, char **split,
+								t_lst_env **lst_env, t_pipex *str_pipes);
 void						ft_exit(t_ast **head, t_lst_env *lst_env,
 								char *prompt);
 
-void						handle_cd_env(t_lst_env **lst_env, char *f(char *s1,
-									char *s2), char *export_text, char *pwd);
+void						handle_cd_env(t_lst_env **lst_env,
+								char *export_text, char *pwd,
+								t_pipex *str_pipes);
 void						is_first(char *text, t_lst_env **lst_env);
 char						**search_lst_env(char *text, t_lst_env **lst_env);
 int							check_array_length(char **array);
 int							errors_cd(char *old_pwd, char **dir, char **split,
 								char *text);
-int							cd_no_argument(char *old_pwd, char **split,
-								t_lst_env **lst_env);
 int							errors_cd(char *old_pwd, char **dir, char **split,
 								char *text);
-int							cd_no_argument(char *old_pwd, char **split,
-								t_lst_env **lst_env);
 
 #endif

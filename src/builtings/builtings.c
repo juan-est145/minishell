@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 18:27:16 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:59:52 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,16 @@ pid_t	ft_env(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
 }
 
 // IMITA EL COMANDO EXPORT
-void	ft_export(char *new, t_lst_env **lst_env)
+pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe)
 {
-	t_lst_env	*node;
-	char		*new_env;
-	char		**split;
-	int			i;
+	pid_t	pid;
 
-	// TO DO: CHECK EXPORT WITH PIPES, SEE WHAT HAPPENS
-	i = 0;
-	split = ft_split(new, ' ');
-	while (split[i])
-	{
-		if (ft_contain(split[i], '=') == 0 && (ft_strlen(split[i]) > 2))
-		{
-			if (ft_lst_contain_change(lst_env, split[i]) == 0)
-				;
-			else
-			{
-				new_env = ft_substr(split[i], 0, ft_strlen(split[i]));
-				node = ft_lstnew_ms(new_env);
-				ft_lstadd_back_ms(lst_env, node);
-			}
-		}
-		i++;
-	}
-	free_matrix(split);
+	pid = fork();
+	if (pid == CHILD)
+		export_process(new, lst_env);
+	free_copie_env(str_pipe->lst_env);
+	up_env(str_pipe->lst_env);
+	return (pid);
 }
 
 // IMITA EL COMANDO UNSET

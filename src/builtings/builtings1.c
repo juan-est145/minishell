@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/30 18:39:33 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 19:09:26 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,20 @@ pid_t	ft_echo(char *text, t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
 }
 
 // IMITA EL COMANDO CD
-pid_t	ft_cd(char *text, t_lst_env **lst_env, t_process_cmd type_cmd)
+pid_t	ft_cd(char *text, t_lst_env **lst_env, t_process_cmd type_cmd,
+		t_pipex *str_pipes)
 {
 	pid_t	pid;
 
 	pid = -1;
 	if (type_cmd == SIMPLE_CMD)
 	{
-		cd_parent_process(text, lst_env);
+		cd_parent_process(text, lst_env, str_pipes);
 		return (pid);
 	}
 	pid = fork();
 	if (pid == CHILD)
-		cd_process(text, lst_env);
+		cd_process(text, lst_env, str_pipes);
 	return (pid);
 }
 

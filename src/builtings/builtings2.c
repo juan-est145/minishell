@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:56 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:08:58 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 19:15:28 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ int	errors_cd(char *old_pwd, char **dir, char **split, char *text)
 	return (0);
 }
 
-int	cd_no_argument(char *old_pwd, char **split, t_lst_env **lst_env)
+int	cd_no_argument(char *old_pwd, char **split, t_lst_env **lst_env,
+		t_pipex *str_pipes)
 {
 	char	**dir;
 
@@ -100,7 +101,7 @@ int	cd_no_argument(char *old_pwd, char **split, t_lst_env **lst_env)
 	{
 		if (errors_cd(old_pwd, dir, split, "Could not access directory") == 1)
 			return (1);
-		handle_cd_env(lst_env, ft_fusion_string, "export PWD=", dir[1]);
+		handle_cd_env(lst_env, "export PWD=", dir[1], str_pipes);
 		free(dir[0]);
 		free(dir);
 	}

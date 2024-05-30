@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtings3.c                                       :+:      :+:    :+:   */
+/*   builtings_child_process.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 18:37:06 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 19:17:00 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	env_process(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
 	exit(0);
 }
 
-void	cd_process(char *text, t_lst_env **lst_env)
+void	cd_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
 {
 	char	**split;
 	char	*old_pwd;
@@ -110,22 +110,22 @@ void	cd_process(char *text, t_lst_env **lst_env)
 	{
 		old_pwd = getcwd(NULL, 0);
 		if (split[1] == NULL)
-			cd_no_argument(old_pwd, split, lst_env);
+			cd_no_argument(old_pwd, split, lst_env, str_pipes);
 		else
 		{
 			if (errors_cd(old_pwd, split, split,
 					"Could not access directory") == 1)
 				exit(EXIT_FAILURE);
 			pwd = getcwd(NULL, 0);
-			handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
+			handle_cd_env(lst_env, "export PWD=", pwd, str_pipes);
 		}
-		handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
+		handle_cd_env(lst_env, "export OLDPWD=", old_pwd, str_pipes);
 	}
 	free_matrix(split);
 	exit(0);
 }
 
-void	cd_parent_process(char *text, t_lst_env **lst_env)
+void	cd_parent_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
 {
 	char	**split;
 	char	*old_pwd;
@@ -138,16 +138,16 @@ void	cd_parent_process(char *text, t_lst_env **lst_env)
 	{
 		old_pwd = getcwd(NULL, 0);
 		if (split[1] == NULL)
-			cd_no_argument(old_pwd, split, lst_env);
+			cd_no_argument(old_pwd, split, lst_env, str_pipes);
 		else
 		{
 			if (errors_cd(old_pwd, split, split,
 					"Could not access directory") == 1)
 				return ;
 			pwd = getcwd(NULL, 0);
-			handle_cd_env(lst_env, ft_fusion_string, "export PWD=", pwd);
+			handle_cd_env(lst_env, "export PWD=", pwd, str_pipes);
 		}
-		handle_cd_env(lst_env, ft_fusion_string, "export OLDPWD=", old_pwd);
+		handle_cd_env(lst_env, "export OLDPWD=", old_pwd, str_pipes);
 	}
 	free_matrix(split);
 }

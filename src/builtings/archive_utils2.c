@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:00:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/27 16:07:02 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/30 19:10:18 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_lstadd_back_ms(t_lst_env **lst, t_lst_env *new)
 
 int	ft_lstsize_ms(t_lst_env *lst)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (lst != NULL)
@@ -41,13 +41,13 @@ int	ft_lstsize_ms(t_lst_env *lst)
 	return (i);
 }
 
-void	handle_cd_env(t_lst_env **lst_env, char *f(char *s1, char *s2),
-		char *export_text, char *pwd)
+void	handle_cd_env(t_lst_env **lst_env, char *export_text, char *pwd,
+		t_pipex *str_pipes)
 {
 	char	*aux;
 
-	aux = f(export_text, pwd);
-	ft_export(aux, lst_env);
+	aux = ft_fusion_string(export_text, pwd);
+	ft_export(aux, lst_env, str_pipes);
 	free(aux);
 	free(pwd);
 }
