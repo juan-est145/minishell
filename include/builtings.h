@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 15:49:05 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:24:10 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int							redirect_stdout(t_ast *node, int fd_pipe[2],
 int							here_doc(char *limit);
 
 // BUILTINGS
-void						ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
+pid_t						ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
 								t_process_cmd type_cmd);
 pid_t						ft_echo(char *text, t_ast *node, int fd_pipe[2],
 								t_process_cmd type_cmd);

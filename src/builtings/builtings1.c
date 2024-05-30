@@ -3,42 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/30 15:47:21 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:25:17 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-void	ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
+pid_t	ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
 		t_process_cmd type_cmd)
 {
 	char	*pwd;
 	char	**split;
 	int		fd;
+	pid_t	pid;
 
-	fd = redirect_stdout(node, fd_pipe, type_cmd);
-	split = ft_split(text, ' ');
-	if (split[1] != NULL)
+	pid = fork();
+	if (pid == CHILD)
 	{
-		printf("Too many arguments with PWD command\n");
+		fd = redirect_stdout(node, fd_pipe, type_cmd);
+		split = ft_split(text, ' ');
+		if (split[1] != NULL)
+		{
+			printf("Too many arguments with PWD command\n");
+			free_matrix(split);
+			exit(EXIT_FAILURE);
+		}
+		pwd = getcwd(NULL, 0);
+		if (pwd == NULL)
+			printf("Error obtaining PWD\n");
+		printf("%s\n", pwd);
+		free(pwd);
+		if (fd > 0)
+		{
+			close(fd);
+			dup2(0, STDOUT_FILENO);
+		}
 		free_matrix(split);
-		return ;
+		exit(0);
 	}
-	pwd = getcwd(NULL, 0);
-	if (pwd == NULL)
-		printf("Error obtaining PWD\n");
-	printf("%s\n", pwd);
-	free(pwd);
-	if (fd > 0)
-	{
-		close(fd);
-		dup2(0, STDOUT_FILENO);
-	}
-	free_matrix(split);
+	return(pid);
 }
 
 bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
