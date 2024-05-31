@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 12:07:01 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:06:07 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ void						cd_parent_process(char *text, t_lst_env **lst_env,
 								t_pipex *str_pipes);
 int							cd_no_argument(char *old_pwd, char **split,
 								t_lst_env **lst_env, t_pipex *str_pipes);
-void						ft_exit(t_ast **head, t_lst_env *lst_env,
+pid_t						ft_exit(t_ast **head, t_lst_env *lst_env,
+								char *prompt, t_process_cmd type_cmd);
+void						exit_process(t_ast **head, t_lst_env *lst_env,
 								char *prompt);
 
 void						handle_cd_env(t_lst_env **lst_env,

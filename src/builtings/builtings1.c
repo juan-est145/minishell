@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/30 19:09:26 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:08:45 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,21 @@ pid_t	ft_cd(char *text, t_lst_env **lst_env, t_process_cmd type_cmd,
 	return (pid);
 }
 
-void	ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt)
+pid_t	ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt,
+		t_process_cmd type_cmd)
 {
-	// TO DO, CHECK WHAT HAPPENS WITH PIPES AND THIS CMD
-	clean_ast(*head);
-	rl_clear_history();
-	free_copie_env(&lst_env);
-	free_lst_env(lst_env);
-	free(prompt);
-	exit(0);
+	pid_t	pid;
+
+	pid = -1;
+	if (type_cmd == SIMPLE_CMD)
+	{
+		exit_process(head, lst_env, prompt);
+		return (pid);
+	}
+	pid = fork();
+	if (pid == CHILD)
+		exit_process(head, lst_env, prompt);
+	return (pid);
+
+
 }

@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:52:55 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 11:14:17 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 12:42:09 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,14 @@ void	unset_parent_process(char *text, t_lst_env **lst_env)
 		temp = temp->next;
 	}
 	free_matrix(split);
+}
+
+void	exit_process(t_ast **head, t_lst_env *lst_env, char *prompt)
+{
+	clean_ast (*head);
+	rl_clear_history();
+	free_copie_env(&lst_env);
+	free_lst_env(lst_env);
+	free(prompt);
+	exit(0);
 }
