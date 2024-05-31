@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 19:08:46 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:59:09 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 	else if (ft_strncmp(node->args, "env\0", 4) == 0)
 		return (ft_env(str_pipe->lst_env, node, str_pipe->fd, type_cmd));
 	else if (ft_strncmp(node->args, "export ", 7) == 0)
-		return (ft_export(node->args, str_pipe->lst_env, str_pipe));
+		return (ft_export(node->args, str_pipe->lst_env, str_pipe, type_cmd));
 	else if (ft_strncmp(node->args, "unset ", 6) == 0)
 	{
 		ft_unset(node->args, str_pipe->lst_env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 19:16:32 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:20:04 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ pid_t						ft_env(t_lst_env **lst_env, t_ast *node,
 void						env_process(t_lst_env **lst_env, t_ast *node,
 								int fd_pipe[2], t_process_cmd cmd_type);
 pid_t						ft_export(char *new, t_lst_env **lst_env,
-								t_pipex *str_pipe);
+								t_pipex *str_pipe, t_process_cmd type_cmd);
 void						export_process(char *new, t_lst_env **lst_env);
-void						ft_unset(char *text, t_lst_env **lst_env);
+void						export_parent_process(char *new,
+								t_lst_env **lst_env);
+void 						ft_unset(char *text, t_lst_env **lst_env);
 bool						ft_unset_normi(t_lst_env **temp, bool flag,
 								t_lst_env *previous);
 pid_t						ft_cd(char *text, t_lst_env **lst_env,

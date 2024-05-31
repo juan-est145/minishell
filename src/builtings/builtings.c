@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 18:59:52 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:58:41 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,18 @@ pid_t	ft_env(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
 }
 
 // IMITA EL COMANDO EXPORT
-pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe)
+pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe, t_process_cmd type_cmd)
 {
 	pid_t	pid;
-
+	
+	pid = -1;
+	if (type_cmd == SIMPLE_CMD)
+	{
+		export_parent_process(new, lst_env);
+		free_copie_env(str_pipe->lst_env);
+		up_env(str_pipe->lst_env);
+		return (pid);		
+	}
 	pid = fork();
 	if (pid == CHILD)
 		export_process(new, lst_env);

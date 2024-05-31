@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings_child_process.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 19:17:00 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:11:03 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ void	cd_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
 					"Could not access directory") == 1)
 				exit(EXIT_FAILURE);
 			pwd = getcwd(NULL, 0);
-			handle_cd_env(lst_env, "export PWD=", pwd, str_pipes);
+			handle_cd_env(lst_env, "PIPES", pwd, str_pipes);
 		}
-		handle_cd_env(lst_env, "export OLDPWD=", old_pwd, str_pipes);
+		handle_cd_env(lst_env, "PIPES", old_pwd, str_pipes);
 	}
 	free_matrix(split);
 	exit(0);

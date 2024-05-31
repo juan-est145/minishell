@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:00:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/30 19:10:18 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:18:30 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,16 @@ void	handle_cd_env(t_lst_env **lst_env, char *export_text, char *pwd,
 		t_pipex *str_pipes)
 {
 	char	*aux;
+	char	*text;
 
-	aux = ft_fusion_string(export_text, pwd);
-	ft_export(aux, lst_env, str_pipes);
-	free(aux);
-	free(pwd);
+	text = "PIPES";
+	if (export_text != text)
+	{
+		aux = ft_fusion_string(export_text, pwd);
+		ft_export(aux, lst_env, str_pipes, SIMPLE_CMD);
+		free(aux);
+		free(pwd);
+	}
 }
 
 int	ignore_space(char *text, int i)
