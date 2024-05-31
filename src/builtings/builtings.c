@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 13:21:10 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:42:59 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ pid_t	ft_env(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
 	pid = fork();
 	if (pid == CHILD)
 		env_process(lst_env, node, fd_pipe, cmd_type);
+	if (cmd_type == SIMPLE_CMD)
+		waitpid(pid, NULL, 0);
 	return (pid);
 }
 

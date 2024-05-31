@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/31 13:21:17 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:46:39 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ pid_t	ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
 	pid = fork();
 	if (pid == CHILD)
 		pwd_process(text, node, fd_pipe, type_cmd);
+	if (type_cmd == SIMPLE_CMD)
+		waitpid(pid, NULL, 0);
 	return (pid);
 }
 
@@ -60,6 +62,8 @@ pid_t	ft_echo(char *text, t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
 	pid = fork();
 	if (pid == CHILD)
 		echo_process(text, node, fd_pipe, type_cmd);
+	if (type_cmd == SIMPLE_CMD)
+		waitpid(pid, NULL, 0);
 	return (pid);
 }
 
