@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:06:54 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/27 13:41:14 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:45:40 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,16 @@ char	*initial_print(char **env)
 void	prepare_signals(void)
 {
 	struct sigaction	sa;
+	struct sigaction	sa_quit;
 
 	sa.sa_handler = &signal_handler;
+	sa_quit.sa_handler = SIG_IGN;
 	my_sigemptyset(&sa.sa_mask);
+	my_sigemptyset(&sa_quit.sa_mask);
 	sa.sa_flags = SA_RESTART;
+	sa_quit.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+	sigaction(SIGQUIT, &sa_quit, NULL);
 }
 
 void	my_sigemptyset(sigset_t *set)
@@ -68,8 +72,6 @@ void	signal_handler(int signum)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (signum == SIGQUIT)
-		close(STDIN_FILENO);
 }
 
 void	print_swamp(void)
