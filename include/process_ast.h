@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_ast.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:14:04 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 13:03:26 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:45:10 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_process_cmd
 	SIMPLE_CMD,
 	ENTRY_PIPE,
 	EXIT_PIPE,
+	MIDDLE_PIPE,
 }							t_process_cmd;
 
 pid_t						read_cmd(t_ast *node, t_pipex *str_pipe,

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:06:54 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:08:45 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ t_ast	*create_ast(t_token_list **head, bool *syntax_error)
 		return (NULL);
 	if (*syntax_error == true)
 		return (printf("Syntax error\n"), clean_ast(ast_head), NULL);
+	if (ast_head->parse_identifier == PARSE_PIPE)
+	{
+		ast_head->right->simple_or_pipe = EXIT_PIPE;
+		find_first_pipe_cmd(ast_head);
+	}
 	return (ast_head);
 }
 
@@ -72,6 +77,7 @@ static t_ast	*process_current_token(t_token_list **head, bool *syntax_error)
 	if (ast_node == NULL)
 		return (NULL);
 	ast_node->parse_identifier = PARSE_CMD;
+	ast_node->simple_or_pipe = SIMPLE_CMD;
 	ast_node->redirections = NULL;
 	ast_node->args = NULL;
 	if (ast_node == NULL)

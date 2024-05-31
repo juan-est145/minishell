@@ -6,13 +6,14 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:57 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:13:00 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:07:24 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
+# include "process_ast.h"
 # include <stdbool.h>
 
 typedef enum e_parse_identifier
@@ -35,6 +36,7 @@ typedef struct s_ast
 {
 	t_parse_identifier		parse_identifier;
 	t_redirections			*redirections;
+	t_process_cmd			simple_or_pipe;
 	char					*args;
 	struct s_ast			*left;
 	struct s_ast			*right;
@@ -54,6 +56,7 @@ t_redirections				*create_red_node(t_token_identifier red_type);
 void						append_red_node(t_redirections **head,
 								t_redirections *node);
 t_ast						*malloc_check(t_ast *left);
-int							redirected_destination(t_redirections **node);//MIO
+int							redirected_destination(t_redirections **node);
+void						find_first_pipe_cmd(t_ast *ast_node);
 
 #endif

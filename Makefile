@@ -20,6 +20,7 @@ $(TOKEN_PATH)/expand_variables.c\
 $(PARSE_PATH)/parse.c\
 $(PARSE_PATH)/parse_utils.c\
 $(PARSE_PATH)/parse_utils2.c\
+$(PARSE_PATH)/find_first_pipe_cmd.c\
 $(BUILTINGS_PATH)/archive_env.c\
 $(BUILTINGS_PATH)/archive_utils.c\
 $(BUILTINGS_PATH)/archive_utils1.c\

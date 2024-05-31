@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:06:32 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:53:55 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,14 @@ t_ast	*join_left_right_nodes(t_ast *left, t_ast *right,
 		new_node->parse_identifier = PARSE_OR;
 	new_node->args = NULL;
 	new_node->redirections = NULL;
+	new_node->simple_or_pipe = MIDDLE_PIPE;
 	new_node->right = right;
 	new_node->left = left;
+	if (current_parse == PIPE)
+	{
+		new_node->left->simple_or_pipe = MIDDLE_PIPE;
+		new_node->right->simple_or_pipe = MIDDLE_PIPE;
+	}
 	return (new_node);
 }
 
