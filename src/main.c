@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/30 12:44:08 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:43:33 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,19 @@ static t_ast	*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe)
 		&& node->left->parse_identifier == PARSE_CMD
 		&& node->right->parse_identifier == PARSE_CMD)
 		return (read_pipe(node, str_pipe->lst_env, str_pipe, prompt), node);
-	execute_ast(node->left, prompt, str_pipe);
-	execute_ast(node->right, prompt, str_pipe);
+	else if (node->parse_identifier == PARSE_PIPE
+		&& node->left->parse_identifier == PARSE_PIPE
+		&& node->right->parse_identifier == PARSE_CMD)
+	{
+		execute_ast(node->left, prompt, str_pipe);
+		//execute_ast(node->right, prompt, str_pipe);
+		return (read_pipe(node, str_pipe->lst_env, str_pipe, prompt), node);
+	}
+	/*else
+	{
+		execute_ast(node->left, prompt, str_pipe);
+		execute_ast(node->right, prompt, str_pipe);
+	}*/
 	return (node);
 }
 
