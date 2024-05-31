@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 10:58:41 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 12:06:01 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ bool	ft_unset_normi(t_lst_env **temp, bool flag, t_lst_env *previous)
 	return (flag);
 }
 
-static bool	ft_unset_normi2(char **split, t_lst_env *previous, bool flag,
+bool	ft_unset_normi2(char **split, t_lst_env *previous, bool flag,
 		t_lst_env **temp)
 {
 	int		i;
@@ -93,26 +93,21 @@ static bool	ft_unset_normi2(char **split, t_lst_env *previous, bool flag,
 	return (flag);
 }
 
-void	ft_unset(char *text, t_lst_env **lst_env)
+pid_t	ft_unset(char *text, t_lst_env **lst_env, t_process_cmd type_cmd)
 {
-	t_lst_env	*temp;
-	t_lst_env	*previous;
-	bool		flag;
-	char		**split;
-
-	// TO DO: CHECK UNSET WITH PIPES, SEE WHAT HAPPENS
-	flag = false;
-	split = ft_split(text, ' ');
-	is_first(text, lst_env);
-	temp = *lst_env;
-	previous = temp;
-	while (temp != NULL)
+	pid_t	pid;
+	pid = -1;
+	if (type_cmd == SIMPLE_CMD)
 	{
-		flag = ft_unset_normi2(split, previous, flag, &temp);
-		if (flag == true)
-			break ;
-		previous = temp;
-		temp = temp->next;
+		unset_parent_process(text, lst_env);
+		free_copie_env(lst_env);
+		up_env(lst_env);
+		return (pid);
 	}
-	free_matrix(split);
+	pid = fork();
+	if (pid == CHILD)
+		unset_process(text, lst_env);
+	free_copie_env(lst_env);
+	up_env(lst_env);
+	return (pid);	
 }
