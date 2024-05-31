@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 12:06:01 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:21:10 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,18 @@ pid_t	ft_env(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
 }
 
 // IMITA EL COMANDO EXPORT
-pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe, t_process_cmd type_cmd)
+pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe,
+		t_process_cmd type_cmd)
 {
 	pid_t	pid;
-	
+
 	pid = -1;
 	if (type_cmd == SIMPLE_CMD)
 	{
 		export_parent_process(new, lst_env);
 		free_copie_env(str_pipe->lst_env);
 		up_env(str_pipe->lst_env);
-		return (pid);		
+		return (pid);
 	}
 	pid = fork();
 	if (pid == CHILD)
@@ -96,6 +97,7 @@ bool	ft_unset_normi2(char **split, t_lst_env *previous, bool flag,
 pid_t	ft_unset(char *text, t_lst_env **lst_env, t_process_cmd type_cmd)
 {
 	pid_t	pid;
+
 	pid = -1;
 	if (type_cmd == SIMPLE_CMD)
 	{
@@ -109,5 +111,5 @@ pid_t	ft_unset(char *text, t_lst_env **lst_env, t_process_cmd type_cmd)
 		unset_process(text, lst_env);
 	free_copie_env(lst_env);
 	up_env(lst_env);
-	return (pid);	
+	return (pid);
 }

@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:52:55 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 12:42:09 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:21:00 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	export_process(char *new, t_lst_env **lst_env)
 	char		**split;
 	int			i;
 
-	// TO DO: CHECK EXPORT WITH PIPES, SEE WHAT HAPPENS
 	i = 0;
 	split = ft_split(new, ' ');
 	while (split[i])
@@ -49,7 +48,6 @@ void	export_parent_process(char *new, t_lst_env **lst_env)
 	char		**split;
 	int			i;
 
-	// TO DO: CHECK EXPORT WITH PIPES, SEE WHAT HAPPENS
 	i = 0;
 	split = ft_split(new, ' ');
 	while (split[i])
@@ -76,7 +74,7 @@ void	unset_process(char *text, t_lst_env **lst_env)
 	t_lst_env	*previous;
 	bool		flag;
 	char		**split;
-	
+
 	flag = false;
 	split = ft_split(text, ' ');
 	is_first(text, lst_env);
@@ -93,13 +91,14 @@ void	unset_process(char *text, t_lst_env **lst_env)
 	free_matrix(split);
 	exit(0);
 }
+
 void	unset_parent_process(char *text, t_lst_env **lst_env)
 {
 	t_lst_env	*temp;
 	t_lst_env	*previous;
 	bool		flag;
 	char		**split;
-	
+
 	flag = false;
 	split = ft_split(text, ' ');
 	is_first(text, lst_env);
@@ -118,7 +117,7 @@ void	unset_parent_process(char *text, t_lst_env **lst_env)
 
 void	exit_process(t_ast **head, t_lst_env *lst_env, char *prompt)
 {
-	clean_ast (*head);
+	clean_ast(*head);
 	rl_clear_history();
 	free_copie_env(&lst_env);
 	free_lst_env(lst_env);

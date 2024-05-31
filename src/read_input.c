@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:20:41 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/28 18:48:55 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:20:02 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*read_input(char *prompt, t_lst_env **lst_env)
 	add_history(text);
 	return (text);
 }
+
 t_pipex	init_str_pipe(t_lst_env **lst_env)
 {
 	t_pipex	str_pipe;

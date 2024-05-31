@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 13:06:07 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:16:26 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ void						handle_cd_env(t_lst_env **lst_env,
 void						is_first(char *text, t_lst_env **lst_env);
 char						**search_lst_env(char *text, t_lst_env **lst_env);
 int							check_array_length(char **array);
-int							errors_cd(char *old_pwd, char **dir, char **split,
-								char *text);
 int							errors_cd(char *old_pwd, char **dir, char **split,
 								char *text);
 

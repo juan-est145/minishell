@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 13:08:02 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:21:40 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 	else if (ft_strncmp(node->args, "export ", 7) == 0)
 		return (ft_export(node->args, str_pipe->lst_env, str_pipe, type_cmd));
 	else if (ft_strncmp(node->args, "unset ", 6) == 0)
-		return(ft_unset(node->args, str_pipe->lst_env, type_cmd));
+		return (ft_unset(node->args, str_pipe->lst_env, type_cmd));
 	else if (ft_strncmp(node->args, "cd", 2) == 0)
 		return (ft_cd(node->args, str_pipe->lst_env, type_cmd, str_pipe));
 	else if (ft_strncmp(node->args, "exit", 4) == 0)
-		return (ft_exit(&str_pipe->ast_head, *str_pipe->lst_env, prompt, type_cmd));
+		return (ft_exit(&str_pipe->ast_head, *str_pipe->lst_env, prompt,
+				type_cmd));
 	else
 		return (process_cmd(node, str_pipe->lst_env, str_pipe, type_cmd));
 }

@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/31 13:08:45 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:21:17 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,4 @@ pid_t	ft_exit(t_ast **head, t_lst_env *lst_env, char *prompt,
 	if (pid == CHILD)
 		exit_process(head, lst_env, prompt);
 	return (pid);
-
-
 }
