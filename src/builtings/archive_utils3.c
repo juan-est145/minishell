@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/30 12:11:50 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:02:58 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	redirect_stdout_input(t_ast *node, int fd);
 int	redirect_stdout(t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
 {
 	int	fd;
-
+	//TO DO: Arreglar para que funcione lcon multiple pipe y con redireccion al final
 	fd = 0;
 	fd = redirect_stdout_input(node, fd);
 	fd = redirect_stdout_output(node, fd);
@@ -27,6 +27,11 @@ int	redirect_stdout(t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
 		return (fd);
 	if (type_cmd == ENTRY_PIPE)
 		dup2(fd_pipe[WRITE], STDOUT_FILENO);
+	else if (type_cmd == MIDDLE_PIPE )
+	{
+		dup2(fd_pipe[WRITE], STDOUT_FILENO);
+		dup2(fd_pipe[READ], STDIN_FILENO);
+	}
 	else
 		dup2(fd_pipe[READ], STDIN_FILENO);
 	close(fd_pipe[WRITE]);

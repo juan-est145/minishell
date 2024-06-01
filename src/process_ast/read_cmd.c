@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 15:46:57 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:45:55 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,26 @@ void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 	pid_t	pid2;
 
 	(void)lst_env;
-	if (str_pipe->fd[READ] == 0 && str_pipe->fd[WRITE] == 0)
-		pipe(str_pipe->fd);
-	pid1 = read_cmd(node->left, str_pipe, prompt, ENTRY_PIPE);
-	pid2 = read_cmd(node->right, str_pipe, prompt, EXIT_PIPE);
+	pid1 = -1;
+	pid2 = -1;
+	//if (str_pipe->fd[READ] == 0 && str_pipe->fd[WRITE] == 0)
+	pipe(str_pipe->fd);
+	if (node->left->simple_or_pipe == ENTRY_PIPE)
+		pid1 = read_cmd(node->left, str_pipe, prompt, ENTRY_PIPE);
+	if (node->right->simple_or_pipe == MIDDLE_PIPE)
+		pid2 = read_cmd(node->right, str_pipe, prompt, MIDDLE_PIPE);
+	else if (node->right->simple_or_pipe == EXIT_PIPE)
+	{
+		pid2 = read_cmd(node->right, str_pipe, prompt, EXIT_PIPE);
+		//str_pipe->fd[READ] = 0;
+		//str_pipe->fd[WRITE] = 0;	
+	}
 	close(str_pipe->fd[READ]);
 	close(str_pipe->fd[WRITE]);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
-	str_pipe->fd[READ] = 0;
-	str_pipe->fd[WRITE] = 0;
+	if (pid1 != -1)
+		waitpid(pid1, NULL, 0);
+	if (pid2 != -1)
+		waitpid(pid2, NULL, 0);
 }
 
 static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,

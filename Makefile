@@ -84,4 +84,4 @@ debug: CFLAGS += -g
 debug: make-library-debug $(NAME)
 
 val: 
-	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME)
