@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:01:15 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 16:40:15 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:03:17 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_pipex	*create_fd_arrays(t_pipex *str_pipe, t_ast *head)
 		head = head->left;
 		i++;
 	}
-	str_pipe->fd_arrays = malloc(sizeof(int **) * (i + 1));
+	str_pipe->fd_arrays = malloc(sizeof(int *) * (i + 1));
 	if (str_pipe->fd_arrays == NULL)
 		return (NULL);
 	fill_fd_arrays(str_pipe, i, &mem_problems);
@@ -56,19 +56,16 @@ static void	fill_fd_arrays(t_pipex *str_pipe, unsigned int limit,
 	i = 0;
 	while (i < limit)
 	{
-		if (i == limit - 1)
-			str_pipe->fd_arrays[i] = NULL;
-		else
+		str_pipe->fd_arrays[i] = malloc(sizeof(int) * 2);
+		if (str_pipe->fd_arrays[i] == NULL)
 		{
-			str_pipe->fd_arrays[i] = malloc(sizeof(int *));
-			if (str_pipe->fd_arrays[i] == NULL)
-			{
-				*mem_problems = true;
-				free_fd_arrays(str_pipe->fd_arrays);
-				return ;
-			}
+			*mem_problems = true;
+			free_fd_arrays(str_pipe->fd_arrays);
+			return ;
 		}
+		i++;
 	}
+	str_pipe->fd_arrays[i] = NULL;
 }
 
 void	free_fd_arrays(int **fd_arrays)

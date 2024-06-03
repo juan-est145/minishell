@@ -5,6 +5,7 @@ minishell
 !env-cases.txt
 !log.txt
 minishell_evaluation_page.pdf
+settings.json
 
 # Prerequisites
 *.d

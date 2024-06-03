@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 17:47:11 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:11:27 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,8 @@ static t_ast	*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe)
 		&& node->right->parse_identifier == PARSE_CMD)
 	{
 		execute_ast(node->left, prompt, str_pipe);
-		//execute_ast(node->right, prompt, str_pipe);
 		return (read_pipe(node, str_pipe->lst_env, str_pipe, prompt), node);
 	}
 	return (node);
 }
 
-// Perhaps there should be another if to check that
-// if the current node is a pipe, i'ts left node
-// is also a pipe but right node is a cmd, it should
-// perhaps only traverse to the left node and then execute
-// the right node. Will need to check once we start using
-// real pipes
