@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/03 18:26:09 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:37:25 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	redirect_stdout(t_ast *node, t_pipex *str_pipe, t_process_cmd type_cmd)
 	}
 	else
 	{
-		dup2(str_pipe->fd_arrays[array_num - 2][READ], STDIN_FILENO);
-		close(str_pipe->fd_arrays[array_num - 2][READ]);
+		dup2(str_pipe->fd_arrays[array_num - 1][READ], STDIN_FILENO);
+		close(str_pipe->fd_arrays[array_num - 1][READ]);
 	}
 	return (fd);
 }
