@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/31 18:02:58 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:26:09 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,37 @@
 static int	redirect_stdout_output(t_ast *node, int fd);
 static int	redirect_stdout_input(t_ast *node, int fd);
 
-int	redirect_stdout(t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
+int	redirect_stdout(t_ast *node, t_pipex *str_pipe, t_process_cmd type_cmd)
 {
 	int	fd;
-	//TO DO: Arreglar para que funcione lcon multiple pipe y con redireccion al final
+	unsigned int array_num;
+
+	// TO DO: Arreglar para que funcione lcon multiple pipe y con redireccion al final
+	array_num = str_pipe->fd_array_num;
 	fd = 0;
 	fd = redirect_stdout_input(node, fd);
 	fd = redirect_stdout_output(node, fd);
 	if (fd != 0 || type_cmd == SIMPLE_CMD)
 		return (fd);
 	if (type_cmd == ENTRY_PIPE)
-		dup2(fd_pipe[WRITE], STDOUT_FILENO);
-	else if (type_cmd == MIDDLE_PIPE )
 	{
-		dup2(fd_pipe[WRITE], STDOUT_FILENO);
-		dup2(fd_pipe[READ], STDIN_FILENO);
+		dup2(str_pipe->fd_arrays[0][WRITE], STDOUT_FILENO);
+		close(str_pipe->fd_arrays[0][READ]);
+		close(str_pipe->fd_arrays[0][READ]);
+	}
+	else if (type_cmd == MIDDLE_PIPE)
+	{
+		dup2(str_pipe->fd_arrays[array_num - 2][READ], STDIN_FILENO);
+		dup2(str_pipe->fd_arrays[array_num - 1][WRITE], STDOUT_FILENO);
+		close(str_pipe->fd_arrays[array_num - 2][READ]);
+		close(str_pipe->fd_arrays[array_num - 1][READ]);
+		close(str_pipe->fd_arrays[array_num - 1][WRITE]);
 	}
 	else
-		dup2(fd_pipe[READ], STDIN_FILENO);
-	close(fd_pipe[WRITE]);
-	close(fd_pipe[READ]);
+	{
+		dup2(str_pipe->fd_arrays[array_num - 2][READ], STDIN_FILENO);
+		close(str_pipe->fd_arrays[array_num - 2][READ]);
+	}
 	return (fd);
 }
 

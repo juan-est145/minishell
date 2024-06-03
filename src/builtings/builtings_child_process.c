@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtings_child_process.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 10:11:03 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:36:42 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-void	echo_process(char *text, t_ast *node, int fd_pipe[2],
+void	echo_process(char *text, t_ast *node, t_pipex *str_pipe,
 		t_process_cmd type_cmd)
 {
 	int		i;
@@ -22,7 +22,7 @@ void	echo_process(char *text, t_ast *node, int fd_pipe[2],
 	char	delimiter;
 	int		fd;
 
-	fd = redirect_stdout(node, fd_pipe, type_cmd);
+	fd = redirect_stdout(node, str_pipe, type_cmd);
 	i = 4;
 	open = false;
 	flag = false;
@@ -41,14 +41,14 @@ void	echo_process(char *text, t_ast *node, int fd_pipe[2],
 	exit(0);
 }
 
-void	pwd_process(char *text, t_ast *node, int fd_pipe[2],
+void	pwd_process(char *text, t_ast *node, t_pipex *str_pipe,
 		t_process_cmd type_cmd)
 {
 	char	*pwd;
 	char	**split;
 	int		fd;
 
-	fd = redirect_stdout(node, fd_pipe, type_cmd);
+	fd = redirect_stdout(node, str_pipe, type_cmd);
 	split = ft_split(text, ' ');
 	if (split[1] != NULL)
 	{
@@ -70,14 +70,14 @@ void	pwd_process(char *text, t_ast *node, int fd_pipe[2],
 	exit(0);
 }
 
-void	env_process(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
+void	env_process(t_lst_env **lst_env, t_ast *node, t_pipex *str_pipe,
 		t_process_cmd cmd_type)
 {
 	char		**split;
 	t_lst_env	*temp;
 	int			fd;
 
-	fd = redirect_stdout(node, fd_pipe, cmd_type);
+	fd = redirect_stdout(node, str_pipe, cmd_type);
 	temp = *lst_env;
 	split = ft_split(node->args, ' ');
 	if (split[1] != NULL)

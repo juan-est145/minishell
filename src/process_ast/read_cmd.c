@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 18:45:55 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:33:58 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 		t_process_cmd type_cmd)
 {
+	//CHange array in builtins later
 	if (ft_strncmp(node->args, "pwd\0", 4) == 0 || ft_strncmp(node->args,
 			"pwd ", 4) == 0)
-		return (ft_getpwd(node->args, node, str_pipe->fd, type_cmd));
+		return (ft_getpwd(node->args, node, str_pipe, type_cmd));
 	else if (ft_strncmp(node->args, "echo ", 4) == 0)
-		return (ft_echo(node->args, node, str_pipe->fd, type_cmd));
+		return (ft_echo(node->args, node, str_pipe, type_cmd));
 	else if (ft_strncmp(node->args, "env\0", 4) == 0)
-		return (ft_env(str_pipe->lst_env, node, str_pipe->fd, type_cmd));
+		return (ft_env(str_pipe->lst_env, node, str_pipe, type_cmd));
 	else if (ft_strncmp(node->args, "export ", 7) == 0)
 		return (ft_export(node->args, str_pipe->lst_env, str_pipe, type_cmd));
 	else if (ft_strncmp(node->args, "unset ", 6) == 0)
@@ -44,26 +45,24 @@ pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 		char *prompt)
 {
-	pid_t	pid1;
-	pid_t	pid2;
+	pid_t			pid1;
+	pid_t			pid2;
+	unsigned int	fd_position;
 
 	(void)lst_env;
 	pid1 = -1;
 	pid2 = -1;
-	//if (str_pipe->fd[READ] == 0 && str_pipe->fd[WRITE] == 0)
-	pipe(str_pipe->fd);
+	open_pipes(str_pipe, node);
+	fd_position = str_pipe->fd_array_num;
 	if (node->left->simple_or_pipe == ENTRY_PIPE)
 		pid1 = read_cmd(node->left, str_pipe, prompt, ENTRY_PIPE);
+	if (node->left->parse_identifier == PARSE_CMD && node->right->simple_or_pipe == MIDDLE_PIPE)
+		close(str_pipe->fd_arrays[fd_position - 2][WRITE]);
 	if (node->right->simple_or_pipe == MIDDLE_PIPE)
 		pid2 = read_cmd(node->right, str_pipe, prompt, MIDDLE_PIPE);
 	else if (node->right->simple_or_pipe == EXIT_PIPE)
-	{
 		pid2 = read_cmd(node->right, str_pipe, prompt, EXIT_PIPE);
-		//str_pipe->fd[READ] = 0;
-		//str_pipe->fd[WRITE] = 0;	
-	}
-	close(str_pipe->fd[READ]);
-	close(str_pipe->fd[WRITE]);
+	close_pipes(str_pipe, node);
 	if (pid1 != -1)
 		waitpid(pid1, NULL, 0);
 	if (pid2 != -1)
@@ -83,7 +82,7 @@ static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 	fd = 0;
 	if (pid == CHILD)
 	{
-		fd = redirect_stdout(node, str_pipe->fd, cmd_type);
+		fd = redirect_stdout(node, str_pipe, cmd_type);
 		command = ft_split(node->args, ' ');
 		segmention_path(lst_env, &str_pipes);
 		dir_cmd = search_comand(&str_pipes, command);

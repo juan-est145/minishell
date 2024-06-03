@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/31 15:46:39 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:39:15 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-pid_t	ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
+pid_t	ft_getpwd(char *text, t_ast *node, t_pipex *str_pipe,
 		t_process_cmd type_cmd)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == CHILD)
-		pwd_process(text, node, fd_pipe, type_cmd);
+		pwd_process(text, node, str_pipe, type_cmd);
 	if (type_cmd == SIMPLE_CMD)
 		waitpid(pid, NULL, 0);
 	return (pid);
@@ -55,13 +55,13 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 }
 
 // IMITA LA FUNCION ECHO
-pid_t	ft_echo(char *text, t_ast *node, int fd_pipe[2], t_process_cmd type_cmd)
+pid_t	ft_echo(char *text, t_ast *node, t_pipex *str_pipe, t_process_cmd type_cmd)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == CHILD)
-		echo_process(text, node, fd_pipe, type_cmd);
+		echo_process(text, node, str_pipe, type_cmd);
 	if (type_cmd == SIMPLE_CMD)
 		waitpid(pid, NULL, 0);
 	return (pid);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 15:42:59 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:39:48 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include "../../libft/libft.h"
 
 // IMITA EL COMANDO ENV
-pid_t	ft_env(t_lst_env **lst_env, t_ast *node, int fd_pipe[2],
+pid_t	ft_env(t_lst_env **lst_env, t_ast *node, t_pipex *str_pipe,
 		t_process_cmd cmd_type)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == CHILD)
-		env_process(lst_env, node, fd_pipe, cmd_type);
+		env_process(lst_env, node, str_pipe, cmd_type);
 	if (cmd_type == SIMPLE_CMD)
 		waitpid(pid, NULL, 0);
 	return (pid);

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:14:04 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 16:45:10 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:58:49 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,6 @@ pid_t						read_cmd(t_ast *node, t_pipex *str_pipe,
 								char *prompt, t_process_cmd type_cmd);
 void						read_pipe(t_ast *node, t_lst_env **lst_env,
 								t_pipex *str_pipe, char *prompt);
+void						open_pipes(t_pipex *str_pipe, t_ast *node);
+void						close_pipes(t_pipex *str_pipe, t_ast *node);
 #endif

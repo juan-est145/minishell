@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/01 10:03:16 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:47:11 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,12 @@ static void	process_input(char *prompt, t_lst_env **lst_env)
 		head = start_token_list(text, lst_env);
 		if (head == NULL)
 			continue ;
-		str_pipe.ast_head = create_ast(&head, &syntax_error);
+		str_pipe.ast_head = create_ast(&head, &syntax_error, &str_pipe);
 		if (syntax_error == true)
 			continue ;
 		if (str_pipe.ast_head == NULL && errno == ENOMEM)
 			error_msgs(AST_MALLOC_FAILURE);
 		execute_ast(str_pipe.ast_head, prompt, &str_pipe);
-		str_pipe.fd[READ] = 0;
-		str_pipe.fd[WRITE] = 0;
 		clean_ast(str_pipe.ast_head);
 	}
 }
@@ -110,11 +108,6 @@ static t_ast	*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe)
 		//execute_ast(node->right, prompt, str_pipe);
 		return (read_pipe(node, str_pipe->lst_env, str_pipe, prompt), node);
 	}
-	/*else
-	{
-		execute_ast(node->left, prompt, str_pipe);
-		execute_ast(node->right, prompt, str_pipe);
-	}*/
 	return (node);
 }
 

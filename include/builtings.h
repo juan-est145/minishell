@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 13:16:26 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:40:00 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,25 @@ t_lst_env					*ft_lstnew_ms(char *content);
 char						*get_pwd_cd(t_lst_env *lst_env);
 int							ignore_space(char *text, int i);
 
-int							redirect_stdout(t_ast *node, int fd_pipe[2],
+int							redirect_stdout(t_ast *node, t_pipex *str_pipe,
 								t_process_cmd type_cmd);
 int							here_doc(char *limit);
 
 // BUILTINGS
-pid_t						ft_getpwd(char *text, t_ast *node, int fd_pipe[2],
-								t_process_cmd type_cmd);
-void						pwd_process(char *text, t_ast *node, int fd_pipe[2],
-								t_process_cmd type_cmd);
-pid_t						ft_echo(char *text, t_ast *node, int fd_pipe[2],
+pid_t						ft_getpwd(char *text, t_ast *node,
+								t_pipex *str_pipe, t_process_cmd type_cmd);
+void						pwd_process(char *text, t_ast *node,
+								t_pipex *str_pipe, t_process_cmd type_cmd);
+pid_t						ft_echo(char *text, t_ast *node, t_pipex *str_pipe,
 								t_process_cmd type_cmd);
 bool						ft_echo_normi(char *text, int i, bool open,
 								char delimiter);
 void						echo_process(char *text, t_ast *node,
-								int fd_pipe[2], t_process_cmd type_cmd);
+								t_pipex *str_pipe, t_process_cmd type_cmd);
 pid_t						ft_env(t_lst_env **lst_env, t_ast *node,
-								int fd_pipe[2], t_process_cmd cmd_type);
+								t_pipex *str_pipe, t_process_cmd cmd_type);
 void						env_process(t_lst_env **lst_env, t_ast *node,
-								int fd_pipe[2], t_process_cmd cmd_type);
+								t_pipex *str_pipe, t_process_cmd cmd_type);
 pid_t						ft_export(char *new, t_lst_env **lst_env,
 								t_pipex *str_pipe, t_process_cmd type_cmd);
 void						export_process(char *new, t_lst_env **lst_env);

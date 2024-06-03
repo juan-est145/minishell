@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:20:41 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/31 13:20:02 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:45:49 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_pipex	init_str_pipe(t_lst_env **lst_env)
 	t_pipex	str_pipe;
 
 	str_pipe.lst_env = lst_env;
-	str_pipe.fd[READ] = 0;
-	str_pipe.fd[WRITE] = 0;
+	str_pipe.fd_arrays = NULL;
+	str_pipe.fd_array_num = 0;
 	return (str_pipe);
 }

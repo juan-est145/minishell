@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 17:08:45 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:29:03 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_ast			*process_current_token(t_token_list **head,
 static char				*handle_cmd_args(t_token_list **head);
 static t_redirections	*handle_redir(t_token_list **head, bool *syntax_error);
 
-t_ast	*create_ast(t_token_list **head, bool *syntax_error)
+t_ast	*create_ast(t_token_list **head, bool *syntax_error, t_pipex *str_pipe)
 {
 	t_ast			*ast_head;
 	t_token_list	*head_copy;
@@ -36,6 +36,8 @@ t_ast	*create_ast(t_token_list **head, bool *syntax_error)
 	{
 		ast_head->right->simple_or_pipe = EXIT_PIPE;
 		find_first_pipe_cmd(ast_head);
+		if (create_fd_arrays(str_pipe, ast_head) == NULL)
+			return (clean_ast(ast_head), NULL);
 	}
 	return (ast_head);
 }
