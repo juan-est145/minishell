@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 19:11:27 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:51:32 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static void	process_input(char *prompt, t_lst_env **lst_env)
 			error_msgs(AST_MALLOC_FAILURE);
 		execute_ast(str_pipe.ast_head, prompt, &str_pipe);
 		clean_ast(str_pipe.ast_head);
+		str_pipe.fd_array_num = 0;
+		free_fd_arrays(str_pipe.fd_arrays);
 	}
 }
 
