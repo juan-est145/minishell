@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/03 18:39:15 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:40:32 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 }
 
 // IMITA LA FUNCION ECHO
-pid_t	ft_echo(char *text, t_ast *node, t_pipex *str_pipe, t_process_cmd type_cmd)
+pid_t	ft_echo(char *text, t_ast *node, t_pipex *str_pipe,
+		t_process_cmd type_cmd)
 {
 	pid_t	pid;
 

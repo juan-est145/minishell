@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/04 12:22:45 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/04 12:42:01 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 	fd_position = str_pipe->fd_array_num;
 	if (node->left->simple_or_pipe == ENTRY_PIPE)
 		pid1 = read_cmd(node->left, str_pipe, prompt, ENTRY_PIPE);
-	if (node->left->parse_identifier == PARSE_CMD && node->right->simple_or_pipe == MIDDLE_PIPE)
+	if (node->left->parse_identifier == PARSE_CMD
+		&& node->right->simple_or_pipe == MIDDLE_PIPE)
 		close(str_pipe->fd_arrays[fd_position - 2][WRITE]);
 	if (node->right->simple_or_pipe == MIDDLE_PIPE)
 		pid2 = read_cmd(node->right, str_pipe, prompt, MIDDLE_PIPE);

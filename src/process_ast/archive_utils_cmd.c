@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 09:50:35 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/04 11:17:03 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/04 12:41:11 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	free_copie_env(t_lst_env **lst)
 	free_matrix(temp->env);
 }
 
-void cleanup(t_pipex *str_pipe)
+void	cleanup(t_pipex *str_pipe)
 {
 	clean_ast(str_pipe->ast_head);
 	str_pipe->fd_array_num = 0;

@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/04 11:17:15 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/04 12:40:16 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,3 @@ static t_ast	*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe)
 	}
 	return (node);
 }
-

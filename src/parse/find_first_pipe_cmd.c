@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:01:15 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/04 11:10:16 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/04 12:41:48 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	find_first_pipe_cmd(t_ast *ast_node)
 	else
 		find_first_pipe_cmd(ast_node->left);
 }
+
 t_pipex	*create_fd_arrays(t_pipex *str_pipe, t_ast *head)
 {
 	unsigned int	i;
@@ -80,4 +81,3 @@ void	free_fd_arrays(int **fd_arrays)
 	}
 	free(fd_arrays);
 }
-
