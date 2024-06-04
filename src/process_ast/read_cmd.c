@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/04 11:21:32 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/04 12:22:45 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 		t_process_cmd cmd_type)
 {
-	t_pipex	str_pipes;
 	pid_t	pid;
 	char	*dir_cmd;
 	char	**command;
@@ -87,8 +86,8 @@ static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 	{
 		fd = redirect_stdout(node, str_pipe, cmd_type);
 		command = ft_split(node->args, ' ');
-		segmention_path(lst_env, &str_pipes);
-		dir_cmd = search_comand(&str_pipes, command);
+		segmention_path(lst_env, str_pipe);
+		dir_cmd = search_comand(str_pipe, command);
 		if (execve(dir_cmd, command, (*lst_env)->env) == -1)
 			exit(EXIT_FAILURE);
 	}

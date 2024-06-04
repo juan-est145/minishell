@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/03 19:37:25 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:28:00 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ int	redirect_stdout(t_ast *node, t_pipex *str_pipe, t_process_cmd type_cmd)
 	if (type_cmd == ENTRY_PIPE)
 	{
 		dup2(str_pipe->fd_arrays[0][WRITE], STDOUT_FILENO);
+		//if (node->left->parse_identifier == PARSE_CMD && node->right->parse_identifier == PARSE_CMD)
+			//close(str_pipe->fd_arrays[0][WRITE]);
 		close(str_pipe->fd_arrays[0][READ]);
-		close(str_pipe->fd_arrays[0][READ]);
+
+		//close(str_pipe->fd_arrays[0][READ]); This line was repeated for some reason
 	}
 	else if (type_cmd == MIDDLE_PIPE)
 	{
@@ -46,6 +49,8 @@ int	redirect_stdout(t_ast *node, t_pipex *str_pipe, t_process_cmd type_cmd)
 	{
 		dup2(str_pipe->fd_arrays[array_num - 1][READ], STDIN_FILENO);
 		close(str_pipe->fd_arrays[array_num - 1][READ]);
+		//if (node->left->parse_identifier == PARSE_CMD && node->right->parse_identifier == PARSE_CMD)
+		close(str_pipe->fd_arrays[0][WRITE]);
 	}
 	return (fd);
 }
