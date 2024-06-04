@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/04 12:28:00 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/04 12:38:02 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,39 +19,13 @@ static int	redirect_stdout_input(t_ast *node, int fd);
 int	redirect_stdout(t_ast *node, t_pipex *str_pipe, t_process_cmd type_cmd)
 {
 	int	fd;
-	unsigned int array_num;
 
-	// TO DO: Arreglar para que funcione lcon multiple pipe y con redireccion al final
-	array_num = str_pipe->fd_array_num;
 	fd = 0;
 	fd = redirect_stdout_input(node, fd);
 	fd = redirect_stdout_output(node, fd);
 	if (fd != 0 || type_cmd == SIMPLE_CMD)
 		return (fd);
-	if (type_cmd == ENTRY_PIPE)
-	{
-		dup2(str_pipe->fd_arrays[0][WRITE], STDOUT_FILENO);
-		//if (node->left->parse_identifier == PARSE_CMD && node->right->parse_identifier == PARSE_CMD)
-			//close(str_pipe->fd_arrays[0][WRITE]);
-		close(str_pipe->fd_arrays[0][READ]);
-
-		//close(str_pipe->fd_arrays[0][READ]); This line was repeated for some reason
-	}
-	else if (type_cmd == MIDDLE_PIPE)
-	{
-		dup2(str_pipe->fd_arrays[array_num - 2][READ], STDIN_FILENO);
-		dup2(str_pipe->fd_arrays[array_num - 1][WRITE], STDOUT_FILENO);
-		close(str_pipe->fd_arrays[array_num - 2][READ]);
-		close(str_pipe->fd_arrays[array_num - 1][READ]);
-		close(str_pipe->fd_arrays[array_num - 1][WRITE]);
-	}
-	else
-	{
-		dup2(str_pipe->fd_arrays[array_num - 1][READ], STDIN_FILENO);
-		close(str_pipe->fd_arrays[array_num - 1][READ]);
-		//if (node->left->parse_identifier == PARSE_CMD && node->right->parse_identifier == PARSE_CMD)
-		close(str_pipe->fd_arrays[0][WRITE]);
-	}
+	dup_fd_arrays(type_cmd, str_pipe);
 	return (fd);
 }
 

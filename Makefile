@@ -26,6 +26,7 @@ $(BUILTINGS_PATH)/archive_utils.c\
 $(BUILTINGS_PATH)/archive_utils1.c\
 $(BUILTINGS_PATH)/archive_utils2.c\
 $(BUILTINGS_PATH)/archive_utils3.c\
+$(BUILTINGS_PATH)/archive_utils4.c\
 $(BUILTINGS_PATH)/builtings.c\
 $(BUILTINGS_PATH)/builtings1.c\
 $(BUILTINGS_PATH)/builtings2.c\

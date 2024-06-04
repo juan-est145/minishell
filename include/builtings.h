@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 18:40:00 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:37:41 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int							ignore_space(char *text, int i);
 
 int							redirect_stdout(t_ast *node, t_pipex *str_pipe,
 								t_process_cmd type_cmd);
+void						dup_fd_arrays(t_process_cmd type_cmd,
+								t_pipex *str_pipe);
 int							here_doc(char *limit);
 
 // BUILTINGS
