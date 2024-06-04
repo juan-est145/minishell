@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:05:12 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:05:17 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:00:10 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool	ft_isspace(unsigned char c)
 	return (false);
 }
 
-bool	tokens_syntax_correct(t_token_list *node)
+/*bool	tokens_syntax_correct(t_token_list *node)
 {
 	unsigned int	i;
 	char			delimiter;
@@ -86,4 +86,4 @@ bool	tokens_syntax_correct(t_token_list *node)
 		node = node->next;
 	}
 	return (true);
-}
+}*/

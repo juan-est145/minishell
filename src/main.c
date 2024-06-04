@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/04 12:40:16 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/04 18:59:46 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ static t_token_list	*start_token_list(char *text, t_lst_env **lst_env)
 	if (*head->token == '\0' && head->next == NULL)
 		return (clean_tokens(&head), printf("Syntax error\n"), NULL);
 	delete_empty_nodes(head);
-	if (tokens_syntax_correct(head) == false)
-		return (clean_tokens(&head), printf("Syntax error\n"), NULL);
+	//if (tokens_syntax_correct(head) == false)
+		//return (clean_tokens(&head), printf("Syntax error\n"), NULL);
 	expand_variables(&head, lst_env);
 	return (head);
 }
