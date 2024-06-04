@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/04 16:12:57 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:36:01 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	redirect_stdout_input(t_ast *node, int fd)
 			return (-1);
 		}
 		dup2(fd, STDIN_FILENO);
-		return (0);
+		return (fd);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 12:35:10 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/06/04 18:01:09 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:37:08 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,20 @@ void	dup_fd_arrays(t_process_cmd type_cmd, t_pipex *str_pipe, int fd[2])
 	}
 	else if (type_cmd == MIDDLE_PIPE)
 	{
-		if (fd[0] == 0)
+/* 		ft_putstr_fd(ft_itoa(fd[0]), 2);
+		ft_putstr_fd("\n", 2); */
+/* 		ft_putstr_fd(ft_itoa(fd[1]), 2);
+		ft_putstr_fd("\n", 2); */
+		if (fd[0] <= 0)
+		{
 			dup2(str_pipe->fd_arrays[array_num - 2][READ], STDIN_FILENO);
-		if (fd[1] == 0)
+			//ft_putstr_fd("ENTRA EN EL ERROR 1\n", 2);
+		}
+		if (fd[1] <= 0)
+		{
 			dup2(str_pipe->fd_arrays[array_num - 1][WRITE], STDOUT_FILENO);
+			//ft_putstr_fd("ENTRA EN EL ERROR 2\n", 2);
+		}
 		close(str_pipe->fd_arrays[array_num - 2][READ]);
 		close(str_pipe->fd_arrays[array_num - 1][READ]);
 		close(str_pipe->fd_arrays[array_num - 1][WRITE]);
