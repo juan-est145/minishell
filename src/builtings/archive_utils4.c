@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 12:35:10 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/06/04 16:15:42 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:01:09 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	dup_fd_arrays(t_process_cmd type_cmd, t_pipex *str_pipe, int fd[2])
 	array_num = str_pipe->fd_array_num;
 	if (type_cmd == ENTRY_PIPE)
 	{
-		if (fd[1] != 0)
+		if (fd[1] > 0)
 			return ;
 		dup2(str_pipe->fd_arrays[0][WRITE], STDOUT_FILENO);
 		close(str_pipe->fd_arrays[0][READ]);
