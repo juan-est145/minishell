@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 18:33:58 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:21:32 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 		t_process_cmd type_cmd)
 {
-	//CHange array in builtins later
 	if (ft_strncmp(node->args, "pwd\0", 4) == 0 || ft_strncmp(node->args,
 			"pwd ", 4) == 0)
 		return (ft_getpwd(node->args, node, str_pipe, type_cmd));
@@ -36,8 +35,12 @@ pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 	else if (ft_strncmp(node->args, "cd", 2) == 0)
 		return (ft_cd(node->args, str_pipe->lst_env, type_cmd, str_pipe));
 	else if (ft_strncmp(node->args, "exit", 4) == 0)
+	{
+		if (type_cmd == SIMPLE_CMD)
+			free_fd_arrays(str_pipe->fd_arrays);
 		return (ft_exit(&str_pipe->ast_head, *str_pipe->lst_env, prompt,
 				type_cmd));
+	}
 	else
 		return (process_cmd(node, str_pipe->lst_env, str_pipe, type_cmd));
 }
