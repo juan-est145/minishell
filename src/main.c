@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 19:51:32 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:17:15 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ static void	process_input(char *prompt, t_lst_env **lst_env)
 		if (str_pipe.ast_head == NULL && errno == ENOMEM)
 			error_msgs(AST_MALLOC_FAILURE);
 		execute_ast(str_pipe.ast_head, prompt, &str_pipe);
-		clean_ast(str_pipe.ast_head);
-		str_pipe.fd_array_num = 0;
-		free_fd_arrays(str_pipe.fd_arrays);
+		cleanup(&str_pipe);
 	}
 }
 

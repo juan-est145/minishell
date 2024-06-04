@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_first_pipe_cmd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:01:15 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 19:03:17 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:10:16 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ void	find_first_pipe_cmd(t_ast *ast_node)
 t_pipex	*create_fd_arrays(t_pipex *str_pipe, t_ast *head)
 {
 	unsigned int	i;
-	unsigned int	j;
 	bool			mem_problems;
 
 	i = 0;
-	j = 0;
 	mem_problems = false;
 	while (head->parse_identifier == PARSE_PIPE)
 	{
@@ -73,6 +71,8 @@ void	free_fd_arrays(int **fd_arrays)
 	int	i;
 
 	i = 0;
+	if (fd_arrays == NULL)
+		return ;
 	while (fd_arrays[i] != NULL)
 	{
 		free(fd_arrays[i]);

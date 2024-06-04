@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 09:50:35 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/13 18:32:21 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:17:03 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,12 @@ void	free_copie_env(t_lst_env **lst)
 
 	temp = *lst;
 	free_matrix(temp->env);
+}
+
+void cleanup(t_pipex *str_pipe)
+{
+	clean_ast(str_pipe->ast_head);
+	str_pipe->fd_array_num = 0;
+	free_fd_arrays(str_pipe->fd_arrays);
+	str_pipe->fd_arrays = NULL;
 }
