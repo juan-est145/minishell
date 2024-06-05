@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 09:44:54 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/03 16:47:04 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/05 11:17:13 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_pipex
 	t_ast			*ast_head;
 	t_lst_env		**lst_env;
 	unsigned int	fd_array_num;
+	int				return_cmd_status;
 }					t_pipex;
 // ARCHIVE_UTILS_CMD
 void				up_env(t_lst_env **lst_env);

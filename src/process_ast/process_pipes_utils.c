@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_pipes_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:35:14 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 20:02:00 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/05 11:24:13 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,18 @@ void	close_pipes(t_pipex *str_pipe, t_ast *node)
 		close(str_pipe->fd_arrays[0][READ]);
 		close(str_pipe->fd_arrays[0][WRITE]);
 	}
+}
+
+void	wait_pid_return_status(pid_t pid, t_pipex *str_pipe)
+{
+	int	status;
+
+	status = 0;
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		str_pipe->return_cmd_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		str_pipe->return_cmd_status = WTERMSIG(status);
+	else
+		str_pipe->return_cmd_status = -1;
 }

@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/04 12:42:01 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/05 11:26:46 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 		pid2 = read_cmd(node->right, str_pipe, prompt, EXIT_PIPE);
 	close_pipes(str_pipe, node);
 	if (pid1 != -1)
-		waitpid(pid1, NULL, 0);
+		wait_pid_return_status(pid1, str_pipe);
 	if (pid2 != -1)
-		waitpid(pid2, NULL, 0);
+		wait_pid_return_status(pid2, str_pipe);
 }
 
 static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
@@ -93,7 +93,7 @@ static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 			exit(EXIT_FAILURE);
 	}
 	if (cmd_type == SIMPLE_CMD)
-		waitpid(pid, NULL, 0);
+		wait_pid_return_status(pid, str_pipe);
 	if (fd > 0)
 		close(fd);
 	return (pid);
