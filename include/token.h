@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:14:15 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/04 19:00:40 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:51:03 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ typedef struct s_token_list
 	struct s_token_list	*next;
 }						t_token_list;
 
+typedef struct s_expand_struct
+{
+	char				delimiter;
+	char				*temp;
+	bool				empty_env;
+	t_pipex				*str_pipe;
+	char				*temp_env;
+}						t_expand_struct;
+
 bool					ft_isspace(unsigned char c);
 t_token_list			*tokenize_cmd(char *full_cmd);
 void					clean_tokens(t_token_list **head);
@@ -53,7 +62,8 @@ void					set_delimiter(char *delimiter, char *full_cmd,
 							unsigned int i);
 void					delete_empty_nodes(t_token_list *head);
 void					expand_variables(t_token_list **head,
-							t_lst_env **lst_env);
-char					*find_env_var(char *text, t_lst_env **lst_env);
+							t_lst_env **lst_env, t_pipex *str_pipe);
+char					*find_env_var(char *text, t_lst_env **lst_env,
+							t_pipex *str_pipe);
 unsigned int			find_last_env_index(char *text, unsigned int env_i);
 #endif

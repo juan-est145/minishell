@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/04 18:59:46 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:32:45 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 static void			process_input(char *prompt, t_lst_env **lst_env);
 static bool			is_input_empty(char *text);
-static t_token_list	*start_token_list(char *text, t_lst_env **lst_env);
+static t_token_list	*start_token_list(char *text, t_lst_env **lst_env,
+						t_pipex *str_pipe);
 static t_ast		*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe);
 
 int	main(int argc, char **argv, char **env)
@@ -49,7 +50,7 @@ static void	process_input(char *prompt, t_lst_env **lst_env)
 		text = read_input(prompt, lst_env);
 		if (is_input_empty(text) == true)
 			continue ;
-		head = start_token_list(text, lst_env);
+		head = start_token_list(text, lst_env, &str_pipe);
 		if (head == NULL)
 			continue ;
 		str_pipe.ast_head = create_ast(&head, &syntax_error, &str_pipe);
@@ -73,7 +74,8 @@ static bool	is_input_empty(char *text)
 	return (false);
 }
 
-static t_token_list	*start_token_list(char *text, t_lst_env **lst_env)
+static t_token_list	*start_token_list(char *text, t_lst_env **lst_env,
+		t_pipex *str_pipe)
 {
 	t_token_list	*head;
 
@@ -84,9 +86,9 @@ static t_token_list	*start_token_list(char *text, t_lst_env **lst_env)
 	if (*head->token == '\0' && head->next == NULL)
 		return (clean_tokens(&head), printf("Syntax error\n"), NULL);
 	delete_empty_nodes(head);
-	//if (tokens_syntax_correct(head) == false)
-		//return (clean_tokens(&head), printf("Syntax error\n"), NULL);
-	expand_variables(&head, lst_env);
+	// if (tokens_syntax_correct(head) == false)
+	// return (clean_tokens(&head), printf("Syntax error\n"), NULL);
+	expand_variables(&head, lst_env, str_pipe);
 	return (head);
 }
 
