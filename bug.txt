@@ -1,3 +1,0 @@
-echo "Hola                  caracola                 metemos todos los espacios que queremos"
-Hola caracola metemos todos los espacios que queremos
-echo Hola | | ls (Posible bug, ver como gestionar luego)
