@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings_child_process.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 18:36:42 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:19:37 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	echo_process(char *text, t_ast *node, t_pipex *str_pipe,
 		i += 3;
 	}
 	open = ft_echo_normi(text, i, open, delimiter);
-	if (flag == false)
+	if (flag == false || open != true)
 		printf("\n");
 	if (fd > 0)
 		close(fd);
