@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 16:29:03 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:50:21 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ static t_ast	*process_current_token(t_token_list **head, bool *syntax_error)
 		if (ast_node->redirections == NULL && ast_node->args == NULL)
 			return (NULL);
 	}
+	if (ast_node->args == NULL)
+		*syntax_error = true;
 	return (ast_node);
 }
 
