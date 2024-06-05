@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:14:15 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:14:16 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:00:40 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ bool					ft_isspace(unsigned char c);
 t_token_list			*tokenize_cmd(char *full_cmd);
 void					clean_tokens(t_token_list **head);
 void					add_token_identifiers(t_token_list *node);
-bool					tokens_syntax_correct(t_token_list *node);
 void					set_delimiter(char *delimiter, char *full_cmd,
 							unsigned int i);
 void					delete_empty_nodes(t_token_list *head);
