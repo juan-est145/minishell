@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:04:01 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/05 12:32:45 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/05 13:08:38 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,13 @@ static t_ast	*execute_ast(t_ast *node, char *prompt, t_pipex *str_pipe)
 	else if (node->parse_identifier == PARSE_PIPE
 		&& node->left->parse_identifier == PARSE_CMD
 		&& node->right->parse_identifier == PARSE_CMD)
-		return (read_pipe(node, str_pipe->lst_env, str_pipe, prompt), node);
+		return (read_pipe(node, str_pipe, prompt), node);
 	else if (node->parse_identifier == PARSE_PIPE
 		&& node->left->parse_identifier == PARSE_PIPE
 		&& node->right->parse_identifier == PARSE_CMD)
 	{
 		execute_ast(node->left, prompt, str_pipe);
-		return (read_pipe(node, str_pipe->lst_env, str_pipe, prompt), node);
+		return (read_pipe(node, str_pipe, prompt), node);
 	}
 	return (node);
 }

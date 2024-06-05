@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/05 11:26:46 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/05 13:08:16 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,12 @@ pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 		return (process_cmd(node, str_pipe->lst_env, str_pipe, type_cmd));
 }
 
-void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
-		char *prompt)
+void	read_pipe(t_ast *node, t_pipex *str_pipe, char *prompt)
 {
 	pid_t			pid1;
 	pid_t			pid2;
 	unsigned int	fd_position;
 
-	(void)lst_env;
 	pid1 = -1;
 	pid2 = -1;
 	open_pipes(str_pipe, node);
