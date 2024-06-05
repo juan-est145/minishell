@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_up.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:20:22 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/27 16:20:23 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:31:29 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@ char	*initial_print(char **env);
 void	print_swamp(void);
 void	prepare_signals(void);
 void	signal_handler(int signum);
+char	*read_input(char *prompt, t_lst_env **lst_env);
+t_pipex	init_str_pipe(t_lst_env **lst_env);
 #endif

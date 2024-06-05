@@ -12,7 +12,6 @@ SET_UP = $(SRC_PATH)/set_up
 NAME = minishell
 
 SCRS = $(SRC_PATH)/main.c\
-$(SRC_PATH)/read_input.c\
 $(TOKEN_PATH)/tokenizer.c\
 $(TOKEN_PATH)/tokenizer_utils.c\
 $(TOKEN_PATH)/tokenizer_utils2.c\
@@ -37,7 +36,8 @@ $(PROCESS_AST_PATH)/archive_utils_cmd.c\
 $(PROCESS_AST_PATH)/archive_utils_cmd1.c\
 $(PROCESS_AST_PATH)/process_pipes_utils.c\
 $(ERRORS_PATH)/print_error_msg.c\
-$(SET_UP)/set_up.c
+$(SET_UP)/set_up.c\
+$(SET_UP)/read_input.c\
 
 OBJS = $(SCRS:.c=.o)
 

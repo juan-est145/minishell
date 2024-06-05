@@ -6,12 +6,12 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:20:41 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/05 16:23:54 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:30:46 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-#include "../libft/libft.h"
+#include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
 char	*read_input(char *prompt, t_lst_env **lst_env)
 {

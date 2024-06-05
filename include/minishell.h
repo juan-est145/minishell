@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:20:00 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/28 18:47:56 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:31:33 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,4 @@
 # define BOLD		"\033[1m"
 # define RESET   	"\x1b[0m"
 
-char	*read_input(char *prompt, t_lst_env **lst_env);
-t_pipex	init_str_pipe(t_lst_env **lst_env);
 #endif
