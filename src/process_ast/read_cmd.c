@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 13:34:44 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 17:07:31 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,14 @@ static char	*search_comand(t_pipex *str_pipes, char **comand)
 {
 	int		i;
 	char	*dir_cmd;
+	char	*aux;
 
 	i = 0;
+	aux = ft_strrchr(comand[0], '/');
+	if (aux != NULL && aux[1] != '\0')
+	{
+		comand[0] = aux + 1;
+	}
 	dir_cmd = create_path(str_pipes, comand, i);
 	while (str_pipes->path_seg[i] != 0)
 	{
