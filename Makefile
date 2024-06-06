@@ -53,7 +53,7 @@ $(INCLUDE_PATH)/set_up.h\
 
 CC = $(shell which cc clang gcc | head -n 1)
 
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 LIB_FLAGS = -Llibft -lft
 EXEC-NAME-FLAG = -lreadline -lhistory -o
 
