@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/05 16:50:21 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:22:57 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_ast	*create_ast(t_token_list **head, bool *syntax_error, t_pipex *str_pipe)
 		if (create_fd_arrays(str_pipe, ast_head) == NULL)
 			return (clean_ast(ast_head), NULL);
 	}
+	unquote_cmds(ast_head);
 	return (ast_head);
 }
 

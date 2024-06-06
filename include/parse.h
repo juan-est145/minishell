@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:57 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 16:37:35 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:22:40 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ int							redirected_destination(t_redirections **node);
 void						find_first_pipe_cmd(t_ast *ast_node);
 t_pipex						*create_fd_arrays(t_pipex *str_pipe, t_ast *head);
 void						free_fd_arrays(int **fd_arrays);
+void						unquote_cmds(t_ast *node);
 #endif
