@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 12:25:57 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:05:28 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 		segmention_path(lst_env, str_pipe);
 		dir_cmd = search_comand(str_pipe, command);
 		if (execve(dir_cmd, command, (*lst_env)->env) == -1)
+		{
+			printf("Command %s not found\n", command[0]);
 			exit(EXIT_FAILURE);
+		}
 	}
 	if (cmd_type == SIMPLE_CMD)
 		wait_pid_return_status(pid, str_pipe);
