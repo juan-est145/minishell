@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 13:05:28 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:34:44 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 	int		fd;
 
 	pid = fork();
+	if (pid == -1)
+		process_cmd_fork_failure(lst_env, str_pipe);
 	fd = 0;
 	if (pid == CHILD)
 	{
@@ -95,8 +97,6 @@ static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 	}
 	if (cmd_type == SIMPLE_CMD)
 		wait_pid_return_status(pid, str_pipe);
-	if (fd > 0)
-		close(fd);
 	return (pid);
 }
 

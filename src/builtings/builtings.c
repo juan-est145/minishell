@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/05 16:24:38 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:24:33 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ pid_t	ft_env(t_lst_env **lst_env, t_ast *node, t_pipex *str_pipe,
 	pid_t	pid;
 
 	pid = fork();
+	if (pid == -1)
+	{
+		printf("Error creating child process, exiting\n");
+		free_lst_env(*lst_env);
+		clean_ast(str_pipe->ast_head);
+		exit(EXIT_FAILURE);
+	}
 	if (pid == CHILD)
 		env_process(lst_env, node, str_pipe, cmd_type);
 	if (cmd_type == SIMPLE_CMD)
@@ -42,6 +49,13 @@ pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe,
 		return (pid);
 	}
 	pid = fork();
+	if (pid == -1)
+	{
+		printf("Error creating child process, exiting\n");
+		free_lst_env(*lst_env);
+		clean_ast(str_pipe->ast_head);
+		exit(EXIT_FAILURE);
+	}
 	if (pid == CHILD)
 		export_process(new, lst_env);
 	free_copie_env(str_pipe->lst_env);
@@ -109,6 +123,12 @@ pid_t	ft_unset(char *text, t_lst_env **lst_env, t_process_cmd type_cmd)
 		return (pid);
 	}
 	pid = fork();
+	if (pid == -1)
+	{
+		printf("Error creating child process, exiting\n");
+		free_lst_env(*lst_env);
+		exit(EXIT_FAILURE);
+	}
 	if (pid == CHILD)
 		unset_process(text, lst_env);
 	free_copie_env(lst_env);

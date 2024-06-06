@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 09:50:35 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/05 16:25:04 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:33:56 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,12 @@ void	cleanup(t_pipex *str_pipe)
 	str_pipe->fd_array_num = 0;
 	free_fd_arrays(str_pipe->fd_arrays);
 	str_pipe->fd_arrays = NULL;
+}
+
+void	process_cmd_fork_failure(t_lst_env **lst_env, t_pipex *str_pipe)
+{
+	printf("Error creating child process, exiting\n");
+	free_lst_env(*lst_env);
+	clean_ast(str_pipe->ast_head);
+	exit(EXIT_FAILURE);
 }

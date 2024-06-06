@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 13:10:19 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:34:27 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,7 @@ char						**search_lst_env(char *text, t_lst_env **lst_env);
 int							check_array_length(char **array);
 int							errors_cd(char *old_pwd, char **dir, char **split,
 								char *text);
+void						process_cmd_fork_failure(t_lst_env **lst_env,
+								t_pipex *str_pipe);
 
 #endif
