@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/06 09:55:08 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:19:43 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ pid_t	ft_getpwd(char *text, t_ast *node, t_pipex *str_pipe,
 
 bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 {
-	int		fd;
-	char	line[1];
-
 	while (text[i] != '\0')
 	{
 		if (open == false)
@@ -52,16 +49,7 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 		printf("%c", text[i]);
 		i++;
 	}
-	if (open == true)
-	{
-		fd = here_doc_echo(delimiter);
-		printf("\n");
-		while (read(fd, line, 1) > 0)
-		{
-			write(1, line, 1);
-		}
-		close(fd);
-	}
+	ft_echo_hd_normi(open, 0, delimiter);
 	return (open);
 }
 

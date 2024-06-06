@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/05 16:21:10 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:18:21 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	redirect_stdout_input(t_ast *node, int fd);
 int	redirect_stdout(t_ast *node, t_pipex *str_pipe, t_process_cmd type_cmd)
 {
 	int	fd[2];
-	
+
 	fd[0] = 0;
 	fd[1] = 0;
 	fd[0] = redirect_stdout_input(node, fd[0]);

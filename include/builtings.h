@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/05 15:06:19 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:17:26 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void						dup_fd_arrays(t_process_cmd type_cmd,
 								t_pipex *str_pipe, int fd[2]);
 int							here_doc(char *limit);
 int							here_doc_echo(char limit);
+void						ft_echo_hd_normi(bool open, int fd, char delimiter);
 
 // BUILTINGS
 pid_t						ft_getpwd(char *text, t_ast *node,
