@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 12:35:10 by juan-est145       #+#    #+#             */
-/*   Updated: 2024/06/05 19:21:13 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 10:51:25 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int	here_doc_echo(char limit)
 			while (buffer[i] != '\0')
 			{
 				if (limit != buffer[i])
-					write(fd[WRITE], &buffer[i], 1);
+					if ('\n' != buffer[i])
+						write(fd[WRITE], &buffer[i], 1);
 				i++;
 			}
 			free(buffer);

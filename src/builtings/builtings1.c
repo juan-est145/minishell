@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/05 19:27:32 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 09:55:08 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,12 @@ bool	ft_echo_normi(char *text, int i, bool open, char delimiter)
 	{
 		fd = here_doc_echo(delimiter);
 		printf("\n");
-		/* line = get_next_line(fd);
-		while (line != NULL)
-		{
-			printf("%s", line);
-			free(line);
-			line = get_next_line(fd);
-		}
-		free(line); */
-		
 		while (read(fd, line, 1) > 0)
 		{
-			//printf("%s", line);
 			write(1, line, 1);
-			//free(line);
-			//read(fd, line, 1);
 		}
-		
 		close(fd);
 	}
-	//	printf("Syntax error\n");
 	return (open);
 }
 
