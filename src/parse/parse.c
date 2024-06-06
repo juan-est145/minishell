@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 16:22:57 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 19:32:51 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ static t_ast	*process_current_token(t_token_list **head, bool *syntax_error)
 	{
 		if (*head != NULL && (*head)->token_identifer == EXPRESSION)
 			ast_node->args = handle_cmd_args(head);
-		if (ast_node->args == NULL)
-			return (NULL);
 		if (*head != NULL && is_redir((*head)->token_identifer) == true)
 			ast_node->redirections = handle_redir(head, syntax_error);
 		if (ast_node->redirections == NULL && ast_node->args == NULL)
