@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:57 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 16:22:40 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 19:52:02 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,6 @@ void						find_first_pipe_cmd(t_ast *ast_node);
 t_pipex						*create_fd_arrays(t_pipex *str_pipe, t_ast *head);
 void						free_fd_arrays(int **fd_arrays);
 void						unquote_cmds(t_ast *node);
+void						quotes_at_start(t_ast *node, int quote_array[2]);
+void						quotes_elsewhere(t_ast *node, int quote_array[2]);
 #endif

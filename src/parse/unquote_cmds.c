@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:11:26 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 18:40:02 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 20:16:55 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../libft/libft.h"
 
 static void	find_quotes(t_ast *node);
+static void	get_quote_index(t_ast *node, int quote_array[2], unsigned int i);
 static bool	quotes_terminated(t_ast *node);
 void		set_new_str(t_ast *node, int quote_array[2]);
 
@@ -34,17 +35,23 @@ void	unquote_cmds(t_ast *node)
 
 static void	find_quotes(t_ast *node)
 {
-	int				quote_array[2];
 	unsigned int	i;
-	char			delimiter;
+	int				quote_array[2];
 
 	i = 0;
-	delimiter = '\0';
 	quote_array[0] = -1;
 	quote_array[1] = -1;
 	if (ft_strchr(node->args, '\"') == NULL && ft_strchr(node->args,
 			'\'') != NULL && quotes_terminated(node) == false)
 		return ;
+	get_quote_index(node, quote_array, i);
+}
+
+static void	get_quote_index(t_ast *node, int quote_array[2], unsigned int i)
+{
+	char	delimiter;
+
+	delimiter = '\0';
 	while (node->args[i] != '\0')
 	{
 		if (node->args[i] == '\'' || node->args[i] == '\"')
@@ -57,9 +64,9 @@ static void	find_quotes(t_ast *node)
 			if (quote_array[0] != -1 && quote_array[1] != -1)
 			{
 				set_new_str(node, quote_array);
+				i = quote_array[1];
 				quote_array[0] = -1;
 				quote_array[1] = -1;
-				i = 0;
 				continue ;
 			}
 		}
@@ -87,50 +94,13 @@ static bool	quotes_terminated(t_ast *node)
 
 void	set_new_str(t_ast *node, int quote_array[2])
 {
-	int		start_index;
-	int		end_index;
-	char	*substr;
-	char	*temp;
-    char    *beginning;
+	int	start_index;
 
 	start_index = 0;
 	if (start_index == quote_array[0])
-    {
-        start_index = 1;
-        end_index = quote_array[1] - 1;
-        substr = ft_substr(node->args, start_index, end_index);
-        temp = substr;
-        if (node->args[end_index + 2] == '\0')
-        {
-            free(node->args);
-            node->args = substr;
-            return ;
-        }
-        substr = ft_strjoin(substr, &node->args[end_index + 2]);
-        free(temp);
-        free(node->args);
-        node->args = substr;
-        return ;
-    }
-	start_index = quote_array[0] + 1;
-	end_index = quote_array[1] - 1;
-	substr = ft_substr(node->args, start_index, (end_index - start_index) + 1);
-    beginning = ft_substr(node->args, 0, start_index -1);
-	temp = substr;
-	substr = ft_strjoin(beginning, substr);
-    if (node->args[end_index + 2] != '\0')
-    {
-        free(temp);
-        temp = substr;
-        substr = ft_strjoin(substr, &node->args[end_index + 2]);
-        free(temp);
-        free(beginning);
-        free(node->args);
-	    node->args = substr;
-        return ;
-    }
-	free(temp);
-    free(beginning);
-    free(node->args);
-	node->args = substr;
+	{
+		quotes_at_start(node, quote_array);
+		return ;
+	}
+	quotes_elsewhere(node, quote_array);
 }
