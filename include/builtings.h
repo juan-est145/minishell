@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 12:17:26 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:43:28 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ pid_t						ft_getpwd(char *text, t_ast *node,
 								t_pipex *str_pipe, t_process_cmd type_cmd);
 void						pwd_process(char *text, t_ast *node,
 								t_pipex *str_pipe, t_process_cmd type_cmd);
+void						pwd_null_error(void);
 pid_t						ft_echo(char *text, t_ast *node, t_pipex *str_pipe,
 								t_process_cmd type_cmd);
 bool						ft_echo_normi(char *text, int i, bool open,

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:20:41 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/05 16:30:46 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:46:19 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*read_input(char *prompt, t_lst_env **lst_env)
 		free(prompt);
 		free_copie_env(lst_env);
 		free_lst_env(*lst_env);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	add_history(text);
 	return (text);

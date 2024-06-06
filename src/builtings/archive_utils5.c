@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils5.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:02:46 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/06 12:20:52 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:43:52 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,10 @@ void	ft_echo_hd_normi(bool open, int fd, char delimiter)
 		}
 		close(fd);
 	}
+}
+
+void	pwd_null_error(void)
+{
+	printf("Error obtaining PWD\n");
+	exit(EXIT_FAILURE);
 }

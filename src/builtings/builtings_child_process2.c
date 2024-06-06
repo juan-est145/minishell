@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings_child_process2.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:52:55 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/31 13:21:00 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:46:09 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	export_process(char *new, t_lst_env **lst_env)
 		i++;
 	}
 	free_matrix(split);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 void	export_parent_process(char *new, t_lst_env **lst_env)
@@ -89,7 +89,7 @@ void	unset_process(char *text, t_lst_env **lst_env)
 		temp = temp->next;
 	}
 	free_matrix(split);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 void	unset_parent_process(char *text, t_lst_env **lst_env)
@@ -122,5 +122,5 @@ void	exit_process(t_ast **head, t_lst_env *lst_env, char *prompt)
 	free_copie_env(&lst_env);
 	free_lst_env(lst_env);
 	free(prompt);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
