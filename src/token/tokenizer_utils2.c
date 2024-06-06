@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:05:26 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:05:30 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:25:32 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	delete_empty_nodes(t_token_list *head)
 	}
 }
 
-void	expand_variables(t_token_list **head, t_lst_env **lst_env)
+void	expand_variables(t_token_list **head, t_lst_env **lst_env,
+		t_pipex *str_pipe)
 {
 	t_token_list	*temp;
 
@@ -46,7 +47,7 @@ void	expand_variables(t_token_list **head, t_lst_env **lst_env)
 	while (temp != NULL)
 	{
 		if (temp->token_identifer == EXPRESSION)
-			temp->token = find_env_var(temp->token, lst_env);
+			temp->token = find_env_var(temp->token, lst_env, str_pipe);
 		temp = temp->next;
 	}
 }
@@ -58,8 +59,8 @@ unsigned int	find_last_env_index(char *text, unsigned int env_i)
 	i = env_i;
 	while (text[i] != '\0' && ft_isspace(text[i]) == false && text[i] != '\"')
 	{
-		if ((text[i] == '$' || (ft_isalnum(text[i]) == false && text[i] != '_'))
-			&& i != env_i)
+		if ((text[i] == '$' || (ft_isalnum(text[i]) == false && text[i] != '?'
+					&& text[i] != '_')) && i != env_i)
 			break ;
 		i++;
 	}

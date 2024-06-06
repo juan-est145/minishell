@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/03 18:39:48 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:24:38 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ pid_t	ft_env(t_lst_env **lst_env, t_ast *node, t_pipex *str_pipe,
 	if (pid == CHILD)
 		env_process(lst_env, node, str_pipe, cmd_type);
 	if (cmd_type == SIMPLE_CMD)
-		waitpid(pid, NULL, 0);
+		wait_pid_return_status(pid, str_pipe);
 	return (pid);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/05 16:48:35 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:25:57 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,12 @@ pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 		return (process_cmd(node, str_pipe->lst_env, str_pipe, type_cmd));
 }
 
-void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
-		char *prompt)
+void	read_pipe(t_ast *node, t_pipex *str_pipe, char *prompt)
 {
 	pid_t			pid1;
 	pid_t			pid2;
 	unsigned int	fd_position;
 
-	(void)lst_env;
 	pid1 = -1;
 	pid2 = -1;
 	open_pipes(str_pipe, node);
@@ -68,9 +66,9 @@ void	read_pipe(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 		pid2 = read_cmd(node->right, str_pipe, prompt, EXIT_PIPE);
 	close_pipes(str_pipe, node);
 	if (pid1 != -1)
-		waitpid(pid1, NULL, 0);
+		wait_pid_return_status(pid1, str_pipe);
 	if (pid2 != -1)
-		waitpid(pid2, NULL, 0);
+		wait_pid_return_status(pid2, str_pipe);
 }
 
 static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
@@ -93,7 +91,7 @@ static pid_t	process_cmd(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 			exit(EXIT_FAILURE);
 	}
 	if (cmd_type == SIMPLE_CMD)
-		waitpid(pid, NULL, 0);
+		wait_pid_return_status(pid, str_pipe);
 	if (fd > 0)
 		close(fd);
 	return (pid);

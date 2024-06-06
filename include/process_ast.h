@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_ast.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:14:04 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/04 11:16:56 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/05 16:23:30 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ typedef enum e_process_cmd
 
 pid_t						read_cmd(t_ast *node, t_pipex *str_pipe,
 								char *prompt, t_process_cmd type_cmd);
-void						read_pipe(t_ast *node, t_lst_env **lst_env,
-								t_pipex *str_pipe, char *prompt);
+void						read_pipe(t_ast *node, t_pipex *str_pipe,
+								char *prompt);
 void						open_pipes(t_pipex *str_pipe, t_ast *node);
 void						close_pipes(t_pipex *str_pipe, t_ast *node);
+void						wait_pid_return_status(pid_t pid,
+								t_pipex *str_pipe);
 void						cleanup(t_pipex *str_pipe);
 #endif

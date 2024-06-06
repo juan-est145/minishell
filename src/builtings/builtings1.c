@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/06 12:19:43 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:24:59 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ pid_t	ft_getpwd(char *text, t_ast *node, t_pipex *str_pipe,
 	if (pid == CHILD)
 		pwd_process(text, node, str_pipe, type_cmd);
 	if (type_cmd == SIMPLE_CMD)
-		waitpid(pid, NULL, 0);
+		wait_pid_return_status(pid, str_pipe);
 	return (pid);
 }
 
@@ -63,7 +63,7 @@ pid_t	ft_echo(char *text, t_ast *node, t_pipex *str_pipe,
 	if (pid == CHILD)
 		echo_process(text, node, str_pipe, type_cmd);
 	if (type_cmd == SIMPLE_CMD)
-		waitpid(pid, NULL, 0);
+		wait_pid_return_status(pid, str_pipe);
 	return (pid);
 }
 
