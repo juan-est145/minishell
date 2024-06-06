@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 10:51:52 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:14:33 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	echo_process(char *text, t_ast *node, t_pipex *str_pipe,
 		i += 3;
 	}
 	open = ft_echo_normi(text, i, open, delimiter);
-	if (flag == false )
+	if (flag == false)
 		printf("\n");
 	if (fd > 0)
 		close(fd);
