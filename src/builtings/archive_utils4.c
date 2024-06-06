@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 16:24:16 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 12:24:13 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:14:04 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int	here_doc_echo(char limit)
 	char	*buffer;
 	int		fd[2];
 
-	pipe(fd);
+	if (pipe(fd) == -1)
+		error_msgs(PIPE_ERROR);
 	continuar = true;
 	while (continuar == true)
 	{

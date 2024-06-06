@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 12:55:29 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:12:35 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	pwd_process(char *text, t_ast *node, t_pipex *str_pipe,
 	}
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		pwd_null_error();
+		error_msgs(PIPE_ERROR);
 	printf("%s\n", pwd);
 	free(pwd);
 	if (fd > 0)

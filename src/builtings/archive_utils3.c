@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/06 11:18:21 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:12:58 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ int	here_doc(char *limit)
 	char	*buffer;
 	int		fd[2];
 
-	pipe(fd);
+	if (pipe(fd) == -1)
+		error_msgs(PIPE_ERROR);
 	continuar = true;
 	while (continuar == true)
 	{
