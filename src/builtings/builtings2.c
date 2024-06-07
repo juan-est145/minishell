@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:56 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 12:57:20 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:59:16 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ int	errors_cd(char *old_pwd, char **dir, char **split, char *text)
 		if (chdir(dir[1]) != 0)
 		{
 			printf("%s\n", text);
-			free_matrix(split);
-			free(old_pwd);
+			if (split != NULL)
+				free_matrix(split);
+			if (old_pwd != NULL)
+				free(old_pwd);
 			return (1);
 		}
 	}

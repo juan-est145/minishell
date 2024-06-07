@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 16:40:49 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:09:57 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,6 @@ int	cd_parent_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
 	if (check_array_length(split) >= 3)
 		return (cd_too_many_arguments(split, str_pipes));
 	old_pwd = getcwd(NULL, 0);
-	if (old_pwd == NULL)
-		return (old_pwd_failure(str_pipes));
 	if (split[1] == NULL)
 		return (cd_no_argument(old_pwd, split, lst_env, str_pipes));
 	if (errors_cd(old_pwd, split, split, "Could not access directory") == 1)

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:18:43 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 16:38:16 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:21:38 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	update_env(t_lst_env **lst_env, t_pipex *str_pipes, char *pwd,
 		char *old_pwd)
 {
 	handle_cd_env(lst_env, "export PWD=", pwd, str_pipes);
-	handle_cd_env(lst_env, "export OLDPWD=", old_pwd, str_pipes);
+	if (old_pwd == NULL)
+		unset_parent_process("unset OLDPWD", lst_env);
+	else
+		handle_cd_env(lst_env, "export OLDPWD=", old_pwd, str_pipes);
 }
 
 int	old_pwd_failure(t_pipex *str_pipes)
