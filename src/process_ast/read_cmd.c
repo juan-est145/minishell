@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 10:04:27 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/07 11:47:43 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,11 @@ static char	*search_comand(t_pipex *str_pipes, char **comand)
 	char	*aux;
 
 	i = 0;
+	if (comand != NULL && comand[0] == NULL)
+		exit(0);
 	aux = ft_strrchr(comand[0], '/');
 	if (aux != NULL && aux[1] != '\0')
-	{
 		comand[0] = aux + 1;
-	}
 	dir_cmd = create_path(str_pipes, comand, i);
 	while (str_pipes->path_seg[i] != 0)
 	{
@@ -134,9 +134,7 @@ static char	*search_comand(t_pipex *str_pipes, char **comand)
 		i++;
 		free(dir_cmd);
 		if (str_pipes->path_seg[i] != 0)
-		{
 			dir_cmd = create_path(str_pipes, comand, i);
-		}
 		else
 			dir_cmd = NULL;
 	}
