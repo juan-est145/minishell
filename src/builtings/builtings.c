@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 17:58:43 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:33:53 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe,
 }
 
 // IMITA EL COMANDO UNSET
-bool	ft_unset_normi(t_lst_env **temp, bool flag, t_lst_env *previous)
+t_unset_flags	ft_unset_normi(t_lst_env **temp, t_unset_flags flag,
+		t_lst_env *previous)
 {
 	t_lst_env	*aux;
 
@@ -74,6 +75,7 @@ bool	ft_unset_normi(t_lst_env **temp, bool flag, t_lst_env *previous)
 		previous->next = (*temp)->next;
 		free(aux->text);
 		free(aux);
+		flag = REPEAT_NODE;
 	}
 	else
 	{
@@ -81,15 +83,15 @@ bool	ft_unset_normi(t_lst_env **temp, bool flag, t_lst_env *previous)
 		previous->next = NULL;
 		free(aux->text);
 		free(aux);
-		flag = true;
+		flag = BREAK;
 		return (flag);
 	}
 	*temp = previous->next;
 	return (flag);
 }
 
-bool	ft_unset_normi2(char **split, t_lst_env *previous, bool flag,
-		t_lst_env **temp)
+t_unset_flags	ft_unset_normi2(char **split, t_lst_env *previous,
+		t_unset_flags flag, t_lst_env **temp)
 {
 	int		i;
 	char	**name;
