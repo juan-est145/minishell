@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 13:12:35 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:40:49 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	pwd_process(char *text, t_ast *node, t_pipex *str_pipe,
 	}
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		error_msgs(PIPE_ERROR);
+		error_msgs(PWD_ERROR);
 	printf("%s\n", pwd);
 	free(pwd);
 	if (fd > 0)
@@ -125,7 +125,7 @@ void	cd_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
 	exit(EXIT_SUCCESS);
 }
 
-void	cd_parent_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
+int	cd_parent_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
 {
 	char	**split;
 	char	*old_pwd;
@@ -133,23 +133,23 @@ void	cd_parent_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
 
 	split = ft_split(text, ' ');
 	if (check_array_length(split) >= 3)
-	{
-		printf("Too many arguments in cd\n");
-		str_pipes->return_cmd_status = 1;
-	}
+		return (cd_too_many_arguments(split, str_pipes));
 	old_pwd = getcwd(NULL, 0);
+	if (old_pwd == NULL)
+		return (old_pwd_failure(str_pipes));
 	if (split[1] == NULL)
-	{
-		cd_no_argument(old_pwd, split, lst_env, str_pipes);
-		return ;
-	}
+		return (cd_no_argument(old_pwd, split, lst_env, str_pipes));
 	if (errors_cd(old_pwd, split, split, "Could not access directory") == 1)
 	{
 		str_pipes->return_cmd_status = 1;
-		return ;
+		return (1);
 	}
 	pwd = getcwd(NULL, 0);
-	handle_cd_env(lst_env, "export PWD=", pwd, str_pipes);
-	handle_cd_env(lst_env, "export OLDPWD=", old_pwd, str_pipes);
+	if (pwd == NULL && errno == ENOMEM)
+		error_msgs(PWD_ERROR);
+	else if (pwd == NULL)
+		return (old_pwd_failure(str_pipes));
+	update_env(lst_env, str_pipes, pwd, old_pwd);
 	free_matrix(split);
+	return (0);
 }

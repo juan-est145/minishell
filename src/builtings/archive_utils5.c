@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:02:46 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/06 12:43:52 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:19:45 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,3 @@ void	ft_echo_hd_normi(bool open, int fd, char delimiter)
 	}
 }
 
-void	pwd_null_error(void)
-{
-	printf("Error obtaining PWD\n");
-	exit(EXIT_FAILURE);
-}

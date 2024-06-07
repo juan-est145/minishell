@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 13:34:27 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:28:35 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,11 @@ pid_t						ft_cd(char *text, t_lst_env **lst_env,
 								t_process_cmd type_cmd, t_pipex *str_pipes);
 void						cd_process(char *text, t_lst_env **lst_env,
 								t_pipex *str_pipes);
-void						cd_parent_process(char *text, t_lst_env **lst_env,
+int							cd_parent_process(char *text, t_lst_env **lst_env,
 								t_pipex *str_pipes);
+int							cd_too_many_arguments(char **split,
+								t_pipex *str_pipes);
+int							old_pwd_failure(t_pipex *str_pipes);
 int							cd_no_argument(char *old_pwd, char **split,
 								t_lst_env **lst_env, t_pipex *str_pipes);
 pid_t						ft_exit(t_ast **head, t_lst_env *lst_env,
@@ -113,5 +116,6 @@ int							errors_cd(char *old_pwd, char **dir, char **split,
 								char *text);
 void						process_cmd_fork_failure(t_lst_env **lst_env,
 								t_pipex *str_pipe);
-
+void						update_env(t_lst_env **lst_env, t_pipex *str_pipes,
+								char *pwd, char *old_pwd);
 #endif
