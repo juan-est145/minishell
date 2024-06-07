@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:11:26 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 12:48:41 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 12:50:34 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	get_quote_index(t_ast *node, int quote_array[2], unsigned int i)
 				set_new_str(node, quote_array);
 				i = quote_array[1];
 				if (ft_strlen(node->args) - 1 < i)
-					i = ft_strlen(node->args) -1;
+					i = ft_strlen(node->args) - 1;
 				quote_array[0] = -1;
 				quote_array[1] = -1;
 				continue ;
