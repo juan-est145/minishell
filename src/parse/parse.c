@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 19:32:51 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 10:05:12 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ static t_ast	*process_current_token(t_token_list **head, bool *syntax_error)
 		if (ast_node->redirections == NULL && ast_node->args == NULL)
 			return (NULL);
 	}
-	if (ast_node->args == NULL)
-		*syntax_error = true;
 	return (ast_node);
 }
 

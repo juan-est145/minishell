@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unquote_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:11:26 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 20:16:55 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 10:07:06 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	find_quotes(t_ast *node)
 	i = 0;
 	quote_array[0] = -1;
 	quote_array[1] = -1;
+	if (node->args == NULL)
+		return ;
 	if (ft_strchr(node->args, '\"') == NULL && ft_strchr(node->args,
 			'\'') != NULL && quotes_terminated(node) == false)
 		return ;
