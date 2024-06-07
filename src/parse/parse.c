@@ -6,7 +6,7 @@
 /*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 10:05:12 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/07 10:12:34 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ static t_ast	*process_current_token(t_token_list **head, bool *syntax_error)
 			ast_node->args = handle_cmd_args(head);
 		if (*head != NULL && is_redir((*head)->token_identifer) == true)
 			ast_node->redirections = handle_redir(head, syntax_error);
+		if (ast_node->redirections != NULL && ast_node->args == NULL)
+			ast_node->args = ft_substr("", 0, 1);
 		if (ast_node->redirections == NULL && ast_node->args == NULL)
 			return (NULL);
 	}
