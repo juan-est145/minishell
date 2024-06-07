@@ -37,6 +37,7 @@ $(BUILTINGS_PATH)/builtings2.c\
 $(BUILTINGS_PATH)/builtings_child_process.c\
 $(BUILTINGS_PATH)/builtings_child_process2.c\
 $(BUILTINGS_PATH)/cd_abstractions.c\
+$(BUILTINGS_PATH)/cd_child_abstractions.c\
 $(PROCESS_AST_PATH)/read_cmd.c\
 $(PROCESS_AST_PATH)/archive_utils_cmd.c\
 $(PROCESS_AST_PATH)/process_pipes_utils.c\

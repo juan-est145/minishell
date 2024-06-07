@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 17:29:13 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:45:20 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,27 +100,14 @@ void	env_process(t_lst_env **lst_env, t_ast *node, t_pipex *str_pipe,
 void	cd_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
 {
 	char	**split;
-	char	*old_pwd;
-	char	*pwd;
 
 	split = ft_split(text, ' ');
 	if (check_array_length(split) >= 3)
-		printf("Too many arguments in cd\n");
-	else
 	{
-		old_pwd = getcwd(NULL, 0);
-		if (split[1] == NULL)
-			cd_no_argument(old_pwd, split, lst_env, str_pipes);
-		else
-		{
-			if (errors_cd(old_pwd, split, split,
-					"Could not access directory") == 1)
-				exit(EXIT_FAILURE);
-			pwd = getcwd(NULL, 0);
-			handle_cd_env(lst_env, "PIPES", pwd, str_pipes);
-		}
-		handle_cd_env(lst_env, "PIPES", old_pwd, str_pipes);
+		printf("Too many arguments in cd\n");
+		return ;
 	}
+	cd_process_continue(str_pipes, lst_env, split);
 	free_matrix(split);
 	exit(EXIT_SUCCESS);
 }

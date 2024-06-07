@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 16:28:35 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:44:23 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int							cd_too_many_arguments(char **split,
 int							old_pwd_failure(t_pipex *str_pipes);
 int							cd_no_argument(char *old_pwd, char **split,
 								t_lst_env **lst_env, t_pipex *str_pipes);
+void						cd_process_continue(t_pipex *str_pipes,
+								t_lst_env **lst_env, char **split);
 pid_t						ft_exit(t_ast **head, t_lst_env *lst_env,
 								char *prompt, t_process_cmd type_cmd);
 void						exit_process(t_ast **head, t_lst_env *lst_env,
