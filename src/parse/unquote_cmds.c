@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unquote_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:11:26 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 10:07:06 by juan-est145      ###   ########.fr       */
+/*   Updated: 2024/06/07 12:48:41 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	unquote_cmds(t_ast *node)
 	if (node == NULL)
 		return ;
 	else if (node->parse_identifier == PARSE_CMD)
+	{
 		find_quotes(node);
+		find_quotes_redir(node);
+	}
 	else if (node->parse_identifier == PARSE_PIPE)
 	{
 		unquote_cmds(node->left);
@@ -41,7 +44,7 @@ static void	find_quotes(t_ast *node)
 	i = 0;
 	quote_array[0] = -1;
 	quote_array[1] = -1;
-	if (node->args == NULL)
+	if (node->args == NULL || *node->args == '\0')
 		return ;
 	if (ft_strchr(node->args, '\"') == NULL && ft_strchr(node->args,
 			'\'') != NULL && quotes_terminated(node) == false)
@@ -67,6 +70,8 @@ static void	get_quote_index(t_ast *node, int quote_array[2], unsigned int i)
 			{
 				set_new_str(node, quote_array);
 				i = quote_array[1];
+				if (ft_strlen(node->args) - 1 < i)
+					i = ft_strlen(node->args) -1;
 				quote_array[0] = -1;
 				quote_array[1] = -1;
 				continue ;

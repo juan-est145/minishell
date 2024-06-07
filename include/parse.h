@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:57 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 19:52:02 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/07 12:32:13 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,11 @@ void						free_fd_arrays(int **fd_arrays);
 void						unquote_cmds(t_ast *node);
 void						quotes_at_start(t_ast *node, int quote_array[2]);
 void						quotes_elsewhere(t_ast *node, int quote_array[2]);
+void						redir_quotes_at_start(t_redirections *node,
+								int quote_array[2]);
+void						find_quotes_redir(t_ast *node);
+void						redir_quotes_elsewhere(t_redirections *node,
+								int quote_array[2]);
+void						clean_nodes_redir(char *temp, char *beginning,
+								t_redirections *node);
 #endif

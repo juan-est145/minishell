@@ -22,6 +22,8 @@ $(PARSE_PATH)/parse_utils2.c\
 $(PARSE_PATH)/find_first_pipe_cmd.c\
 $(PARSE_PATH)/unquote_cmds.c\
 $(PARSE_PATH)/quote_utils.c\
+$(PARSE_PATH)/unquote_redir.c\
+$(PARSE_PATH)/quote_redir_utils.c\
 $(BUILTINGS_PATH)/archive_env.c\
 $(BUILTINGS_PATH)/archive_utils.c\
 $(BUILTINGS_PATH)/archive_utils1.c\
