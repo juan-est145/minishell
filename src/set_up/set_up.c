@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:06:54 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/27 16:45:40 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:48:01 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ char	*initial_print(char **env)
 
 	i = 0;
 	prompt = ft_getenv(env, "LOGNAME=");
-	prompt = ft_strjoin(prompt, "$ ");
+	if (prompt == NULL)
+		prompt = ft_strjoin("minishell", "$ ");
+	else
+		prompt = ft_strjoin(prompt, "$ ");
 	color_prompt = ft_strjoin(GREEN, prompt);
 	free(prompt);
 	prompt = ft_strjoin(color_prompt, RESET);

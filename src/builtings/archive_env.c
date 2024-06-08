@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:07:35 by juestrel          #+#    #+#             */
-/*   Updated: 2024/05/23 13:07:49 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:44:45 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,30 @@ int	srch_path(char **env, char *search)
 	int	i;
 
 	i = 0;
-	while (ft_strncmp(search, env[i], 5) != 0)
+	while (env[i] != NULL)
 	{
+		if (ft_strncmp(search, env[i], 5) == 0)
+			return (i);
 		i++;
 	}
-	return (i);
+	return (-1);
 }
 
 char	*ft_getenv(char **env, char *search)
 {
 	char	*result;
 	int		i;
+	int		env_index;
 
 	i = 0;
+	if (env == NULL)
+		return (NULL);
 	while (search[i] != '\0')
 		i++;
-	result = env[srch_path(env, search)] + i;
+	env_index = srch_path(env, search);
+	if (env_index == -1)
+		return (NULL);
+	result = env[env_index] + i;
 	return (result);
 }
 
