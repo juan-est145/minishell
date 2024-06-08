@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:52:55 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 18:30:42 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/08 11:53:50 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,35 @@ void	unset_parent_process(char *text, t_lst_env **lst_env)
 
 void	exit_process(t_ast **head, t_lst_env *lst_env, char *prompt)
 {
+	char	**split;
+	bool	flag;
+	int		i;
+
+	flag = true;
+	i = 0;
+	split = ft_split((*head)->args, ' ');
 	clean_ast(*head);
 	rl_clear_history();
 	free_copie_env(&lst_env);
 	free_lst_env(lst_env);
 	free(prompt);
-	exit(EXIT_SUCCESS);
+	if (split[1] == NULL)
+		exit(EXIT_SUCCESS);
+	else if (split[2] == NULL)
+	{
+		if (split[1] != NULL)
+		{
+			while (split[1][i] != '\0')
+			{
+				if (ft_isdigit(split[1][i]) == 0)
+					flag = false;
+				i++;
+			}
+			if (flag == true)
+				exit(ft_atoi(split[1]));
+			else
+				exit(2);
+		}
+	}
+	exit(2);
 }
