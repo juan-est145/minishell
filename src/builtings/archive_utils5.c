@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils5.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:02:46 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/06 12:43:52 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 12:18:18 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,18 @@ void	pwd_null_error(void)
 {
 	printf("Error obtaining PWD\n");
 	exit(EXIT_FAILURE);
+}
+
+bool	is_num(char **split, bool flag)
+{
+	int	i;
+
+	i = 0;
+	while (split[1][i] != '\0')
+	{
+		if (ft_isdigit(split[1][i]) == 0)
+			flag = false;
+		i++;
+	}
+	return (flag);
 }
