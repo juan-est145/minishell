@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/08 12:19:02 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:57:01 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void						dup_fd_arrays(t_process_cmd type_cmd,
 int							here_doc(char *limit);
 int							here_doc_echo(char limit);
 void						ft_echo_hd_normi(bool open, int fd, char delimiter);
-bool						is_num(char **split, bool flag);
+bool						is_num(char **split);
 
 // BUILTINGS
 pid_t						ft_getpwd(char *text, t_ast *node,
@@ -110,7 +110,8 @@ pid_t						ft_exit(t_ast **head, t_lst_env *lst_env,
 								char *prompt, t_process_cmd type_cmd);
 void						exit_process(t_ast **head, t_lst_env *lst_env,
 								char *prompt);
-
+void						exit_cleanup(t_ast **head, t_lst_env *lst_env,
+								char *prompt);
 void						handle_cd_env(t_lst_env **lst_env,
 								char *export_text, char *pwd,
 								t_pipex *str_pipes);

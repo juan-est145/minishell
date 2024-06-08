@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils5.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:02:46 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/08 12:18:18 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:56:33 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ void	pwd_null_error(void)
 	exit(EXIT_FAILURE);
 }
 
-bool	is_num(char **split, bool flag)
+bool	is_num(char **split)
 {
-	int	i;
+	int		i;
+	bool	flag;
 
 	i = 0;
+	flag = true;
 	while (split[1][i] != '\0')
 	{
 		if (ft_isdigit(split[1][i]) == 0)
@@ -47,4 +49,13 @@ bool	is_num(char **split, bool flag)
 		i++;
 	}
 	return (flag);
+}
+
+void	exit_cleanup(t_ast **head, t_lst_env *lst_env, char *prompt)
+{
+	clean_ast(*head);
+	rl_clear_history();
+	free_copie_env(&lst_env);
+	free_lst_env(lst_env);
+	free(prompt);
 }

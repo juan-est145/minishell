@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings_child_process2.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:52:55 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/08 12:23:45 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:00:16 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,27 +121,20 @@ void	unset_parent_process(char *text, t_lst_env **lst_env)
 void	exit_process(t_ast **head, t_lst_env *lst_env, char *prompt)
 {
 	char	**split;
-	bool	flag;
+	int		exit_value;
 
-	flag = true;
 	split = ft_split((*head)->args, ' ');
-	clean_ast(*head);
-	rl_clear_history();
-	free_copie_env(&lst_env);
-	free_lst_env(lst_env);
-	free(prompt);
+	exit_cleanup(head, lst_env, prompt);
+	if (split == NULL)
+		exit(EXIT_FAILURE);
 	if (split[1] == NULL)
-		exit(EXIT_SUCCESS);
-	else if (split[2] == NULL)
 	{
-		if (split[1] != NULL)
-		{
-			flag = is_num(split, flag);
-			if (flag == true)
-				exit(ft_atoi(split[1]));
-			else
-				exit(2);
-		}
+		free_matrix(split);
+		exit(EXIT_SUCCESS);
 	}
-	exit(2);
+	exit_value = 2;
+	if (is_num(split) == true && split[2] == NULL)
+		exit_value = ft_atoi(split[1]);
+	free_matrix(split);
+	exit(exit_value);
 }
