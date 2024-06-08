@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 09:50:35 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/08 18:20:50 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:52:09 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	up_env(t_lst_env **lst_env)
 
 	i = 0;
 	temp = *lst_env;
+	if (temp == NULL)
+		return ;
 	copied_env = malloc(sizeof(char *) * (ft_lstsize_ms(temp) + 1));
 	if (!copied_env)
 		return ;
