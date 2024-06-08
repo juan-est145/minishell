@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings_child_process2.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:52:55 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 18:30:42 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/08 14:14:02 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ void	unset_process(char *text, t_lst_env **lst_env)
 
 void	unset_parent_process(char *text, t_lst_env **lst_env)
 {
-	t_lst_env			*temp;
-	t_lst_env			*previous;
-	t_unset_flags		flag;
-	char				**split;
+	t_lst_env		*temp;
+	t_lst_env		*previous;
+	t_unset_flags	flag;
+	char			**split;
 
 	flag = NEUTRAL;
 	split = ft_split(text, ' ');
@@ -109,11 +109,13 @@ void	unset_parent_process(char *text, t_lst_env **lst_env)
 		flag = ft_unset_normi2(split, previous, flag, &temp);
 		if (flag == BREAK)
 			break ;
-		previous = temp;
 		if (flag == REPEAT_NODE)
 			flag = NEUTRAL;
 		else
+		{
+			previous = temp;
 			temp = temp->next;
+		}
 	}
 	free_matrix(split);
 }

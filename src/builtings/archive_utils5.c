@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:02:46 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/06 12:43:52 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 13:56:24 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,12 @@ void	pwd_null_error(void)
 {
 	printf("Error obtaining PWD\n");
 	exit(EXIT_FAILURE);
+}
+
+bool	found_env(char *env, char *env_to_remove)
+{
+	if (ft_strlen(env) == ft_strlen(env_to_remove) && ft_strncmp(env,
+			env_to_remove, ft_strlen(env)) == 0)
+		return (true);
+	return (false);
 }

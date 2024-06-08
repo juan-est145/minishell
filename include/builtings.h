@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 18:34:12 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/08 13:56:45 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ t_unset_flags				ft_unset_normi2(char **split, t_lst_env *previous,
 								t_unset_flags flag, t_lst_env **temp);
 t_unset_flags				ft_unset_normi(t_lst_env **temp, t_unset_flags flag,
 								t_lst_env *previous);
+bool						found_env(char *env, char *env_to_remove);
 pid_t						ft_cd(char *text, t_lst_env **lst_env,
 								t_process_cmd type_cmd, t_pipex *str_pipes);
 void						cd_process(char *text, t_lst_env **lst_env,

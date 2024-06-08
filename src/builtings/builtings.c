@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 18:33:53 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/08 14:20:31 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_unset_flags	ft_unset_normi(t_lst_env **temp, t_unset_flags flag,
 		free(aux->text);
 		free(aux);
 		flag = BREAK;
-		return (flag);
+		//return (flag);
 	}
 	*temp = previous->next;
 	return (flag);
@@ -100,10 +100,11 @@ t_unset_flags	ft_unset_normi2(char **split, t_lst_env *previous,
 	name = ft_split((*temp)->text, '=');
 	while (split[i])
 	{
-		if (ft_strncmp(name[0], split[i], ft_strlen(name[0])) == 0)
+		//if (ft_strncmp(name[0], split[i], ft_strlen(split[i])) == 0)
+		if (found_env(name[0], split[i]) == true)
 		{
 			flag = ft_unset_normi(temp, flag, previous);
-			if (flag == true)
+			if (flag == BREAK)
 				break ;
 		}
 		i++;
