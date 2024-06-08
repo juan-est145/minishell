@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/06 13:24:33 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:32:06 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe,
 }
 
 // IMITA EL COMANDO UNSET
-bool	ft_unset_normi(t_lst_env **temp, bool flag, t_lst_env *previous)
+t_unset_flags	ft_unset_normi(t_lst_env **temp, t_unset_flags flag,
+		t_lst_env *previous)
 {
 	t_lst_env	*aux;
 
@@ -74,6 +75,7 @@ bool	ft_unset_normi(t_lst_env **temp, bool flag, t_lst_env *previous)
 		previous->next = (*temp)->next;
 		free(aux->text);
 		free(aux);
+		flag = REPEAT_NODE;
 	}
 	else
 	{
@@ -81,15 +83,14 @@ bool	ft_unset_normi(t_lst_env **temp, bool flag, t_lst_env *previous)
 		previous->next = NULL;
 		free(aux->text);
 		free(aux);
-		flag = true;
-		return (flag);
+		flag = BREAK;
 	}
 	*temp = previous->next;
 	return (flag);
 }
 
-bool	ft_unset_normi2(char **split, t_lst_env *previous, bool flag,
-		t_lst_env **temp)
+t_unset_flags	ft_unset_normi2(char **split, t_lst_env *previous,
+		t_unset_flags flag, t_lst_env **temp)
 {
 	int		i;
 	char	**name;
@@ -98,10 +99,10 @@ bool	ft_unset_normi2(char **split, t_lst_env *previous, bool flag,
 	name = ft_split((*temp)->text, '=');
 	while (split[i])
 	{
-		if (ft_strncmp(name[0], split[i], ft_strlen(name[0])) == 0)
+		if (found_env(name[0], split[i]) == true)
 		{
 			flag = ft_unset_normi(temp, flag, previous);
-			if (flag == true)
+			if (flag == BREAK)
 				break ;
 		}
 		i++;

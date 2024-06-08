@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 17:44:23 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:31:09 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ typedef struct s_lst_env
 	char					**env;
 	struct s_lst_env		*next;
 }							t_lst_env;
+
+typedef enum e_unset_flags
+{
+	NEUTRAL,
+	BREAK,
+	REPEAT_NODE
+}							t_unset_flags;
 
 typedef struct s_ast		t_ast;
 typedef enum e_process_cmd	t_process_cmd;
@@ -86,10 +93,11 @@ pid_t						ft_unset(char *text, t_lst_env **lst_env,
 void						unset_parent_process(char *text,
 								t_lst_env **lst_env);
 void						unset_process(char *text, t_lst_env **lst_env);
-bool						ft_unset_normi2(char **split, t_lst_env *previous,
-								bool flag, t_lst_env **temp);
-bool						ft_unset_normi(t_lst_env **temp, bool flag,
+t_unset_flags				ft_unset_normi2(char **split, t_lst_env *previous,
+								t_unset_flags flag, t_lst_env **temp);
+t_unset_flags				ft_unset_normi(t_lst_env **temp, t_unset_flags flag,
 								t_lst_env *previous);
+bool						found_env(char *env, char *env_to_remove);
 pid_t						ft_cd(char *text, t_lst_env **lst_env,
 								t_process_cmd type_cmd, t_pipex *str_pipes);
 void						cd_process(char *text, t_lst_env **lst_env,
