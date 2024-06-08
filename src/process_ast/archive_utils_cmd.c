@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 09:50:35 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/06 13:33:56 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:20:50 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	free_copie_env(t_lst_env **lst)
 	t_lst_env	*temp;
 
 	temp = *lst;
-	free_matrix(temp->env);
+	if (temp != NULL)
+		free_matrix(temp->env);
 }
 
 void	cleanup(t_pipex *str_pipe)

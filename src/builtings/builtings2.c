@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:56 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 16:59:16 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:19:06 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	is_first(char *text, t_lst_env **lst_env)
 	int			i;
 	t_lst_env	*temp;
 
+	if (lst_env[0] == NULL)
+		return ;
 	name = ft_split(text, ' ');
 	i = 1;
 	temp = NULL;
-	while (name[i] != NULL)
+	while (name[i] != NULL && lst_env[0] != NULL)
 	{
 		if (ft_strncmp(name[i], (*lst_env)->text, ft_strlen(name[i])) == 0)
 		{
