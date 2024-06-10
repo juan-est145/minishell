@@ -6,14 +6,14 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 17:41:02 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 17:46:15 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:47:14 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-void	cd_process_continue(t_pipex *str_pipes, t_lst_env **lst_env,
+/*void	cd_process_continue(t_pipex *str_pipes, t_lst_env **lst_env,
 		char **split)
 {
 	char	*old_pwd;
@@ -34,4 +34,4 @@ void	cd_process_continue(t_pipex *str_pipes, t_lst_env **lst_env,
 		handle_cd_env(lst_env, "PIPES", pwd, str_pipes);
 	}
 	handle_cd_env(lst_env, "PIPES", old_pwd, str_pipes);
-}
+}*/

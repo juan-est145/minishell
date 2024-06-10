@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:00:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/05/31 10:18:30 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:26:12 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,20 @@ int	ft_lstsize_ms(t_lst_env *lst)
 	return (i);
 }
 
-void	handle_cd_env(t_lst_env **lst_env, char *export_text, char *pwd,
-		t_pipex *str_pipes)
+void	handle_cd_env(t_lst_env **lst_env, char *fusion, t_pipex *str_pipes,
+		t_ast *node)
 {
-	char	*aux;
 	char	*text;
+	t_ast	*node_aux;
 
 	text = "PIPES";
-	if (export_text != text)
+	(void)node;
+	if (fusion != text)
 	{
-		aux = ft_fusion_string(export_text, pwd);
-		ft_export(aux, lst_env, str_pipes, SIMPLE_CMD);
-		free(aux);
-		free(pwd);
+		node_aux = new_ast_node();
+		node_aux->args = fusion;
+		ft_export(node_aux, lst_env, str_pipes, SIMPLE_CMD);
+		free(node_aux);
 	}
 }
 

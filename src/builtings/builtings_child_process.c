@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 17:45:20 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:26:02 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,44 +97,54 @@ void	env_process(t_lst_env **lst_env, t_ast *node, t_pipex *str_pipe,
 	exit(EXIT_SUCCESS);
 }
 
-void	cd_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
+void	cd_process(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipes)
 {
-	char	**split;
+	char		**split;
+	t_str_aux	aux;
 
-	split = ft_split(text, ' ');
+	split = ft_split(node->args, ' ');
 	if (check_array_length(split) >= 3)
+		cd_process_args_error(split);
+	aux.old_pwd = getcwd(NULL, 0);
+	aux.split = split;
+	if (split[1] == NULL)
+		cd_no_argument(node, aux, lst_env, str_pipes);
+	else
 	{
-		printf("Too many arguments in cd\n");
-		return ;
+		if (errors_cd(aux.old_pwd, split, split,
+				"Could not access directory") == 1)
+			exit(EXIT_FAILURE);
+		aux.pwd = getcwd(NULL, 0);
+		handle_cd_env(lst_env, "PIPES", str_pipes, node);
 	}
-	cd_process_continue(str_pipes, lst_env, split);
+	handle_cd_env(lst_env, "PIPES", str_pipes, node);
 	free_matrix(split);
 	exit(EXIT_SUCCESS);
 }
 
-int	cd_parent_process(char *text, t_lst_env **lst_env, t_pipex *str_pipes)
+int	cd_parent_process(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipes)
 {
-	char	**split;
-	char	*old_pwd;
-	char	*pwd;
+	char		*fusion;
+	t_str_aux	aux;
 
-	split = ft_split(text, ' ');
-	if (check_array_length(split) >= 3)
-		return (cd_too_many_arguments(split, str_pipes));
-	old_pwd = getcwd(NULL, 0);
-	if (split[1] == NULL)
-		return (cd_no_argument(old_pwd, split, lst_env, str_pipes));
-	if (errors_cd(old_pwd, split, split, "Could not access directory") == 1)
+	aux.split = ft_split(node->args, ' ');
+	if (check_array_length(aux.split) >= 3)
+		return (cd_too_many_arguments(aux.split, str_pipes));
+	aux.old_pwd = getcwd(NULL, 0);
+	if (aux.split[1] == NULL)
+		return (cd_no_argument(node, aux, lst_env, str_pipes));
+	if (errors_cd(aux.old_pwd, aux.split, aux.split,
+			"Could not access directory") == 1)
 	{
 		str_pipes->return_cmd_status = 1;
 		return (1);
 	}
-	pwd = getcwd(NULL, 0);
-	if (pwd == NULL && errno == ENOMEM)
+	aux.pwd = getcwd(NULL, 0);
+	if (aux.pwd == NULL && errno == ENOMEM)
 		error_msgs(PWD_ERROR);
-	else if (pwd == NULL)
-		return (free_matrix(split), old_pwd_failure(str_pipes));
-	update_env(lst_env, str_pipes, pwd, old_pwd);
-	free_matrix(split);
+	else if (aux.pwd == NULL)
+		return (free_matrix(aux.split), old_pwd_failure(str_pipes));
+	fusion = update_env_cd_parent(aux, lst_env, str_pipes, node);
+	cd_parent_cleanup(fusion, &aux);
 	return (0);
 }

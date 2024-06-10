@@ -6,65 +6,41 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:52:55 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/08 16:10:45 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:30:56 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../libft/libft.h"
 
-void	export_process(char *new, t_lst_env **lst_env)
+void	export_process(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
+		t_process_cmd type_cmd)
 {
-	t_lst_env	*node;
-	char		*new_env;
-	char		**split;
-	int			i;
+	char	**split;
+	int		fd;
 
-	i = 0;
-	split = ft_split(new, ' ');
-	while (split[i])
-	{
-		if (ft_contain(split[i], '=') == 0 && (ft_strlen(split[i]) > 2))
-		{
-			if (ft_lst_contain_change(lst_env, split[i]) == 0)
-				;
-			else
-			{
-				new_env = ft_substr(split[i], 0, ft_strlen(split[i]));
-				node = ft_lstnew_ms(new_env);
-				ft_lstadd_back_ms(lst_env, node);
-			}
-		}
-		i++;
-	}
+	split = ft_split(node->args, ' ');
+	fd = redirect_stdout(node, str_pipe, type_cmd);
+	export_help(split, lst_env);
+	export_loop(split, lst_env);
 	free_matrix(split);
+	close(fd);
 	exit(EXIT_SUCCESS);
 }
 
-void	export_parent_process(char *new, t_lst_env **lst_env)
+void	export_parent_process(t_ast *node, t_lst_env **lst_env,
+		t_pipex *str_pipe, t_process_cmd type_cmd)
 {
-	t_lst_env	*node;
-	char		*new_env;
-	char		**split;
-	int			i;
+	char	**split;
+	int		fd;
 
-	i = 0;
-	split = ft_split(new, ' ');
-	while (split[i])
-	{
-		if (ft_contain(split[i], '=') == 0 && (ft_strlen(split[i]) > 2))
-		{
-			if (ft_lst_contain_change(lst_env, split[i]) == 0)
-				;
-			else
-			{
-				new_env = ft_substr(split[i], 0, ft_strlen(split[i]));
-				node = ft_lstnew_ms(new_env);
-				ft_lstadd_back_ms(lst_env, node);
-			}
-		}
-		i++;
-	}
+	split = ft_split(node->args, ' ');
+	fd = redirect_stdout(node, str_pipe, type_cmd);
+	if (split[1] == NULL)
+		export_void(lst_env);
+	else
+		export_loop(split, lst_env);
+	dup2(0, STDOUT_FILENO);
 	free_matrix(split);
 }
 

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/08 15:32:06 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:31:11 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ pid_t	ft_env(t_lst_env **lst_env, t_ast *node, t_pipex *str_pipe,
 }
 
 // IMITA EL COMANDO EXPORT
-pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe,
+pid_t	ft_export(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipe,
 		t_process_cmd type_cmd)
 {
 	pid_t	pid;
@@ -43,7 +43,7 @@ pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe,
 	pid = -1;
 	if (type_cmd == SIMPLE_CMD)
 	{
-		export_parent_process(new, lst_env);
+		export_parent_process(node, lst_env, str_pipe, type_cmd);
 		free_copie_env(str_pipe->lst_env);
 		up_env(str_pipe->lst_env);
 		return (pid);
@@ -57,7 +57,7 @@ pid_t	ft_export(char *new, t_lst_env **lst_env, t_pipex *str_pipe,
 		exit(EXIT_FAILURE);
 	}
 	if (pid == CHILD)
-		export_process(new, lst_env);
+		export_process(node, lst_env, str_pipe, type_cmd);
 	free_copie_env(str_pipe->lst_env);
 	up_env(str_pipe->lst_env);
 	return (pid);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:01:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/06 13:29:48 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:50:16 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ pid_t	ft_echo(char *text, t_ast *node, t_pipex *str_pipe,
 }
 
 // IMITA EL COMANDO CD
-pid_t	ft_cd(char *text, t_lst_env **lst_env, t_process_cmd type_cmd,
+pid_t	ft_cd(t_ast *node, t_lst_env **lst_env, t_process_cmd type_cmd,
 		t_pipex *str_pipes)
 {
 	pid_t	pid;
@@ -88,7 +88,7 @@ pid_t	ft_cd(char *text, t_lst_env **lst_env, t_process_cmd type_cmd,
 	pid = -1;
 	if (type_cmd == SIMPLE_CMD)
 	{
-		cd_parent_process(text, lst_env, str_pipes);
+		cd_parent_process(node, lst_env, str_pipes);
 		return (pid);
 	}
 	pid = fork();
@@ -100,7 +100,7 @@ pid_t	ft_cd(char *text, t_lst_env **lst_env, t_process_cmd type_cmd,
 		exit(EXIT_FAILURE);
 	}
 	if (pid == CHILD)
-		cd_process(text, lst_env, str_pipes);
+		cd_process(node, lst_env, str_pipes);
 	return (pid);
 }
 

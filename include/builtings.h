@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/08 16:08:17 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:43:10 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ typedef enum e_unset_flags
 	BREAK,
 	REPEAT_NODE
 }							t_unset_flags;
+
+typedef struct s_str_aux
+{
+	char					*old_pwd;
+	char					**split;
+	char					*pwd;
+}							t_str_aux;
 
 typedef struct s_ast		t_ast;
 typedef enum e_process_cmd	t_process_cmd;
@@ -67,6 +74,8 @@ int							here_doc(char *limit);
 int							here_doc_echo(char limit);
 void						ft_echo_hd_normi(bool open, int fd, char delimiter);
 bool						is_num(char **split);
+void						export_void(t_lst_env **lst_env);
+void						export_help(char **split, t_lst_env **lst_env);
 
 // BUILTINGS
 pid_t						ft_getpwd(char *text, t_ast *node,
@@ -84,11 +93,14 @@ pid_t						ft_env(t_lst_env **lst_env, t_ast *node,
 								t_pipex *str_pipe, t_process_cmd cmd_type);
 void						env_process(t_lst_env **lst_env, t_ast *node,
 								t_pipex *str_pipe, t_process_cmd cmd_type);
-pid_t						ft_export(char *new, t_lst_env **lst_env,
+pid_t						ft_export(t_ast *node, t_lst_env **lst_env,
 								t_pipex *str_pipe, t_process_cmd type_cmd);
-void						export_process(char *new, t_lst_env **lst_env);
-void						export_parent_process(char *new,
-								t_lst_env **lst_env);
+void						export_process(t_ast *node, t_lst_env **lst_env,
+								t_pipex *str_pipe, t_process_cmd type_cmd);
+void						export_loop(char **split, t_lst_env **lst_env);
+void						export_parent_process(t_ast *node,
+								t_lst_env **lst_env, t_pipex *str_pipe,
+								t_process_cmd type_cmd);
 pid_t						ft_unset(char *text, t_lst_env **lst_env,
 								t_process_cmd type_cmd);
 void						unset_parent_process(char *text,
@@ -99,28 +111,31 @@ t_unset_flags				ft_unset_normi2(char **split, t_lst_env *previous,
 t_unset_flags				ft_unset_normi(t_lst_env **temp, t_unset_flags flag,
 								t_lst_env *previous);
 bool						found_env(char *env, char *env_to_remove);
-pid_t						ft_cd(char *text, t_lst_env **lst_env,
+pid_t						ft_cd(t_ast *node, t_lst_env **lst_env,
 								t_process_cmd type_cmd, t_pipex *str_pipes);
-void						cd_process(char *text, t_lst_env **lst_env,
+void						cd_process(t_ast *node, t_lst_env **lst_env,
 								t_pipex *str_pipes);
-int							cd_parent_process(char *text, t_lst_env **lst_env,
+int							cd_parent_process(t_ast *node, t_lst_env **lst_env,
 								t_pipex *str_pipes);
 int							cd_too_many_arguments(char **split,
 								t_pipex *str_pipes);
 int							old_pwd_failure(t_pipex *str_pipes);
-int							cd_no_argument(char *old_pwd, char **split,
+void						cd_parent_cleanup(char *fusion, t_str_aux *aux);
+void						cd_process_args_error(char **split);
+int							clean_pwds(t_str_aux aux, t_pipex *str_pipes);
+char						*update_env_cd_parent(t_str_aux aux,
+								t_lst_env **lst_env, t_pipex *str_pipes,
+								t_ast *node);
+int							cd_no_argument(t_ast *node, t_str_aux aux,
 								t_lst_env **lst_env, t_pipex *str_pipes);
-void						cd_process_continue(t_pipex *str_pipes,
-								t_lst_env **lst_env, char **split);
 pid_t						ft_exit(t_ast **head, t_lst_env *lst_env,
 								char *prompt, t_process_cmd type_cmd);
 void						exit_process(t_ast **head, t_lst_env *lst_env,
 								char *prompt);
 void						exit_cleanup(t_ast **head, t_lst_env *lst_env,
 								char *prompt);
-void						handle_cd_env(t_lst_env **lst_env,
-								char *export_text, char *pwd,
-								t_pipex *str_pipes);
+void						handle_cd_env(t_lst_env **lst_env, char *fusion,
+								t_pipex *str_pipes, t_ast *node);
 void						is_first(char *text, t_lst_env **lst_env);
 char						**search_lst_env(char *text, t_lst_env **lst_env);
 int							check_array_length(char **array);

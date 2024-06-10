@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   archive_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:27:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/06 13:12:58 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:31:14 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int	redirect_stdout(t_ast *node, t_pipex *str_pipe, t_process_cmd type_cmd)
 	fd[0] = redirect_stdout_input(node, fd[0]);
 	fd[1] = redirect_stdout_output(node, fd[1]);
 	if (type_cmd == SIMPLE_CMD)
+	{
+		if (fd[1] != 0)
+			close(fd[1]);
 		return (fd[0]);
+	}
 	dup_fd_arrays(type_cmd, str_pipe, fd);
 	return (fd[0]);
 }

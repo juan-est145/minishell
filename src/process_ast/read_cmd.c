@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:06:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 11:47:43 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:47:38 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ pid_t	read_cmd(t_ast *node, t_pipex *str_pipe, char *prompt,
 		return (ft_echo(node->args, node, str_pipe, type_cmd));
 	else if (ft_strncmp(node->args, "env\0", 4) == 0)
 		return (ft_env(str_pipe->lst_env, node, str_pipe, type_cmd));
-	else if (ft_strncmp(node->args, "export ", 7) == 0)
-		return (ft_export(node->args, str_pipe->lst_env, str_pipe, type_cmd));
+	else if (ft_strncmp(node->args, "export", 6) == 0)
+		return (ft_export(node, str_pipe->lst_env, str_pipe, type_cmd));
 	else if (ft_strncmp(node->args, "unset ", 6) == 0)
 		return (ft_unset(node->args, str_pipe->lst_env, type_cmd));
 	else if (ft_strncmp(node->args, "cd", 2) == 0)
-		return (ft_cd(node->args, str_pipe->lst_env, type_cmd, str_pipe));
+		return (ft_cd(node, str_pipe->lst_env, type_cmd, str_pipe));
 	else if (ft_strncmp(node->args, "exit", 4) == 0)
 	{
 		if (type_cmd == SIMPLE_CMD)

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:56 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 16:59:16 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:43:41 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,25 +91,23 @@ int	errors_cd(char *old_pwd, char **dir, char **split, char *text)
 	return (0);
 }
 
-int	cd_no_argument(char *old_pwd, char **split, t_lst_env **lst_env,
+int	cd_no_argument(t_ast *node, t_str_aux aux, t_lst_env **lst_env,
 		t_pipex *str_pipes)
 {
 	char	**dir;
+	char	*fusion;
 
 	dir = search_lst_env("HOME", lst_env);
-	if (errors_cd(old_pwd, dir, split, "HOME no set") == 1)
-	{
-		str_pipes->return_cmd_status = 1;
-		return (1);
-	}
-	if (errors_cd(old_pwd, dir, split, "Could not access directory") == 1)
-	{
-		str_pipes->return_cmd_status = 1;
-		return (1);
-	}
-	handle_cd_env(lst_env, "export PWD=", dir[1], str_pipes);
+	if (errors_cd(aux.old_pwd, dir, aux.split, "HOME no set") == 1)
+		return (clean_pwds(aux, str_pipes));
+	if (errors_cd(aux.old_pwd, dir, aux.split,
+			"Could not access directory") == 1)
+		return (clean_pwds(aux, str_pipes));
+	fusion = ft_fusion_string("export PWD=", dir[1]);
+	handle_cd_env(lst_env, fusion, str_pipes, node);
 	free(dir[0]);
 	free(dir);
+	free(fusion);
 	str_pipes->return_cmd_status = 0;
 	return (0);
 }
