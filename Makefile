@@ -46,6 +46,7 @@ $(PROCESS_AST_PATH)/process_pipes_utils.c\
 $(ERRORS_PATH)/print_error_msg.c\
 $(SET_UP)/set_up.c\
 $(SET_UP)/read_input.c\
+$(SET_UP)/swampert.c\
 
 OBJS = $(SCRS:.c=.o)
 

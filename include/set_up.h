@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:20:22 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/06/05 16:31:29 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:41:31 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ void	prepare_signals(void);
 void	signal_handler(int signum);
 char	*read_input(char *prompt, t_lst_env **lst_env);
 t_pipex	init_str_pipe(t_lst_env **lst_env);
+void	print_swamp1(void);
+void	print_swamp2(void);
 #endif
