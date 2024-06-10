@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:18:43 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/10 15:42:36 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:58:54 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,17 @@ int	clean_pwds(t_str_aux aux, t_pipex *str_pipes)
 		free(aux.old_pwd);
 	if (aux.pwd != NULL)
 		free(aux.pwd);
+	if (aux.split != NULL)
+		free_matrix(aux.split);
 	return (1);
+}
+
+t_str_aux	init_str_aux(void)
+{
+	t_str_aux	aux;
+
+	aux.old_pwd = NULL;
+	aux.pwd = NULL;
+	aux.split = NULL;
+	return (aux);
 }

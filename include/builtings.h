@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:12:11 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/10 15:43:10 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:59:22 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int							cd_parent_process(t_ast *node, t_lst_env **lst_env,
 								t_pipex *str_pipes);
 int							cd_too_many_arguments(char **split,
 								t_pipex *str_pipes);
+t_str_aux					init_str_aux(void);
 int							old_pwd_failure(t_pipex *str_pipes);
 void						cd_parent_cleanup(char *fusion, t_str_aux *aux);
 void						cd_process_args_error(char **split);

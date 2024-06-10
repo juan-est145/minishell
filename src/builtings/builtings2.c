@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:56 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/10 15:43:41 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:56:40 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,14 @@ int	cd_no_argument(t_ast *node, t_str_aux aux, t_lst_env **lst_env,
 
 	dir = search_lst_env("HOME", lst_env);
 	if (errors_cd(aux.old_pwd, dir, aux.split, "HOME no set") == 1)
-		return (clean_pwds(aux, str_pipes));
+		return (free_matrix(dir), clean_pwds(aux, str_pipes));
 	if (errors_cd(aux.old_pwd, dir, aux.split,
 			"Could not access directory") == 1)
-		return (clean_pwds(aux, str_pipes));
+		return (free_matrix(dir), clean_pwds(aux, str_pipes));
 	fusion = ft_fusion_string("export PWD=", dir[1]);
 	handle_cd_env(lst_env, fusion, str_pipes, node);
-	free(dir[0]);
-	free(dir);
+	free_matrix(dir);
+	clean_pwds(aux, str_pipes);
 	free(fusion);
 	str_pipes->return_cmd_status = 0;
 	return (0);
