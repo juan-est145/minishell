@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:50:30 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/10 16:00:14 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:10:26 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	cd_parent_process(t_ast *node, t_lst_env **lst_env, t_pipex *str_pipes)
 	if (aux.pwd == NULL && errno == ENOMEM)
 		error_msgs(PWD_ERROR);
 	else if (aux.pwd == NULL)
-		return (free_matrix(aux.split), old_pwd_failure(str_pipes));
+		return (old_pwd_failure(str_pipes), clean_pwds(aux, str_pipes));
 	fusion = update_env_cd_parent(aux, lst_env, str_pipes, node);
 	cd_parent_cleanup(fusion, &aux);
 	return (0);
