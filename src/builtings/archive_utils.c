@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:08:03 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/07 16:59:23 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:04:14 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	free_matrix(char **matrix)
 	int	i;
 
 	i = 0;
+	if (matrix == NULL)
+		return ;
 	while (matrix[i] != NULL)
 	{
 		free(matrix[i]);
