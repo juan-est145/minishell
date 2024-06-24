@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:52:55 by juestrel          #+#    #+#             */
-/*   Updated: 2024/06/10 14:30:56 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:21:44 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	export_parent_process(t_ast *node, t_lst_env **lst_env,
 		export_loop(split, lst_env);
 	dup2(0, STDOUT_FILENO);
 	free_matrix(split);
+	(void)fd;
 }
 
 void	unset_process(char *text, t_lst_env **lst_env)
